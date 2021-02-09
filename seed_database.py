@@ -1,6 +1,10 @@
 import os
 
-# import model
+import model
 
-os.system('dropdb ratings')
-os.system('createdb ratings')
+# os.system('dropdb cello_tree')
+# os.system('createdb cello_tree')
+
+model.connect_to_db(server.app)
+model.db.create_all()
+

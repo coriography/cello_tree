@@ -15,7 +15,7 @@ class User(db.Model):
     def __repr__(self):
         """Display info about User."""
 
-        return f'<User user_id={self.user_id}, username={self.username, email={self.email}}'
+        return f'<User user_id={self.user_id}, username={self.username}, email={self.email}'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
