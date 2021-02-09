@@ -7,7 +7,7 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
@@ -15,7 +15,7 @@ class User(db.Model):
     def __repr__(self):
         """Display info about User."""
 
-        return f'<User user_id={self.user_id}, username={self.username}, email={self.email}'
+        return f'<User user_id={self.user_id}, username={self.username}, email={self.email}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
