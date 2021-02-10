@@ -45,6 +45,19 @@ class Link(db.Model):
     # link = Link(start_year='2014', end_year='2018', location='Cleveland')
 
 
+class Post(db.Model):
+    """Data model for forum post."""
+
+    __tablename__ = "posts"
+
+    post_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    def __repr__(self):
+        """Display info about forum post."""
+
+        return f'<Post post_id={self.post_id}>'
+        
+
 class User(db.Model):
     """Data model for a user."""
 
