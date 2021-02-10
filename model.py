@@ -17,10 +17,14 @@ class User(db.Model):
 
         return f'<User user_id={self.user_id}, username={self.username}, email={self.email}>'
 
+        # test_user = User(username='tester', email='test@test.com', password='123')
 
-def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
+
+
+
+def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    # flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.app = flask_app
