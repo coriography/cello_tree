@@ -11,10 +11,6 @@ class Cellist(db.Model):
     __tablename__ = "cellists"
 
     cellist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
     location = db.Column(db.String(50))
@@ -23,8 +19,14 @@ class Cellist(db.Model):
     img_url = db.Column(db.Text)
     music_url = db.Column(db.Text)
 
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
+
     creator = db.relationship('User', backref='cellist_profiles')
-    # links: a list of Link objects associated with Cellist.
+    # teacher_links: a list of Link objects associated with Cellist.
+    # student_links: a list of Link objects associated with Cellist.
 
     def __repr__(self):
         """Display info about Cellist."""
@@ -65,6 +67,7 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     cellist_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     post_date = db.Column(db.DateTime, nullable=False)
 
     # upvotes: a list of Upvote objects associated with Post. 
@@ -127,8 +130,8 @@ class User(db.Model):
 
 #     role_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 #     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-#     admin = db.Column(db.Boolean)
-#     moderator = db.Column(db.Boolean)
+#     r_admin = db.Column(db.Boolean)
+#     r_moderator = db.Column(db.Boolean)
 #     r_user = db.Column(db.Boolean)
 #       # or: role = db.Column(db.String(50)) #admin, moderator, or user
 #       # user = db.relationship('User', backref='role')
