@@ -11,6 +11,10 @@ class Cellist(db.Model):
     __tablename__ = "cellists"
 
     cellist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    # link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
     location = db.Column(db.String(50))
@@ -18,6 +22,8 @@ class Cellist(db.Model):
     bio = db.Column(db.Text)
     img_url = db.Column(db.Text)
     music_url = db.Column(db.Text)
+
+    # links: a list of Link objects associated with Cellist.
 
     def __repr__(self):
         """Display info about Cellist."""
@@ -33,9 +39,14 @@ class Link(db.Model):
     __tablename__ = "links"
 
     link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
     start_year = db.Column(db.DateTime)
     end_year = db.Column(db.DateTime)
     location = db.Column(db.String(50))
+
+    # teacher = db.relationship('Cellist', foreign_keys='teacher_id', backref='teacher_links')
+    # student = db.relationship('Cellist', foreign_keys='student_id', backref='student_links')
 
     def __repr__(self):
         """Display info about Link."""
@@ -116,8 +127,6 @@ def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
     db.init_app(flask_app)
 
     print('Connected to the db!')        
-
-
 
 
 
