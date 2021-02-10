@@ -30,6 +30,8 @@ class Cellist(db.Model):
 class Link(db.Model):
     """Data model for a teacher/student link."""
 
+    __tablename__ = "links"
+
     link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     start_year = db.Column(db.DateTime)
     end_year = db.Column(db.DateTime)
@@ -59,6 +61,23 @@ class User(db.Model):
         return f'<User user_id={self.user_id}, username={self.username}, email={self.email}>'
 
         # test_user = User(username='tester', email='test@test.com', password='123')
+
+class Role(db.Model):
+    """Data model for a user/admin role."""
+
+    __tablename__ = "roles"
+
+    role_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    admin = db.Column(db.Boolean)
+    moderator = db.Column(db.Boolean)
+    user = db.Column(db.Boolean)
+
+    def __repr__(self):
+        """Display info about Role."""
+
+        return f'<Role role_id={self.role_id}, user={self.user}>'
+
+        # tr = Role(admin='False', moderator='False', user='True')
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
