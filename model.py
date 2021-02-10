@@ -38,7 +38,7 @@ class Link(db.Model):
     location = db.Column(db.String(50))
 
     def __repr__(self):
-        """Display info about teacher/student link."""
+        """Display info about Link."""
 
         return f'<Link link_id={self.link_id} start_year={self.start_year}>'
 
@@ -53,10 +53,24 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
     def __repr__(self):
-        """Display info about forum post."""
+        """Display info about Post."""
 
         return f'<Post post_id={self.post_id}>'
-        
+
+
+class Upvote(db.Model):
+    """Data model for post upvote."""
+
+    __tablename__ = "upvotes"
+
+    upvote_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    count = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        """Display info about Upvote."""
+
+        return f'<Upvote upvote_id={self.upvote_id}, count={self.count}>'
+
 
 class User(db.Model):
     """Data model for a user."""
