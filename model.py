@@ -1,6 +1,47 @@
 from flask_sqlalchemy import SQLAlchemy
 
+import datetime
+
 db = SQLAlchemy()
+
+
+class Cellist(db.Model):
+    """Data model for a cellist."""
+
+    __tablename__ = "cellists"
+
+    cellist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fname = db.Column(db.String(50), nullable=False)
+    lname = db.Column(db.String(50), nullable=False)
+    location = db.Column(db.String(50))
+    cello_details = db.Column(db.Text())
+    bio = db.Column(db.Text)
+    img_url = db.Column(db.Text)
+    music_url = db.Column(db.Text)
+
+    def __repr__(self):
+        """Display info about Cellist."""
+
+        return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
+
+    # test_c = Cellist(fname='Cori', lname='Lint', location='Tulsa', cello_details='2014 Y. Chen, Cleveland OH', bio='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', img_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', music_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
+
+
+class Link(db.Model):
+    """Data model for a teacher/student link."""
+
+    link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    start_year = db.Column(db.DateTime)
+    end_year = db.Column(db.DateTime)
+    location = db.Column(db.String(50))
+
+    def __repr__(self):
+        """Display info about teacher/student link."""
+
+        return f'<Link link_id={self.link_id} start_year={self.start_year}>'
+
+    # link = Link(start_year='2014', end_year='2018', location='Cleveland')
+
 
 class User(db.Model):
     """Data model for a user."""
@@ -20,8 +61,6 @@ class User(db.Model):
         # test_user = User(username='tester', email='test@test.com', password='123')
 
 
-
-
 def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     # flask_app.config['SQLALCHEMY_ECHO'] = echo
@@ -31,6 +70,9 @@ def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
     db.init_app(flask_app)
 
     print('Connected to the db!')        
+
+
+
 
 
 if __name__ == '__main__':
