@@ -12,6 +12,13 @@ app.jinja_env.undefined = StrictUndefined
 def show_home():
     return render_template('home.html')
 
+@app.route('/add_cellist')
+def add_cellist():
+    # create_cellist(
+    return render_template('add_cellist.html')
+
+
+
 
 if __name__ == '__main__':
     print("we're in server")
