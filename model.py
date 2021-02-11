@@ -24,7 +24,7 @@ class Cellist(db.Model):
     editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
 
-    creator = db.relationship('User', backref='cellist_profiles')
+    creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
     # teacher_links: a list of Link objects associated with Cellist.
     # student_links: a list of Link objects associated with Cellist.
 

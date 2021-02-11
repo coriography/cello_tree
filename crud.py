@@ -1,18 +1,72 @@
 from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
-def create_cellist():
+def create_cellist(fname, lname, location, cello_details, bio, img_url, music_url):
+    """Create a cellist profile."""
+    cellist = Cellist(fname=fname, lname=lname, location=location, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
+
+    db.session.add(cellist)
+    db.session.commit()
+
+    return cellist
+# create_cellist('cori', 'lint', 'tulsa', '2014', 'woeiraoier', 'owierjwoi', 'keurhtihiugrh')
+
+def edit_cellist():
+    """Edit a cellist profile."""
     pass
+
+
+def update_owner():
+    """Add or update owner of cellist profile."""
+    pass
+
 
 def create_link():
+    """Create a teacher/student link."""
     pass
+
 
 def create_post():
+    """Create a post on a cellist profile."""
     pass
+
+
+def edit_post():
+    """Edit an existing post. Only the post creator, an admin, or moderator can do this."""
+    pass
+
+
+def delete_post():
+    """Delete a post. Only the post creator, an admin, or moderator can do this."""
+    pass
+
 
 def upvote_post():
+    """Upvote a post."""
     pass
 
+
+def delete_upvote():
+    """Delete an upvote. Only the upvote creator can do this."""
+    pass
+
+
 def create_user():
+    """Create a user."""
+    pass
+
+
+def edit_user():
+    """Update a user."""
+    pass
+
+
+def delete_user():
+    """Delete a user."""
+    pass
+
+
+def update_role():
+    """Update a user's role."""
     pass
 
 
