@@ -45,7 +45,6 @@ class Link(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
     start_year = db.Column(db.DateTime)
     end_year = db.Column(db.DateTime)
-    location = db.Column(db.String(50))
 
     teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='teacher_links')
     student = db.relationship('Cellist', foreign_keys=[student_id], backref='student_links')
@@ -126,7 +125,7 @@ class User(db.Model):
     username = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    role = db.Column(db.String(50), nullable=False) # or use Role table???
+    role = db.Column(db.String(50), nullable=False)
 
     # cellist_profiles: a list of Cellist objects associated with User.
     # posts: a list of Post objects associated with User.
@@ -139,25 +138,6 @@ class User(db.Model):
 
         # test_user = User(username='tester', email='test@test.com', password='123')
 
-# class Role(db.Model):
-#     """Data model for a user/admin role."""
-
-#     __tablename__ = "roles"
-
-#     role_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-#     r_admin = db.Column(db.Boolean)
-#     r_moderator = db.Column(db.Boolean)
-#     r_user = db.Column(db.Boolean)
-#       # or: role = db.Column(db.String(50)) #admin, moderator, or user
-#       # user = db.relationship('User', backref='role')
-
-#     def __repr__(self):
-#         """Display info about Role."""
-
-#         return f'<Role role_id={self.role_id}, user_id={self.user_id}>'
-
-#         # tr = Role(admin='False', moderator='False', user='True')
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///tree', echo=True):
