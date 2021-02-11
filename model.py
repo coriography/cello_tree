@@ -157,6 +157,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
 
 
 if __name__ == '__main__':
+    print("we're in model")
     from server import app
 
     # Call connect_to_db(app, echo=False) if your program output gets
