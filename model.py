@@ -144,7 +144,7 @@ class User(db.Model):
 #         # tr = Role(admin='False', moderator='False', user='True')
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///test', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///tree', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     # flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
