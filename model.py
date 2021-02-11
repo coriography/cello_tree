@@ -13,7 +13,6 @@ class Cellist(db.Model):
     cellist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
-    location = db.Column(db.String(50))
     cello_details = db.Column(db.Text())
     bio = db.Column(db.Text)
     img_url = db.Column(db.Text)
@@ -33,7 +32,7 @@ class Cellist(db.Model):
 
         return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
 
-    # test_c = Cellist(fname='Cori', lname='Lint', location='Tulsa', cello_details='2014 Y. Chen, Cleveland OH', bio='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', img_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', music_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
+    # test_c = Cellist(fname='Cori', lname='Lint', cello_details='2014 Y. Chen, Cleveland OH', bio='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', img_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', music_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
 
 
 class Link(db.Model):
@@ -57,6 +56,23 @@ class Link(db.Model):
         return f'<Link link_id={self.link_id} teacher_student_link={self.teacher} / {self.student}>'
 
     # link = Link(teacher_id='1', student_id='1')
+
+
+class Location(db.Model):
+    """Data model for a cellist location."""
+
+    __tablename__ = "locations"
+
+    location_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    cellist_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    loc_type = db.Column(db.String(50), nullable=False)
+
+    cellist = db.relationship('Cellist', foreign_keys=[cellist_id], backref='locations')
+
+    def __repr__(self):
+        """Display info about Location."""
+
+        return f'<Location location_id={self.location_id} cellist={self.cellist_id}>'
 
 
 class Post(db.Model):

@@ -1,7 +1,6 @@
 data = [
     {'fname': 'Cori',
     'lname': 'Lint',
-    'location': 'Tulsa',
     'cello_details': '2014 Y. Chen, Cleveland',
     'bio': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'img_url':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 
     'music_url':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -10,7 +9,6 @@ data = [
     },
     {'fname': 'Anthony',
     'lname': 'Elliott',
-    'location': 'Ann Arbor',
     'cello_details': 'unknown telliott',
     'bio': 'Tony Elliott Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 
     'img_url':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 
@@ -20,7 +18,6 @@ data = [
     },
     {'fname': 'Jayesh',
     'lname': 'Susan',
-    'location': 'Philly',
     'cello_details': 'unknown jayesh',
     'bio': 'Jayesh Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 
     'img_url':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 
