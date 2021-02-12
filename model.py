@@ -32,8 +32,6 @@ class Cellist(db.Model):
 
         return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
 
-    # test_c = Cellist(fname='Cori', lname='Lint', cello_details='2014 Y. Chen, Cleveland OH', bio='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', img_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', music_url='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
-
 
 class Link(db.Model):
     """Data model for a teacher/student link."""

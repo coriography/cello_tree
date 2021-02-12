@@ -18,7 +18,7 @@ $('#add_cellist').on('submit', (evt) => {
     $.post('/add_cellist', add_cellist_form_data, (res) => {
         //display response
         console.log(res)
-        $('#response_here').text(res.fname, res.lname)
+        $('#response_here').text(`${res.fname} ${res.lname} has been added to the database.`)
     });  
 
 });
