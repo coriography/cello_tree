@@ -50,9 +50,14 @@ def delete_upvote():
     pass
 
 
-def create_user():
+def create_user(username, email, password, role="user"):
     """Create a user."""
-    pass
+    user = User(username=username, email=email, password=password, role=role)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return user
 
 
 def edit_user():
