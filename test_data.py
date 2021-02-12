@@ -31,7 +31,7 @@ data = [
     'lname': 'Jørgen Jensen',
     'cello_details': '',
     'bio': 'teacher Leonard Rose',
-    'img_url': '',
+    'img_url': 'https://music.northwestern.edu/sites/default/files/2017-11/HansJorgenJensen.jpg',
     'music_url': ''
     },
     {'fname': 'János',
