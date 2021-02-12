@@ -13,7 +13,7 @@ model.db.create_all()
 
 
 for cellist in data:
-    crud.create_cellist(cellist['fname'], cellist['lname'], cellist['location'], cellist['cello_details'], cellist['bio'], cellist['img_url'], cellist['music_url'])
+    crud.create_cellist(cellist['fname'], cellist['lname'], cellist['cello_details'], cellist['bio'], cellist['img_url'], cellist['music_url'])
 
 
 if __name__ == '__main__':

@@ -1,14 +1,14 @@
 from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
-def create_cellist(fname, lname, location, cello_details, bio, img_url, music_url):
+def create_cellist(fname, lname, cello_details, bio, img_url, music_url):
     """Create a cellist profile."""
-    cellist = Cellist(fname=fname, lname=lname, location=location, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
+    cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
 
     db.session.add(cellist)
     db.session.commit()
 
     return cellist
-# create_cellist('cori', 'lint', 'tulsa', '2014', 'woeiraoier', 'owierjwoi', 'keurhtihiugrh')
+# create_cellist('cori', 'lint', 'tulsa', 'woeiraoier', 'owierjwoi', 'keurhtihiugrh')
 
 def edit_cellist():
     """Edit a cellist profile."""
