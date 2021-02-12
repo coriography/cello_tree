@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cello Tree</title>
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>(this is now add_cellist.html)</h2>
     <h1>Add cellist form</h1>
     <form id="add_cellist">
         <input type="text" id="fname" placeholder="first name">
@@ -24,5 +15,5 @@
     <h3 id="response_here"></h3>
 
     <script src="/static/ajax.js"></script>
-</body>
-</html>
+
+{% endblock %}   
