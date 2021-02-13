@@ -25,11 +25,11 @@ $('#add_cellist').on('submit', (evt) => {
 
 // event handler for login form on home.html
 $('#login_form').on('submit', (evt) => {
-    evt.preventDefault();
+    evt.preventDefault(); 
 
     const loginData = {
         'username_email': $('#username_email').val(),
-        'password': $('#password').val()
+        'password': $('#login_password').val()
     }
 
     $.post('/', loginData, (res) => {
