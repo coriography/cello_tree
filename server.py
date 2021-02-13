@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash
 
 from model import connect_to_db
 
@@ -22,11 +22,31 @@ def login():
     
     # get username/email and password from AJAX
     username_email = request.form.get('username_email')
-    password = request.form.get('password')
+    password = request.form.get('login_password')
 
     # check database if this combo exists
     # if yes, add user to session
     # else, display error text
+
+    flash(f"LOGGED IN {username_email}")
+    return "logged in"
+
+
+# @app.route('/create_account', methods=['POST'])
+# def create_account():
+#     """Add a new user to the database."""
+    
+#     # get username/email and password from AJAX
+#     # check if username already exists (crud function)
+#     username = request.form.get('username')
+#     email = request.form.get('email')
+#     password = request.form.get('create_password')
+
+#     # add to db (crud function)
+
+#     flash("CREATED ACCOUNT")
+
+#     return redirect("/")
     
 
 @app.route('/add_cellist')
