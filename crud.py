@@ -59,6 +59,11 @@ def create_user(username, email, password, role="user"):
 
     return user
 
+def check_user(username_email, password)
+    """Check whether user is in database."""
+
+    #SQLAlchemy request
+
 
 def edit_user():
     """Update a user."""

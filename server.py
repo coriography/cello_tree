@@ -15,13 +15,29 @@ def show_home():
 
     return render_template('home.html')
 
+
+@app.route('/', methods=['POST'])
+def login():
+    """Log in a user, given email or username and password."""
+    
+    # get username/email and password from AJAX
+    username_email = request.form.get('username_email')
+    password = request.form.get('password')
+
+    # check database if this combo exists
+    # if yes, add user to session
+    # else, display error text
+    
+
 @app.route('/add_cellist')
 def show_add_cellist_form():
 
     return render_template('add_cellist.html')
 
+
 @app.route('/add_cellist', methods=["POST"])
 def add_cellist():
+
     """Add a cellist to the database."""
     # request.form.get - getting from request, not from html
     fname = request.form.get('fname')
@@ -35,6 +51,9 @@ def add_cellist():
     print("created cellist")
     
     return jsonify({'status': 'ok', 'fname': fname, 'lname': lname})
+
+
+
 
 
 if __name__ == '__main__':

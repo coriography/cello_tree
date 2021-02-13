@@ -17,10 +17,24 @@ $('#add_cellist').on('submit', (evt) => {
     //send data to server.py
     $.post('/add_cellist', add_cellist_form_data, (res) => {
         //display response
-        console.log(res)
         $('#response_here').text(`${res.fname} ${res.lname} has been added to the database.`)
     });  
 
 });
 
-   
+
+// event handler for login form on home.html
+$('#login_form').on('submit', (evt) => {
+    evt.preventDefault();
+
+    const loginData = {
+        'username_email': $('#username_email').val(),
+        'password': $('#password').val()
+    }
+
+    $.post('/', loginData, (res) => {
+        console.log(res);
+    });
+
+});
+
