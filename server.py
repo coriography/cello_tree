@@ -39,7 +39,7 @@ def create_account():
     # get username/email and password from AJAX
     username = request.form.get('username')
     email = request.form.get('email')
-    password = request.form.get('create_password')
+    create_password = request.form.get('create_password')
 
     # check if username or email already exists (crud function)
     if crud.check_username(username) != None:
@@ -48,6 +48,7 @@ def create_account():
         return jsonify({'status': 'email_error', 'email': email})
     else:
         # add to db (crud function)
+        crud.create_user(username, email, create_password)
         return jsonify({'status': 'ok', 'username': username})
     
 

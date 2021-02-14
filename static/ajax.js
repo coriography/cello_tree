@@ -46,7 +46,7 @@ $('#create_account').on('submit', (evt) => {
     const loginData = {
         'username': $('#username').val(),
         'email': $('#email').val(),
-        'password': $('#create_password').val()
+        'create_password': $('#create_password').val()
     }
 
     $.post('/api/create_account', loginData, (res) => {
