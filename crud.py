@@ -61,13 +61,13 @@ def create_user(username, email, password, role="user"):
 
 
 def check_username(username):
-    """Check whether username is already taken."""
+    """Return database row that matches given username."""
 
     return User.query.filter(User.username == username).first()
 
 
 def check_email(email):
-    """Check whether email is already taken."""
+    """Return database row that matches given email."""
 
     return User.query.filter(User.email == email).first()
 
