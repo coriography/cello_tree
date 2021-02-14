@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, flash
+from flask import Flask, render_template, jsonify, request, flash, session
 
 from model import connect_to_db
 
@@ -24,12 +24,22 @@ def login():
     username_email = request.form.get('username_email')
     password = request.form.get('login_password')
 
-    # check database if this combo exists
-    # if yes, add user to session
-    # else, display error text
-
-    # flash(f"LOGGED IN {username_email}")
-    return jsonify({'status': 'ok', 'username_email': username_email})
+    # get username or email from db
+    user_by_username = crud.check_username(username_email)
+    user_by_email = crud.check_email(username_email)
+    
+    # if username exists OR email exists in db and user password matches form password:
+    if user_by_username != None and user_by_username.password == password:
+        # add user to session
+        session['user_id'] = user_by_username.user_id
+        return jsonify({'status': 'ok', 'username_email': username_email})
+    elif user_by_email != None and user_by_email.password == password:
+        session['user_id'] = user_by_email.user_id
+        return jsonify({'status': 'ok', 'username_email': username_email})
+    else:
+        # display error text 
+        # TODO: display create account form
+        return jsonify({'status': 'error', 'msg': 'NOPE, password does not match a user in the db'})
 
 
 @app.route('/api/create_account', methods=['POST'])

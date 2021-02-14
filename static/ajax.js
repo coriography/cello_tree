@@ -34,9 +34,12 @@ $('#login_form').on('submit', (evt) => {
 
     $.post('/api/login', loginData, (res) => {
         console.log(res);
-        $('#display_response').text(`${res.username_email} is logged in`)
+        if (res.status === 'ok') {
+            $('#display_response').text(`${res.username_email} is logged in`)
+        } else if (res.status === 'error') {
+            $('#display_response').text(res.msg)
+        }
     });
-
 });
 
 // event handler for create_account form on home.html
