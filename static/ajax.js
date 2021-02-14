@@ -32,8 +32,26 @@ $('#login_form').on('submit', (evt) => {
         'password': $('#login_password').val()
     }
 
-    $.post('/', loginData, (res) => {
+    $.post('/api/login', loginData, (res) => {
         console.log(res);
+        $('#display_response').text(`${res.username_email} is logged in`)
+    });
+
+});
+
+// event handler for create_account form on home.html
+$('#create_account').on('submit', (evt) => {
+    evt.preventDefault(); 
+
+    const loginData = {
+        'username': $('#username').val(),
+        'email': $('#email').val(),
+        'password': $('#login_password').val()
+    }
+
+    $.post('/api/create_account', loginData, (res) => {
+        console.log(res);
+        $('#display_response').text(`account created for ${res.username}`)
     });
 
 });
