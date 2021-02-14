@@ -84,9 +84,14 @@ def add_cellist():
     print("created cellist")
     
     return jsonify({'status': 'ok', 'fname': fname, 'lname': lname})
+    # TODO: redirect to cellist profile!
 
 
-
+@app.route('/cellist_profile/<cellist_id>')
+def show_cellist(cellist_id):
+    # get cellist from database (write a crud function)
+    # display their info
+    # render template and pass in cellist
 
 
 if __name__ == '__main__':
