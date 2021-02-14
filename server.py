@@ -16,7 +16,7 @@ def show_home():
     return render_template('home.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     """Log in a user, given email or username and password."""
     
@@ -28,25 +28,25 @@ def login():
     # if yes, add user to session
     # else, display error text
 
-    flash(f"LOGGED IN {username_email}")
-    return "logged in"
+    # flash(f"LOGGED IN {username_email}")
+    return jsonify({'status': 'ok', 'username_email': username_email})
 
 
-# @app.route('/create_account', methods=['POST'])
-# def create_account():
-#     """Add a new user to the database."""
+@app.route('/api/create_account', methods=['POST'])
+def create_account():
+    """Add a new user to the database."""
     
-#     # get username/email and password from AJAX
-#     # check if username already exists (crud function)
-#     username = request.form.get('username')
-#     email = request.form.get('email')
-#     password = request.form.get('create_password')
+    # get username/email and password from AJAX
+    # check if username already exists (crud function)
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('create_password')
 
-#     # add to db (crud function)
+    # add to db (crud function)
 
-#     flash("CREATED ACCOUNT")
+    # flash("CREATED ACCOUNT")
 
-#     return redirect("/")
+    return jsonify({'status': 'ok', 'username': username})
     
 
 @app.route('/add_cellist')
