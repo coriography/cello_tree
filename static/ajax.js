@@ -51,7 +51,13 @@ $('#create_account').on('submit', (evt) => {
 
     $.post('/api/create_account', loginData, (res) => {
         console.log(res);
-        $('#display_response').text(`account created for ${res.username}`)
+        if (res.status === 'username_error') {
+            $('#display_response').text(`${res.username} already exists`)
+        } else if (res.status === 'email_error') {
+            $('#display_response').text(`${res.email} already exists`)
+        } else if (res.status === 'ok') {
+            $('#display_response').text(`account created for ${res.username}`)
+        }
     });
 
 });
