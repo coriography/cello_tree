@@ -59,16 +59,12 @@ def create_user(username, email, password, role="user"):
 
     return user
 
-def login_user(username_email, password):
-    """Check whether user is in database."""
-
-    #SQLAlchemy request
-
 
 def check_username(username):
     """Check whether username is already taken."""
 
     return User.query.filter(User.username == username).first()
+
 
 def check_email(email):
     """Check whether email is already taken."""
