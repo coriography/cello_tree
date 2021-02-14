@@ -10,6 +10,11 @@ def create_cellist(fname, lname, cello_details, bio, img_url, music_url):
     return cellist
 # create_cellist('cori', 'lint', 'tulsa', 'woeiraoier', 'owierjwoi', 'keurhtihiugrh')
 
+def get_cellist_by_id(cellist_id):
+    """Returns cellist object given cellist id."""
+    return Cellist.query.get(cellist_id)
+
+
 def edit_cellist():
     """Edit a cellist profile."""
     pass

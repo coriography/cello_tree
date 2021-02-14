@@ -89,9 +89,10 @@ def add_cellist():
 
 @app.route('/cellist_profile/<cellist_id>')
 def show_cellist(cellist_id):
-    # get cellist from database (write a crud function)
-    # display their info
+    # get cellist from database 
+    cellist = crud.get_cellist_by_id(cellist_id)
     # render template and pass in cellist
+    return render_template('cellist_profile.html', cellist=cellist)
 
 
 if __name__ == '__main__':
