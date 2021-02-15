@@ -8,7 +8,7 @@ data = [
     },
     {'fname': 'Anthony',
     'lname': 'Elliott',
-    'cello_details': 'unknown telliott',
+    'cello_details': '1703 David Tecchler, Rome. A wedding gift to the Duke of Edinburgh in 1874. See more: https://ur.umich.edu/0203/Aug11_03/10.shtml',
     'bio': 'Cellist Anthony Elliott is in great demand as a soloist, chamber music performer, and teacher. Following his victory in the Emanuel Feuermann International Cello Competition in 1987, Strad Magazine wrote of his competition appearance, “his emotional communication is often profound, and his glittering, silvery tone captivates the ear.” Following quickly on the heels of his competition victory was a highly successful New York debut recital, which received a lengthy standing ovation from a capacity crowd.', 
     'img_url': 'https://www.sfcv.org/sites/default/files/elliott-anthony-with-cello.jpg',
     'music_url': 'http://www.anthonyelliott.net/'
