@@ -3,5 +3,20 @@
 {% block body %}
     <h1>{{cellist.fname}} {{cellist.lname}}</h1>
 
+    {% if cellist.img_url %}
+        <img src="{{cellist.img_url}}" alt="">
+    {% endif %}
+
+    {% if cellist.bio %}
+        <p>{{cellist.bio}}</p>
+    {% endif %}
+
+    {% if cellist.cello_details %}
+        <p>Instrument: {{cellist.cello_details}}</p>
+    {% endif %}
+
+    {% if cellist.music_url %}
+        <a target="_blank" href="{{cellist.music_url}}">Listen here</a>
+    {% endif %}
 
 {% endblock %}   
