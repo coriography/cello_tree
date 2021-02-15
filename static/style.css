@@ -1,0 +1,22 @@
+/* Font-Family: 'Source Sans Pro', Sans-Serif;
+Font-Size: 48px;
+Font-Family: 'Sintony', Sans-Serif;
+Font-Size: 14px; */
+
+/* Font-Family: 'Ubuntu', Sans-Serif;
+Font-Size: 48px;
+Font-Family: 
+Font-Size: 15px; */
+
+/* Font-Family: 'Nunito', Sans-Serif;
+Font-Size: 45px;
+Font-Family: 'PT Sans', Sans-Serif;
+Font-Size: 17px; */
+
+* {
+    font-family: 'Open Sans', Sans-Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', Sans-Serif;
+}
