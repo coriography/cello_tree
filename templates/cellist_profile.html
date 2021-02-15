@@ -19,4 +19,13 @@
         <a target="_blank" href="{{cellist.music_url}}">Listen here</a>
     {% endif %}
 
+    {% if cellist.posts %}
+        <h4>Forum</h4>
+        {% for post in cellist.posts %}
+            <h5>{{post.user.username}}</h5>
+            <h6>{{post.post_date}}</h6>
+            <p>{{post.content}}</p>
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}   

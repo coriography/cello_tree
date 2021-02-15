@@ -1,5 +1,7 @@
 from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
+from datetime import datetime, timezone, timedelta
+
 def create_cellist(fname, lname, cello_details, bio, img_url, music_url):
     """Create a cellist profile."""
     cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
@@ -34,10 +36,16 @@ def create_link():
     pass
 
 
-def create_post():
+def create_post(user_id, cellist_id, content, post_date):
     """Create a post on a cellist profile."""
-    pass
+    # use Post model to create a post 
+    # get user id from session to assign user id
+    post = Post(user_id=user_id, cellist_id=cellist_id, content=content, post_date=post_date)
 
+    db.session.add(post)
+    db.session.commit()
+
+    return post
 
 def edit_post():
     """Edit an existing post. Only the post creator, an admin, or moderator can do this."""

@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-import datetime
+from datetime import datetime, timezone, timedelta
 
 db = SQLAlchemy()
 
@@ -92,7 +92,8 @@ class Post(db.Model):
 
         return f'<Post post_id={self.post_id} cellist_id={self.cellist_id}>'
 
-        # post = Post()
+        # post = Post(user_id=1, cellist_id=1, content="contenttttttttttttt", post_date=datetime.now(timezone.utc))
+
 
 
 class Upvote(db.Model):
