@@ -87,6 +87,12 @@ def add_cellist():
     # TODO: redirect to cellist profile!
 
 
+@app.route('/all_cellists')
+def show_all_cellists():
+    all_cellists = crud.get_all_cellists()
+
+    return render_template('all_cellists.html', all_cellists=all_cellists)
+
 @app.route('/cellist_profile/<cellist_id>')
 def show_cellist(cellist_id):
     # get cellist from database 

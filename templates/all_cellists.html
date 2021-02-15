@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>View All Cellists</h1>
+
+{% for cellist in all_cellists %}
+    <a href="/cellist_profile/{{cellist.cellist_id}}">{{cellist.lname}}, {{cellist.fname}}</a><br>
+{% endfor %}
+
+{% endblock %}   
