@@ -41,8 +41,8 @@ class Link(db.Model):
     link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     teacher_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
     student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
-    start_year = db.Column(db.DateTime)
-    end_year = db.Column(db.DateTime)
+    # start_year = db.Column(db.DateTime)
+    # end_year = db.Column(db.DateTime)
 
     teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='teacher_links')
     student = db.relationship('Cellist', foreign_keys=[student_id], backref='student_links')

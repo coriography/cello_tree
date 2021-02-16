@@ -31,9 +31,16 @@ def update_owner():
     pass
 
 
-def create_link():
+def create_link(teacher_id, student_id):
     """Create a teacher/student link."""
-    pass
+
+    link = Link(teacher_id=teacher_id, student_id=student_id)
+    
+    db.session.add(link)
+    db.session.commit()
+
+    return link
+
 
 
 def create_post(user_id, cellist_id, content, post_date):
