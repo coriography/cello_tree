@@ -42,6 +42,11 @@ def create_link(teacher_id, student_id):
     return link
 
 
+def check_link(teacher_id, student_id):
+    """Return database row that matches given link."""
+
+    return Link.query.filter(Link.teacher_id == teacher_id, Link.student_id == student_id).first()
+
 
 def create_post(user_id, cellist_id, content, post_date):
     """Create a post on a cellist profile."""
