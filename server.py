@@ -104,14 +104,17 @@ def show_cellist(cellist_id):
 @app.route('/api/create_link', methods=['POST'])
 def create_link_from_profile():
 
-    # TODO: do db query to add using names instead of id's
-    # TODO: send teacher/student OBJECT through to be displayed w/ AJAX
+    # TODO: do db query to add teacher using names instead of id's
+    # TODO: send teacher/student OBJECT through to be displayed w/ AJAX?
 
     teacher_id = request.form.get('teacher_id')
     student_id = request.form.get('student_id')
 
-    # check whether link already exists in db before creating link
-    if crud.check_link(teacher_id, student_id) != None:
+    # check that id's are not the same
+    if teacher_id == student_id:
+        return jsonify({'status': 'teacher_eq_student', 'teacher_id': teacher_id, 'student_id': student_id})
+    # check whether link already exists in db
+    elif crud.check_link(teacher_id, student_id) != None:
         return jsonify({'status': 'link_exists', 'teacher_id': teacher_id, 'student_id': student_id})
     else:
         crud.create_link(teacher_id, student_id)
