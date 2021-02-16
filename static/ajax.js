@@ -76,13 +76,16 @@ $('#add_link').on('submit', (evt) => {
 
     $.post('/api/create_link', linkData, (res) => {
         console.log(res);
-        // if (res.status === 'username_error') {
-        //     $('#display_response').text(`${res.username} already exists`)
-        // } else if (res.status === 'email_error') {
-        //     $('#display_response').text(`${res.email} already exists`)
-        // } else if (res.status === 'ok') {
-        //     $('#display_response').text(`account created for ${res.username}`)
-        // }
+        if (res.status === 'teacher_eq_student') {
+            $('#add_link_response').text('Cannot add link between a teacher and themselves.')
+        } else if (res.status === 'link_exists') {
+            $('#add_link_response').text('That link already exists.')
+        } else if (res.status === 'ok') {
+            $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
+
+            // TODO: add ajax to populate into teacher list??
+
+        }
     });
 
 });
