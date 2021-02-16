@@ -21,7 +21,7 @@ class Cellist(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
+    # ?? do I need this? link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
 
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
     # teacher_links: a list of Link objects associated with Cellist.
@@ -44,13 +44,13 @@ class Link(db.Model):
     # start_year = db.Column(db.DateTime)
     # end_year = db.Column(db.DateTime)
 
-    teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='teacher_links')
-    student = db.relationship('Cellist', foreign_keys=[student_id], backref='student_links')
+    teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='student_links')
+    student = db.relationship('Cellist', foreign_keys=[student_id], backref='teacher_links')
 
     def __repr__(self):
         """Display info about Link."""
 
-        return f'<Link link_id={self.link_id} teacher_student_link={self.teacher} / {self.student}>'
+        return f'<Link link_id={self.link_id}; teacher_id={self.teacher_id}, student_id ={self.student_id}>'
 
     # link = Link(teacher_id='1', student_id='1')
 
