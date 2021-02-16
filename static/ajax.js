@@ -65,3 +65,24 @@ $('#create_account').on('submit', (evt) => {
 
 });
 
+// event handler for add_link form on cellist_profile.html
+$('#add_link').on('submit', (evt) => {
+    evt.preventDefault(); 
+
+    const linkData = {
+        'teacher_id': $('#teacher_id').val(),
+        'student_id': $('#student_id').val()
+    }
+
+    $.post('/api/create_link', linkData, (res) => {
+        console.log(res);
+        // if (res.status === 'username_error') {
+        //     $('#display_response').text(`${res.username} already exists`)
+        // } else if (res.status === 'email_error') {
+        //     $('#display_response').text(`${res.email} already exists`)
+        // } else if (res.status === 'ok') {
+        //     $('#display_response').text(`account created for ${res.username}`)
+        // }
+    });
+
+});
