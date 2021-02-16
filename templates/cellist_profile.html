@@ -28,12 +28,20 @@
 
     <p id="add_link_response"></p>
 
+    {% if cellist.teacher_links %}
     <ul id="teachers_list">TEACHERS
-        <li>teacher 1</li>
+        {% for teacher_link in cellist.teacher_links%}
+        <li><a href="/cellist_profile/{{teacher_link.teacher_id}}">id={{teacher_link.teacher_id}}</a></li>
+        {% endfor %}
     </ul>
+    {% endif %}
+    {% if cellist.student_links %}
     <ul id="students_list">STUDENTS
-        <li>student 1</li>
+        {% for student_link in cellist.student_links%}
+        <li><a href="/cellist_profile/{{student_link.student_id}}">id={{student_link.student_id}}</a></li>
+        {% endfor %}
     </ul>
+    {% endif %}
 
     {% if cellist.posts %}
         <h4>Forum</h4>
