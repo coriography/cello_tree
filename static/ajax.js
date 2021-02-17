@@ -29,7 +29,7 @@ $('#login_form').on('submit', (evt) => {
 
     const loginData = {
         'username_email': $('#username_email').val(),
-        'password': $('#login_password').val()
+        'login_password': $('#login_password').val()
     }
 
     $.post('/api/login', loginData, (res) => {
