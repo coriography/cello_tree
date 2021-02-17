@@ -19,6 +19,14 @@ for cellist in data:
     crud.create_cellist(cellist['fname'], cellist['lname'], cellist['cello_details'], cellist['bio'], cellist['img_url'], cellist['music_url'])
 
 
+# seed cellist links from cellist_data.py
+cellist_id = 0
+for cellist in data:
+    cellist_id += 1
+    for teacher_id in cellist['teacher_ids']:
+        crud.create_link(teacher_id, cellist_id)
+
+
 # seed user data
 for i in range(10):
 
