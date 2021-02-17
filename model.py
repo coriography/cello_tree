@@ -32,6 +32,22 @@ class Cellist(db.Model):
 
         return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
 
+# TODO: add secondary=association_table in place of FK's in Cellist/Cellist?? I think
+# association_table = Table('association', Base.metadata,
+#     Column('left_id', Integer, ForeignKey('left.id')),
+#     Column('right_id', Integer, ForeignKey('right.id'))
+# )
+
+# class Parent(Base):
+#     __tablename__ = 'left'
+#     id = Column(Integer, primary_key=True)
+#     children = relationship("Child",
+#                     secondary=association_table)
+
+# class Child(Base):
+#     __tablename__ = 'right'
+#     id = Column(Integer, primary_key=True)
+
 
 class Link(db.Model):
     """Data model for a teacher/student link."""
