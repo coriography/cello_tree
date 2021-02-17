@@ -43,13 +43,20 @@
     </ul>
     {% endif %}
 
-    {% if cellist.posts %}
+    
         <h4>Forum</h4>
-        {% for post in cellist.posts %}
-            <h5>{{post.user.username}}</h5>
-            <h6>{{post.post_date}}</h6>
-            <p>{{post.content}}</p>
-        {% endfor %}
-    {% endif %}
+        <form id="add_post">
+            <input id="post_content" type="textarea" placeholder="your post here">
+            <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
+            <input type="submit">
+        </form>
+
+        {% if cellist.posts %}
+            {% for post in cellist.posts %}
+                <h5>{{post.user.username}}</h5>
+                <h6>{{post.post_date}}</h6>
+                <p>{{post.content}}</p>
+            {% endfor %}
+        {% endif %}
 
 {% endblock %}   

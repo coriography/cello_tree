@@ -92,3 +92,26 @@ $('#add_link').on('submit', (evt) => {
     });
 
 });
+
+
+// event handler for add_post form on cellist_profile.html
+$('#add_post').on('submit', (evt) => {
+    evt.preventDefault(); 
+
+    const postData = {
+        'post_content': $('#post_content').val(),
+        'cellist_id_from_profile': $('#cellist_id_from_profile').val()
+    }
+
+    $.post('/api/add_post', postData, (res) => {
+        console.log(res);
+        // if (res.status === 'error') {
+        //     $('#add_link_response').text('error message.')
+        // } else if (res.status === 'link_exists') {
+        //     $('#add_link_response').text('That link already exists.')
+        // } else if (res.status === 'ok') { 
+        //     $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
+        // }
+    });
+
+});

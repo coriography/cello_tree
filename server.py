@@ -6,6 +6,8 @@ import crud
 
 from jinja2 import StrictUndefined
 
+from datetime import datetime, timezone, timedelta
+
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -123,6 +125,22 @@ def create_link_from_profile():
     else:
         crud.create_link(teacher_id, student_id)
         return jsonify({'status': 'ok', 'teacher_id': teacher_id, 'student_id': student_id})
+
+
+@app.route('/api/add_post', methods=['POST'])
+def add_post_from_page():
+
+    user_id = session['user_id']
+    cellist_id = request.form.get('cellist_id_from_profile')
+    post_content = request.form.get('post_content')
+    post_date = datetime.now(timezone.utc)
+    # post_date = "2021-02-14 00:48:25.427639"
+
+    crud.create_post(user_id, cellist_id, post_content, post_date)
+    
+    return jsonify({'status': 'ok'})
+    # TODO: should I append this post to posts??? or wut
+
 
 
 if __name__ == '__main__':
