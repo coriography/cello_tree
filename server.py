@@ -80,11 +80,15 @@ def add_cellist():
     img_url = request.form.get('img_url')
     music_url = request.form.get('music_url')
 
-    crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
-    print("created cellist")
-    
-    return jsonify({'status': 'ok', 'fname': fname, 'lname': lname})
-    # TODO: redirect to cellist profile!
+    # check whether name combo already exists in db
+    if crud.get_cellist_by_name(fname, lname) != None:
+        return jsonify({'status': 'error', 'fname': fname, 'lname': lname})
+    else:
+        crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
+        print(f"created cellist {fname} {lname}")
+        return jsonify({'status': 'ok', 'fname': fname, 'lname': lname})
+        
+    # TODO: redirect to cellist profile?? HOW?
 
 
 @app.route('/all_cellists')

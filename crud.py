@@ -16,6 +16,12 @@ def get_cellist_by_id(cellist_id):
     """Returns cellist object given cellist id."""
     return Cellist.query.get(cellist_id)
 
+
+def get_cellist_by_name(fname, lname):
+    """Returns cellist object given cellist name."""
+    return Cellist.query.filter(Cellist.fname == fname, Cellist.lname == lname).first()
+
+
 def get_all_cellists():
     """Get all cellists from database."""
     cellists = Cellist.query.order_by('lname').all()

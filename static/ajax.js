@@ -16,8 +16,11 @@ $('#add_cellist').on('submit', (evt) => {
 
     //send data to server.py
     $.post('/add_cellist', add_cellist_form_data, (res) => {
-        //display response
-        $('#response_here').text(`${res.fname} ${res.lname} has been added to the database.`)
+        if (res.status === 'ok') {
+            $('#response_here').text(`${res.fname} ${res.lname} has been added to the database.`)
+        } else if (res.status === 'error') {
+            $('#response_here').text(`${res.fname} ${res.lname} already exists in the database.`)
+        }
     });  
 
 });
