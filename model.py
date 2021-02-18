@@ -4,6 +4,96 @@ from datetime import datetime, timezone, timedelta
 
 db = SQLAlchemy()
 
+# !! original Cellist/Link model code
+    # class Link(db.Model):
+    #     """Data model for a teacher/student link."""
+
+    #     __tablename__ = "links"
+
+    #     link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    #     teacher_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    #     student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    #     # start_year = db.Column(db.DateTime)
+    #     # end_year = db.Column(db.DateTime)
+
+    #     teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='student_links')
+    #     student = db.relationship('Cellist', foreign_keys=[student_id], backref='teacher_links')
+
+    #     def __repr__(self):
+    #         """Display info about Link."""
+
+    #         return f'<Link link_id={self.link_id}; teacher_id={self.teacher_id}, student_id ={self.student_id}>'
+
+    #     # link = Link(teacher_id='1', student_id='1')
+
+    # class Cellist(db.Model):
+    #     """Data model for a cellist."""
+
+    #     __tablename__ = "cellists"
+
+    #     cellist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    #     fname = db.Column(db.String(50), nullable=False)
+    #     lname = db.Column(db.String(50), nullable=False)
+    #     cello_details = db.Column(db.Text())
+    #     bio = db.Column(db.Text)
+    #     img_url = db.Column(db.Text)
+    #     music_url = db.Column(db.Text)
+
+    #     owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    #     creator_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    #     editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    #     # ?? do I need this? link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
+
+    #     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
+    #     # teacher_links: a list of Link objects associated with Cellist.
+    #     # student_links: a list of Link objects associated with Cellist.
+
+    #     def __repr__(self):
+    #         """Display info about Cellist."""
+
+    #         return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
+
+
+
+    # # TODO: add secondary=association_table in place of FK's in Cellist/Cellist?? I think
+
+    # class CellistLink(db.Model):
+    #     """Link????? Cellist???"""
+
+    #     __tablename__ = "cellists_links"
+
+    #     cellist_link_id = db.Column(db)
+
+    # association_table = db.Table('association',
+    #     db.Column('cellists_id', db.Integer, db.ForeignKey('cellists.cellist_id')),
+    #     db.Column('links_id', db.Integer, db.ForeignKey('links.link_id'))
+    # )
+
+    # class Parent(Base): #Cellist
+    #     __tablename__ = 'left'
+    #     id = Column(Integer, primary_key=True)
+    #     children = relationship("Child",
+    #                     secondary=association_table) # this will be a list [] of child objects associated with parent - you can use this to loop through
+
+    # class Child(Base): # Link (to teachers and students)
+    #     __tablename__ = 'right'
+    #     id = Column(Integer, primary_key=True)
+    
+
+class Link(db.Model):
+    """Data model for an association table between students and teachers (both Cellist)."""
+
+    __tablename__ = "links"
+
+    link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
+
+    def __repr__(self):
+        """Display info about Link."""
+
+        return f'<Link link_id={self.link_id}; teacher_id={self.teacher_id}, student_id ={self.student_id}>'
+
 
 class Cellist(db.Model):
     """Data model for a cellist."""
@@ -24,53 +114,15 @@ class Cellist(db.Model):
     # ?? do I need this? link = db.Column(db.Integer, db.ForeignKey('links.link_id'))
 
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
-    # teacher_links: a list of Link objects associated with Cellist.
-    # student_links: a list of Link objects associated with Cellist.
+
+    teachers = db.relationship("Cellist", secondary=Link, primaryjoin=cellist_id == Link.teacher_id, secondaryjoin=cellist_id == Link.student_id, backref="students") # a list of teacher objects associated with student
+    # students: a list of student objects associated with teacher
 
     def __repr__(self):
         """Display info about Cellist."""
 
         return f'<Cellist cellist_id={self.cellist_id}, fname={self.fname}, lname={self.lname}>'
 
-
-# # TODO: add secondary=association_table in place of FK's in Cellist/Cellist?? I think
-# association_table = CellistLinks('association', Base.metadata,
-#     Column('left_id', Integer, ForeignKey('left.id')),
-#     Column('right_id', Integer, ForeignKey('right.id'))
-# )
-
-# class Parent(Base): #Cellist
-#     __tablename__ = 'left'
-#     id = Column(Integer, primary_key=True)
-#     children = relationship("Child",
-#                     secondary=association_table) # this will be a list [] of child objects associated with parent - you can use this to loop through
-
-# class Child(Base): # Link (to teachers and students)
-#     __tablename__ = 'right'
-#     id = Column(Integer, primary_key=True)
-    
-
-
-class Link(db.Model):
-    """Data model for a teacher/student link."""
-
-    __tablename__ = "links"
-
-    link_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    teacher_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
-    student_id = db.Column(db.Integer, db.ForeignKey('cellists.cellist_id'), nullable=False)
-    # start_year = db.Column(db.DateTime)
-    # end_year = db.Column(db.DateTime)
-
-    teacher = db.relationship('Cellist', foreign_keys=[teacher_id], backref='student_links')
-    student = db.relationship('Cellist', foreign_keys=[student_id], backref='teacher_links')
-
-    def __repr__(self):
-        """Display info about Link."""
-
-        return f'<Link link_id={self.link_id}; teacher_id={self.teacher_id}, student_id ={self.student_id}>'
-
-    # link = Link(teacher_id='1', student_id='1')
 
 
 class Location(db.Model):
