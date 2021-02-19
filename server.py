@@ -143,6 +143,16 @@ def add_post_from_page():
     # TODO: should I append this post to posts??? or wut
 
 
+@app.route('/api/upvote_post', methods=['POST'])
+def upvote_post_from_post():
+    pass
+    # pass in user in from session
+    # increase vote count and pass count into server route?
+    # or take care of count increase in crud? bc I want to update in db
+    # how do I get the post id????
+    # need a db query that get total count of upvotes for each post
+
+
 
 if __name__ == '__main__':
     print("we're in server")
