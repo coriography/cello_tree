@@ -101,10 +101,11 @@ def show_all_cellists():
 
 @app.route('/cellist_profile/<cellist_id>')
 def show_cellist(cellist_id):
-    # get cellist from database 
+
     cellist = crud.get_cellist_by_id(cellist_id)
-    # render template and pass in cellist
-    return render_template('cellist_profile.html', cellist=cellist)
+    posts = crud.get_posts_by_cellist(cellist_id)
+
+    return render_template('cellist_profile.html', cellist=cellist, posts=posts)
 
 
 @app.route('/api/create_link', methods=['POST'])
