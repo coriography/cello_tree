@@ -47,6 +47,7 @@ class Cellist(db.Model):
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
     # teacher_links: a list of Link objects associated with Cellist.
     # student_links: a list of Link objects associated with Cellist.
+    # posts: a list of Post objects associated with Cellist.
 
     def __repr__(self):
         """Display info about Cellist."""
