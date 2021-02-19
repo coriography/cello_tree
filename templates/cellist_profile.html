@@ -52,11 +52,15 @@
         </form>
 
         {% if posts %}
-            {% for post in posts %}
-                <h5>{{post.user.username}}</h5>
-                <h6>{{post.post_date}}</h6>
-                <p>{{post.content}}</p>
-            {% endfor %}
+            <div id="profile_forum">
+                {% for post in posts %}
+                    <h5>{{post.user.username}}</h5>
+                    <h6>{{post.post_date}}</h6>
+                    <p>{{post.content}}</p>
+                    <button id="upvote_button">Upvote this post</button>
+                    <p id="upvote_count">{{post.upvotes}}</p>            
+                {% endfor %}
+            </div>
         {% endif %}
 
 {% endblock %}   
