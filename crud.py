@@ -87,12 +87,20 @@ def delete_post():
     pass
 
 
-def create_upvote(user_id, post_id, count=1):
+def create_upvote(user_id, post_id):
     """Create an upvote on a post."""
     
-    upvote = Upvote(user_id=user_id, post_id=post_id, count=count)
+    upvote = Upvote(user_id=user_id, post_id=post_id)
 
     return upvote
+
+
+def get_upvotes_count(post_id):
+    """Get the count of upvotes for a given post."""
+
+    count_upvotes = Upvote.query.filter(Upvote.post_id == post_id).count()
+
+    return count_upvotes
 
 
 def delete_upvote():
