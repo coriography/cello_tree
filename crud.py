@@ -2,7 +2,7 @@ from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
 from datetime import datetime, timezone, timedelta
 
-def create_cellist(fname, lname, cello_details, bio, img_url, music_url):
+def create_cellist(fname, lname, cello_details, bio, img_url="", music_url=""):
     """Create a cellist profile."""
     cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
 
