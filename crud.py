@@ -87,9 +87,12 @@ def delete_post():
     pass
 
 
-def upvote_post():
-    """Upvote a post."""
-    pass
+def create_upvote(user_id, post_id, count=1):
+    """Create an upvote on a post."""
+    
+    upvote = Upvote(user_id=user_id, post_id=post_id, count=count)
+
+    return upvote
 
 
 def delete_upvote():
