@@ -104,7 +104,6 @@ class Upvote(db.Model):
     upvote_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'))
-    count = db.Column(db.Integer, nullable=False)
 
     post = db.relationship('Post', backref='upvotes')
     user = db.relationship('User', backref='upvotes')
@@ -112,7 +111,7 @@ class Upvote(db.Model):
     def __repr__(self):
         """Display info about Upvote."""
 
-        return f'<Upvote upvote_id={self.upvote_id}, count={self.count}>'
+        return f'<Upvote upvote_id={self.upvote_id}, post_id={self.post_id}>'
 
 
 class User(db.Model):
