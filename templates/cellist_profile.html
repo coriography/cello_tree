@@ -51,8 +51,8 @@
             <input type="submit">
         </form>
 
-        {% if cellist.posts %}
-            {% for post in cellist.posts %}
+        {% if posts %}
+            {% for post in posts %}
                 <h5>{{post.user.username}}</h5>
                 <h6>{{post.post_date}}</h6>
                 <p>{{post.content}}</p>
