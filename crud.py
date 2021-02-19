@@ -2,6 +2,8 @@ from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
 from datetime import datetime, timezone, timedelta
 
+from flask_sqlalchemy import SQLAlchemy
+
 def create_cellist(fname, lname, cello_details, bio, img_url="", music_url=""):
     """Create a cellist profile."""
     cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
@@ -10,7 +12,7 @@ def create_cellist(fname, lname, cello_details, bio, img_url="", music_url=""):
     db.session.commit()
 
     return cellist
-# create_cellist('cori', 'lint', 'tulsa', 'woeiraoier', 'owierjwoi', 'keurhtihiugrh')
+
 
 def get_cellist_by_id(cellist_id):
     """Returns cellist object given cellist id."""
@@ -26,6 +28,7 @@ def get_all_cellists():
     """Get all cellists from database."""
     cellists = Cellist.query.order_by('lname').all()
     return cellists
+
 
 def edit_cellist():
     """Edit a cellist profile."""
@@ -64,6 +67,15 @@ def create_post(user_id, cellist_id, content, post_date):
     db.session.commit()
 
     return post
+
+
+def get_posts_by_cellist(cellist_id):
+    """Get all posts associated with Cellist and sort by date."""
+
+    posts = Post.query.filter(Post.cellist_id == cellist_id).order_by(Post.post_date.desc()).all()
+
+    return posts
+
 
 def edit_post():
     """Edit an existing post. Only the post creator, an admin, or moderator can do this."""
