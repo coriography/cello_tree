@@ -54,11 +54,18 @@
         {% if posts %}
             <div id="profile_forum">
                 {% for post in posts %}
-                    <h5>{{post.user.username}}</h5>
-                    <h6>{{post.post_date}}</h6>
-                    <p>{{post.content}}</p>
-                    <button id="upvote_button">Upvote this post</button>
-                    <p id="upvote_count">{{post.upvotes}}</p>            
+                    <div>
+                        <h5>{{post.user.username}}</h5>
+                        <h6>{{post.post_date}}</h6>
+                        <p>{{post.content}}</p>
+                        <!-- THIS DOESN'T WORK because the form and id's are repeating
+                            <form id="upvote_form">
+                            <input id="post_id" type="hidden" val="{{post.post_id}}">
+                            <input id="submit_upvote" type="submit" value="Upvote this post">
+                        </form> -->
+                        <button disabled>I like this post</button>
+                        <!-- <p id="upvote_count">{{post.upvotes}}</p>    -->
+                    </div>  
                 {% endfor %}
             </div>
         {% endif %}
