@@ -145,13 +145,15 @@ def add_post_from_page():
 
 @app.route('/api/upvote_post', methods=['POST'])
 def upvote_post_from_post():
-    pass
-    # pass in user in from session
-    # increase vote count and pass count into server route?
-    # or take care of count increase in crud? bc I want to update in db
-    # how do I get the post id????
-    # need a db query that get total count of upvotes for each post
 
+    post_id = request.form.get('post_id')
+    user_id = session['user_id']
+
+    crud.create_upvote(user_id, post_id)
+    upvotes_count = crud.get_upvotes_count(post_id)
+    
+
+    return jsonify({'status': 'ok', 'upvotes_count': upvotes_count})
 
 
 if __name__ == '__main__':
