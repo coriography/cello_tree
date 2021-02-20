@@ -115,3 +115,16 @@ $('#add_post').on('submit', (evt) => {
     });
 
 });
+
+
+$('#upvote_form').on('submit', (evt) => {
+    evt.preventDefault();
+
+    const upvoteData = {
+        'post_id': $('#post_id').val()
+    }
+
+    $.post('/api/upvote_post', upvoteData, (res) => {
+        console.log(res);
+    });
+});
