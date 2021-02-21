@@ -117,14 +117,26 @@ $('#add_post').on('submit', (evt) => {
 });
 
 
-$('#upvote_form').on('submit', (evt) => {
-    evt.preventDefault();
+// $('#upvote_form').on('submit', (evt) => {
+//     evt.preventDefault();
 
+//     const upvoteData = {
+//         'post_id': $('#post_id').val()
+//     }
+
+//     $.post('/api/upvote_post', upvoteData, (res) => {
+//         console.log(res);
+//     });
+// });
+
+// use button with onClick function and pass in post id
+// function defines post id as object and executes ajax call
+function clickUpvote(post_id) {
     const upvoteData = {
-        'post_id': $('#post_id').val()
+        'post_id': post_id
     }
 
     $.post('/api/upvote_post', upvoteData, (res) => {
         console.log(res);
     });
-});
+};
