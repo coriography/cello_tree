@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://d3js.org/d3-hierarchy.v2.min.js"></script>
-<script>
+<script src="https://d3js.org/d3-hierarchy.v2.min.js"></script>
+<!-- <script>
 var treemap = d3.treemap();
-</script>
+</script> -->
+
+<style>
+    #tree_container { height: 500px; }
+</style>
+
+{% endblock %}
 
 {% block body %}
 <h1>The Tree</h1>
 
-<!-- 
+<!-- LOGIC 
     for each cellist,
         if cellist has no teachers,
             display cellist name
@@ -24,5 +33,7 @@ var treemap = d3.treemap();
     OR
     reorganize into nested dictionary
  -->
+
+<div id="tree_container"></div>
 
 {% endblock %}   
