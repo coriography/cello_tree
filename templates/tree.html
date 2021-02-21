@@ -4,13 +4,20 @@
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://d3js.org/d3-hierarchy.v2.min.js"></script>
-<script src="https://d3js.org/d3-hierarchy.v2.min.js"></script>
-<!-- <script>
-var treemap = d3.treemap();
-</script> -->
+
 
 <style>
-    #tree_container { height: 500px; }
+
+    .node {
+        fill: #000000;
+        stroke: none;
+    }
+
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 2px;
+    }
 </style>
 
 {% endblock %}
@@ -34,6 +41,14 @@ var treemap = d3.treemap();
     reorganize into nested dictionary
  -->
 
-<div id="tree_container"></div>
+<svg width="500" height="500">
+    <g transform="translate(5, 5)">
+        <g class="links"></g>
+        <g class="nodes"></g>
+    </g>
+</svg>
+
+<script src="/static/tree.js"></script>
+
 
 {% endblock %}   
