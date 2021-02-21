@@ -83,14 +83,13 @@ def add_cellist():
     music_url = request.form.get('music_url')
 
     # check whether name combo already exists in db
-    if crud.get_cellist_by_name(fname, lname) != None:
-        return jsonify({'status': 'error', 'fname': fname, 'lname': lname})
+    existing_cellist = crud.get_cellist_by_name(fname, lname)
+    if existing_cellist != None:
+        return jsonify({'status': 'error', 'cellist_id': existing_cellist.cellist_id, 'fname': existing_cellist.fname, 'lname': existing_cellist.lname})
     else:
-        crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
-        print(f"created cellist {fname} {lname}")
-        return jsonify({'status': 'ok', 'fname': fname, 'lname': lname})
-        
-    # TODO: redirect to cellist profile?? HOW?
+        cellist = crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
+
+        return jsonify({'status': 'ok', 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname})
 
 
 @app.route('/all_cellists')
@@ -104,6 +103,8 @@ def show_cellist(cellist_id):
 
     cellist = crud.get_cellist_by_id(cellist_id)
     posts = crud.get_posts_by_cellist(cellist_id)
+    # TODO: upvotes_count = crud.get_upvotes_count(post_id)
+    # TODO: use loops? for post in posts??
 
     return render_template('cellist_profile.html', cellist=cellist, posts=posts)
 
@@ -148,10 +149,10 @@ def upvote_post_from_post():
 
     post_id = request.form.get('post_id')
     user_id = session['user_id']
+    print(user_id)
 
     crud.create_upvote(user_id, post_id)
     upvotes_count = crud.get_upvotes_count(post_id)
-    
 
     return jsonify({'status': 'ok', 'upvotes_count': upvotes_count})
 
