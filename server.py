@@ -157,6 +157,12 @@ def upvote_post_from_post():
     return jsonify({'status': 'ok', 'upvotes_count': upvotes_count})
 
 
+@app.route('/tree')
+def display_tree_page():
+
+    return render_template('tree.html')
+
+
 if __name__ == '__main__':
     print("we're in server")
     connect_to_db(app)
