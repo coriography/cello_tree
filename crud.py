@@ -147,6 +147,12 @@ def update_role():
     pass
 
 
+def get_all_links():
+    """Query all cellist links."""
+
+    return Link.query.all()
+
+
 if __name__ == '__main__':
     print("we're in crud")
     from server import app
