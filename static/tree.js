@@ -1,37 +1,40 @@
 "use strict";
 
 var data = {
-    "name": "Janos Starker",
+    "name": "parent node (hide)",
     "children": [{
-            "name": "Anthony Elliott",
-            "children": [{
-                    "name": "Cori Lint"
-                },
-                {
-                    "name": "Jonathan Butler",
-                    "children": [{
-                        "name": "JB1",
+        "name": "Janos Starker",
+        "children": [{
+                "name": "Anthony Elliott",
+                "children": [{
+                        "name": "Cori Lint",
                         "children": [{
-                            "name": "JB2"
+                            "name": "CL1",
+                            "children": [{
+                                "name": "CL2"
+                            }]
                         }]
-                    }]
-                },
-                {
-                    "name": "Annabeth Shirley"
-                }
-            ]
-        },
-        {
-            "name": "Brant Taylor",
-            "children": [{
-                    "name": "Sonia Mantell"
-                },
-                {
-                    "name": "Anita Graef"
-                }
-            ]
-        }
-    ]
+                    },
+                    {
+                        "name": "Jonathan Butler"
+                    },
+                    {
+                        "name": "Annabeth Shirley"
+                    }
+                ]
+            },
+            {
+                "name": "Brant Taylor",
+                "children": [{
+                        "name": "Sonia Mantell"
+                    },
+                    {
+                        "name": "Anita Graef"
+                    }
+                ]
+            }
+        ]
+    }]
 };
 
 
@@ -68,12 +71,11 @@ container.height(max - min + root.dx * 2);
 
 // d3.scaleSequential will return a function that we'll use to color the
 // links of the tree
-//
-// For more info see:
 // - https://github.com/d3/d3-scale#sequential-scales
 // - https://github.com/d3/d3-scale-chromatic#interpolateWarm
-const color = d3.scaleSequential(d3.interpolateWarm)
+const color = d3.scaleSequential(d3.interpolateYlGn)
     .domain([0, root.links().length - 1]);
+// const color = "#E3E3E3"; // or just 
 
 const svg = d3.select('#tree_layout').append('svg');
 
@@ -84,7 +86,7 @@ const g = svg.append('g')
 
 const link = g.append('g')
     .attr('fill', 'none')
-    .attr('stroke-width', 5.5)
+    .attr('stroke-width', 3)
     .selectAll('path')
     .data(root.links())
     .enter().append('path')
@@ -93,8 +95,8 @@ const link = g.append('g')
     })
     .attr(
         'd',
-        // d3.linkHorizontal returns a function that will automatically
-        // generate nice, curvy paths. We'll use this function as a callback.
+        // d3.linkHorizontal returns a function that automatically
+        // generates paths between parent and child. We'll use this function as a callback.
         //
         // For more info see: https://github.com/d3/d3-shape#linkHorizontal
         d3.linkHorizontal()
