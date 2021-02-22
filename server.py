@@ -163,6 +163,35 @@ def display_tree_page():
     return render_template('tree.html')
 
 
+@app.route('/tree_data.json')
+def get_links_for_tree():
+
+    # !! this doesn't seem scalable??????
+    # get all links using db query
+    # turn them into nested pydict
+    # send back through in a JSON object for D3 display
+
+    data = {}
+
+    links = crud.get_all_links
+    for link in links:
+    # check whether id exists on any level of dict
+    # !! ^ how??? do I need to order query by whether they have teachers and start with those who don't?
+    # add id, fname, lname of teacher to dict
+    # add id, fname, lname of each student to dict
+    # add each of their students to dict
+
+
+    # ?? OR .... if I only display one cellist node at a time
+    # query a cellist given ID
+    # get their teachers
+    # get anyone who has listed this cellist as their teacher
+    # then when clicking on a new person, query their teachers or students (depending on direction)
+
+
+    return jsonify({'data': data})
+
+
 if __name__ == '__main__':
     print("we're in server")
     connect_to_db(app)
