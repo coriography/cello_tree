@@ -152,6 +152,11 @@ def get_all_links():
 
     return Link.query.all()
 
+def get_students_by_cellist_id(cellist_id):
+    """Return list of student links associated with cellist id."""
+
+    return Link.query.filter(Link.teacher_id == cellist_id).all()
+
 
 if __name__ == '__main__':
     print("we're in crud")
