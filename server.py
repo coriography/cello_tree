@@ -166,7 +166,6 @@ def display_tree_page():
 @app.route('/tree_data.json')
 def get_links_for_tree():
 
-    # !! this doesn't seem scalable??????
     # get all links using db query
     # turn them into nested pydict
     # send back through in a JSON object for D3 display
@@ -182,7 +181,7 @@ def get_links_for_tree():
     # add each of their students to dict
 
 
-    # OR add new field in db "has teacher"
+    # !! add new field in db "has teacher"
     # OR give all same non-teacher by default
 
 
@@ -192,9 +191,6 @@ def get_links_for_tree():
     # get their teachers
     # get anyone who has listed this cellist as their teacher
     # then when clicking on a new person, query their teachers or students (depending on direction)
-
-
-    
 
     # return jsonify({'data': data})
     pass
@@ -206,22 +202,43 @@ def show_tree_by_cellist_id(cellist_id):
     # take in cellist id based on button click
     # query for links where teacher id is given id
     students_list = crud.get_students_by_cellist_id(cellist_id)
-    # create py dict based on this
+    # create py dict, loop through students
+    # add id, fname, lname of teacher and each student to dict
     tree_data = {}
     tree_data["id"] = cellist_id
     tree_data["fname"] = "fname"
     tree_data["lname"] = "lname"
     tree_data["children"] = []
-    for student in students_list:
-        tree_data["children"].append({"id": student.student_id, "fname": "fname", "lname": "lname"})
-    # add id, fname, lname of teacher to dict
-    # add id, fname, lname of each student to dict
-    # add each of their students to dict
+    for student_link in students_list:
+        tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
+    
     # pass through using jsonify
     # access in D3
-    # !! but how do I also render the page???
-    # !! return - render template OR jsonify data??? Can I do both?
-    # !! or do I do all this then use GET request on actual route?
+    # !! use GET request on actual route?
+    # return render_template('tree.html')
+    return jsonify({'tree_data': tree_data})
+    # pass
+
+@app.route('/teacher_tree/<cellist_id>')
+def show_teacher_tree_by_cellist_id(cellist_id):
+    # build button in cellist profile with onclick, passes in current cellist_id
+    # build ajax file to handle onclick
+    # take in cellist id based on button click
+    # query for links where teacher id is given id
+    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
+    # create py dict, loop through students
+    # add id, fname, lname of teacher and each student to dict
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["fname"] = "fname"
+    tree_data["lname"] = "lname"
+    tree_data["children"] = []
+    for teacher_link in teachers_list:
+        tree_data["children"].append({"id": teacher_link.teacher.cellist_id, "fname": teacher_link.teacher.fname, "lname": teacher_link.teacher.lname})
+    
+    # pass through using jsonify
+    # access in D3
+    # !! use GET request on actual route?
     # return render_template('tree.html')
     return jsonify({'tree_data': tree_data})
     # pass
