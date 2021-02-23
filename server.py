@@ -201,17 +201,32 @@ def get_links_for_tree():
 
 @app.route('/tree/<cellist_id>')
 def show_tree_by_cellist_id(cellist_id):
-    # TODO: start smol. 
-    # use a different server route?
     # build button in cellist profile with onclick, passes in current cellist_id
     # build ajax file to handle onclick
     # take in cellist id based on button click
     # query for links where teacher id is given id
+    students_list = crud.get_students_by_cellist_id(cellist_id)
     # create py dict based on this
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["fname"] = "fname"
+    tree_data["lname"] = "lname"
+    tree_data["children"] = []
+    for student in students_list:
+        tree_data["children"].append({"id": student.student_id, "fname": "fname", "lname": "lname"})
+    # add id, fname, lname of teacher to dict
+    # add id, fname, lname of each student to dict
+    # add each of their students to dict
     # pass through using jsonify
     # access in D3
-    # THEN deal with adding to tree
-    pass
+    # !! but how do I also render the page???
+    # !! return - render template OR jsonify data??? Can I do both?
+    # !! or do I do all this then use GET request on actual route?
+    # return render_template('tree.html')
+    return jsonify({'tree_data': tree_data})
+    # pass
+    
+
 
 if __name__ == '__main__':
     print("we're in server")
