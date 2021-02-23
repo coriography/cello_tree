@@ -194,6 +194,13 @@ def get_links_for_tree():
     # then when clicking on a new person, query their teachers or students (depending on direction)
 
 
+    
+
+    # return jsonify({'data': data})
+    pass
+
+@app.route('/tree/<cellist_id>')
+def show_tree_by_cellist_id(cellist_id):
     # TODO: start smol. 
     # use a different server route?
     # build button in cellist profile with onclick, passes in current cellist_id
@@ -204,10 +211,7 @@ def get_links_for_tree():
     # pass through using jsonify
     # access in D3
     # THEN deal with adding to tree
-
-    # return jsonify({'data': data})
     pass
-
 
 if __name__ == '__main__':
     print("we're in server")
