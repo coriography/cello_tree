@@ -141,3 +141,16 @@ function clickUpvote(post_id) {
         console.log(res);
     });
 };
+
+// ?? don't need this if just rendering template in server!
+// use button with onClick function (on cellist_profile.html) and pass in cellist id
+// function defines cellist id as object and executes ajax call
+// function getTree(cellist_id) {
+//     const cellist_id = {
+//         'cellist_id': cellist_id
+//     }
+
+//     $.post(`/tree/${cellist_id}`, cellist_id, (res) => {
+//         console.log(res);
+//     });
+// };
