@@ -158,6 +158,12 @@ def get_students_by_cellist_id(cellist_id):
     return Link.query.filter(Link.teacher_id == cellist_id).all()
 
 
+def get_teachers_by_cellist_id(cellist_id):
+    """Return list of teacher links associated with cellist id."""
+
+    return Link.query.filter(Link.student_id == cellist_id).all()
+
+
 if __name__ == '__main__':
     print("we're in crud")
     from server import app
