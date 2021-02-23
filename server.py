@@ -171,25 +171,42 @@ def get_links_for_tree():
     # turn them into nested pydict
     # send back through in a JSON object for D3 display
 
-    data = {}
+    # data = {}
 
-    links = crud.get_all_links
-    for link in links:
-    # check whether id exists on any level of dict
+    # links = crud.get_all_links
+    # for link in links:
+    # check whether id exists on any level of dict??
     # !! ^ how??? do I need to order query by whether they have teachers and start with those who don't?
     # add id, fname, lname of teacher to dict
     # add id, fname, lname of each student to dict
     # add each of their students to dict
 
 
+    # OR add new field in db "has teacher"
+    # OR give all same non-teacher by default
+
+
     # ?? OR .... if I only display one cellist node at a time
+    # !! but.... D3 needs a "root node" and I would have to recalculate every time? idk
     # query a cellist given ID
     # get their teachers
     # get anyone who has listed this cellist as their teacher
     # then when clicking on a new person, query their teachers or students (depending on direction)
 
 
-    return jsonify({'data': data})
+    # TODO: start smol. 
+    # use a different server route?
+    # build button in cellist profile with onclick, passes in current cellist_id
+    # build ajax file to handle onclick
+    # take in cellist id based on button click
+    # query for links where teacher id is given id
+    # create py dict based on this
+    # pass through using jsonify
+    # access in D3
+    # THEN deal with adding to tree
+
+    # return jsonify({'data': data})
+    pass
 
 
 if __name__ == '__main__':
