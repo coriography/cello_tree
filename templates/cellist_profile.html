@@ -41,8 +41,8 @@
         <li><a href="/cellist_profile/{{student_link.student_id}}">{{student_link.student.fname}} {{student_link.student.lname}}</a></li>
         {% endfor %}
     </ul>
-    <!-- <button onclick="getTree(`{{cellist.cellist_id}}`)">View in tree</button> -->
-    <a href="/tree/{{cellist.cellist_id}}" disabled>View in tree</a>
+    <button onclick="getTree(`{{cellist.cellist_id}}`)">View in tree</button>
+    <!-- <a href="/tree/{{cellist.cellist_id}}">View in tree</a> -->
     {% endif %}
 
     
@@ -61,7 +61,7 @@
                         <h6>{{post.post_date}}</h6>
                         <p>{{post.content}}</p>
                         <button onclick="clickUpvote(`{{post.post_id}}`)">I like this post</button>
-                        <p>{{post.upvotes}}</p>   
+                        <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>   
                     </div>  
                 {% endfor %}
             </div>
