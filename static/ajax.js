@@ -138,7 +138,6 @@ function clickUpvote(post_id) {
     }
 
     $.post('/api/upvote_post', upvoteData, (res) => {
-        console.log(res.upvotes_count);
         $(`#upvotes_count_${post_id}`).text(res.upvotes_count);
     });
 };
