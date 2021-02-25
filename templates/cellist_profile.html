@@ -21,7 +21,12 @@
 
     <form id="add_link">
         <h5>add a teacher</h5>
-        <input id="teacher_id" type="text" placeholder="teacher id">
+        <!-- <input id="teacher_id" type="text" placeholder="teacher id"> -->
+        <select name="teacher_id_select" id="teacher_id" required>
+            {% for c_option in all_cellists %}
+                <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}</option>
+            {% endfor %}
+        </select>
         <input id="student_id" type="hidden" placeholder="student id" value="{{cellist.cellist_id}}">
         <input type="submit">
     </form>
@@ -61,7 +66,7 @@
                         <h6>{{post.post_date}}</h6>
                         <p>{{post.content}}</p>
                         <button onclick="clickUpvote(`{{post.post_id}}`)">I like this post</button>
-                        <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>   
+                        <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
                     </div>  
                 {% endfor %}
             </div>

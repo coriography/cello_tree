@@ -103,10 +103,9 @@ def show_cellist(cellist_id):
 
     cellist = crud.get_cellist_by_id(cellist_id)
     posts = crud.get_posts_by_cellist(cellist_id)
-    # TODO: upvotes_count = crud.get_upvotes_count(post_id)
-    # TODO: use loops? for post in posts??
+    all_cellists = crud.get_all_cellists()
 
-    return render_template('cellist_profile.html', cellist=cellist, posts=posts)
+    return render_template('cellist_profile.html', cellist=cellist, posts=posts, all_cellists=all_cellists)
 
 
 @app.route('/api/create_link', methods=['POST'])
@@ -163,7 +162,7 @@ def display_tree_page():
     return render_template('tree.html')
 
 
-@app.route('/tree_data.json')
+@app.route('/api/mega_tree')
 def get_links_for_tree():
 
     # get all links using db query
@@ -195,7 +194,7 @@ def get_links_for_tree():
     # return jsonify({'data': data})
     pass
 
-@app.route('/tree/<cellist_id>')
+@app.route('/api/tree/<cellist_id>')
 def show_tree_by_cellist_id(cellist_id):
     # build button in cellist profile with onclick, passes in current cellist_id
     # build ajax file to handle onclick
@@ -219,7 +218,7 @@ def show_tree_by_cellist_id(cellist_id):
     return jsonify({'tree_data': tree_data})
     # pass
 
-@app.route('/teacher_tree/<cellist_id>')
+@app.route('/api/teacher_tree/<cellist_id>')
 def show_teacher_tree_by_cellist_id(cellist_id):
     # build button in cellist profile with onclick, passes in current cellist_id
     # build ajax file to handle onclick
