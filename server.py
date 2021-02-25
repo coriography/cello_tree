@@ -67,7 +67,7 @@ def create_account():
 @app.route('/add_cellist')
 def show_add_cellist_form():
 
-    return render_template('add_cellist.html')
+    return render_template('add_cellist.html', session=session)
 
 
 @app.route('/add_cellist', methods=["POST"])
@@ -89,7 +89,7 @@ def add_cellist():
     else:
         cellist = crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
 
-        return jsonify({'status': 'ok', 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname})
+        return jsonify({'status': 'ok', 'is_logged_in': is_logged_in, 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname})
 
 
 @app.route('/all_cellists')

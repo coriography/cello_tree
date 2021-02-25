@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Add cellist form</h1>
+    <h1>Add cellist</h1>
+    {% if 'user_id' in session %}
     <form id="add_cellist">
         <input type="text" id="fname" placeholder="first name">
         <input type="text" id="lname" placeholder="last name">
@@ -12,5 +13,8 @@
         <input type="submit">
     </form>
     <h3 id="response_here"></h3>
+    {% else %}
+    <p>Please <a href="/">log in</a> to add a cellist.</p>
+    {% endif %}
 
 {% endblock %}   
