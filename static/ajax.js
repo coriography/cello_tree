@@ -132,12 +132,13 @@ $('#add_post').on('submit', (evt) => {
 
 // use button with onClick function and pass in post id
 // function defines post id as object and executes ajax call
-function clickUpvote(post_id) {
+function toggleUpvote(post_id) {
     const upvoteData = {
         'post_id': post_id
     }
 
     $.post('/api/upvote_post', upvoteData, (res) => {
+        console.log(res);
         $(`#upvotes_count_${post_id}`).text(res.upvotes_count);
     });
 };

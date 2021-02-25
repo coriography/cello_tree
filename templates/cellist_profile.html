@@ -63,11 +63,11 @@
                 {% for post in posts %}
                     <div>
                         <h5>{{post.user.username}}</h5>
-                        <h6>{{post.post_date}}</h6>
+                        <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
                         <p>{{post.content}}</p>
-                        <button onclick="clickUpvote(`{{post.post_id}}`)">I like this post</button>
+                        <button id="toggle_upvote" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
                         <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
-                    </div>  
+                    </div>
                 {% endfor %}
             </div>
         {% endif %}

@@ -135,7 +135,6 @@ def add_post_from_page():
     cellist_id = request.form.get('cellist_id_from_profile')
     post_content = request.form.get('post_content')
     post_date = datetime.now(timezone.utc)
-    # post_date = "2021-02-14 00:48:25.427639"
 
     crud.create_post(user_id, cellist_id, post_content, post_date)
     
@@ -148,12 +147,22 @@ def upvote_post_from_post():
 
     post_id = request.form.get('post_id')
     user_id = session['user_id']
+    
     print(user_id)
+    print(post_id)
 
-    crud.create_upvote(user_id, post_id)
+    # check whether upvote exists
+    # !! No row was found for one()
+    if crud.get_upvote(user_id, post_id) != None:
+        crud.create_upvote(user_id, post_id)
+        msg = "undo upvote"
+    else:
+        crud.delete_upvote(user_id, post_id)
+        msg = "upvote"
+
     upvotes_count = crud.get_upvotes_count(post_id)
 
-    return jsonify({'status': 'ok', 'upvotes_count': upvotes_count})
+    return jsonify({'status': 'ok', 'upvotes_count': upvotes_count, 'msg': msg})
 
 
 @app.route('/tree')
