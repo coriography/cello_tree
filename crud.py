@@ -97,6 +97,14 @@ def create_upvote(user_id, post_id):
     return upvote
 
 
+def get_upvote(user_id, post_id):
+    """Get upvote from db given user_id and post_id."""
+    
+    upvote = Upvote.query.filter(Upvote.user_id == user_id, Upvote.post_id == post_id).first()
+
+    return upvote
+
+
 def get_upvotes_count(post_id):
     """Get the count of upvotes for a given post."""
 
