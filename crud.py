@@ -105,9 +105,14 @@ def get_upvotes_count(post_id):
     return count_upvotes
 
 
-def delete_upvote():
+def delete_upvote(user_id, post_id):
     """Delete an upvote. Only the upvote creator can do this."""
-    pass
+
+    upvote = Upvote.query.filter_by(user_id=user_id, post_id=post_id).one()
+    db.session.delete(upvote)
+    db.session.commit()
+
+    return None
 
 
 def create_user(username, email, password, role="user"):
