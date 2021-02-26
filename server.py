@@ -154,11 +154,11 @@ def upvote_post_from_post():
     # check whether upvote exists
     # !! No row was found for one()
     if crud.get_upvote(user_id, post_id) != None:
-        crud.create_upvote(user_id, post_id)
-        msg = "undo upvote"
-    else:
         crud.delete_upvote(user_id, post_id)
         msg = "upvote"
+    else:
+        crud.create_upvote(user_id, post_id)
+        msg = "undo upvote"
 
     upvotes_count = crud.get_upvotes_count(post_id)
 
