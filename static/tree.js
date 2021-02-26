@@ -121,6 +121,9 @@ function growTree(data, svgElement) {
         .enter().append('g')
         .attr('transform', (d) => {
             return `translate(${d.y}, ${d.x})`;
+        })
+        .attr('id', (d) => {
+            return `node_${d.data.id}`;
         });
 
     node.append('circle')
