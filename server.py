@@ -147,18 +147,14 @@ def upvote_post_from_post():
 
     post_id = request.form.get('post_id')
     user_id = session['user_id']
-    
-    print(user_id)
-    print(post_id)
 
     # check whether upvote exists
-    # !! No row was found for one()
     if crud.get_upvote(user_id, post_id) != None:
         crud.delete_upvote(user_id, post_id)
-        msg = "upvote"
+        msg = "Upvote"
     else:
         crud.create_upvote(user_id, post_id)
-        msg = "undo upvote"
+        msg = "Undo Upvote"
 
     upvotes_count = crud.get_upvotes_count(post_id)
 
@@ -217,7 +213,6 @@ def show_tree_by_cellist_id(cellist_id):
     tree_data["id"] = cellist_id
     tree_data["fname"] = cellist.fname
     tree_data["lname"] = cellist.lname
-    
     tree_data["children"] = []
     for student_link in students_list:
         tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
