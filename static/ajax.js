@@ -138,8 +138,8 @@ function toggleUpvote(post_id) {
     }
 
     $.post('/api/upvote_post', upvoteData, (res) => {
-        console.log(res);
         $(`#upvotes_count_${post_id}`).text(res.upvotes_count);
+        $(`#toggle_upvote`).text(res.msg);
     });
 };
 
