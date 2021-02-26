@@ -46,8 +46,8 @@
         <li><a href="/cellist_profile/{{student_link.student_id}}">{{student_link.student.fname}} {{student_link.student.lname}}</a></li>
         {% endfor %}
     </ul>
-    <button onclick="getTree(`{{cellist.cellist_id}}`)">View in tree</button>
-    <!-- <a href="/tree/{{cellist.cellist_id}}">View in tree</a> -->
+    <!-- <button onclick="createNode(`{{cellist.cellist_id}}`)">View in tree</button> -->
+    <a href="/tree/{{cellist.cellist_id}}">View in tree</a>
     {% endif %}
 
     
