@@ -43,19 +43,6 @@ var data = {
     }]
 };
 
-// $( document ).ready(
-//     function getTree(cellist_id) {
-//         console.log("clicked");
-//         $.get(`/api/tree/${cellist_id}`, (res) => {
-//             growTree(res.tree_data, "#tree_layout");
-//             console.log(res.tree_data);
-//         });
-//     }
-// );
-
-function createNode(cellist_id) {
-    $('#node_cellist_id').text(cellist_id);
-}
 
 function growTree(data, svgElement) {
     console.log(data);
@@ -163,17 +150,16 @@ function growTree(data, svgElement) {
         })
         .attr('font-size', 14)
         .text((d) => {
-            return d.data.fname;
+            return `${d.data.fname} ${d.data.lname}`;
         }).clone(true).lower() // Copy text and give it a white outline
         .attr('stroke', 'white');
 }
+
 
 $( document ).ready( function () {
 
     console.log("doc ready");
 
-    // nodeCellistId = $('#node_cellist_id').val()
-    // let rootCellistId = $('p[data-root-cellist-id]).text();
     let rootCellistId = $("#root_cellist_id").first().attr("data-id");
 
     console.log(rootCellistId);   
