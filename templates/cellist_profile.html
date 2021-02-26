@@ -66,7 +66,9 @@
                         <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
                         <p>{{post.content}}</p>
                         <button id="toggle_upvote" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
+                        <!-- {% if post.upvotes|length > 0 %} -->
                         <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
+                        <!-- {% endif %} -->
                     </div>
                 {% endfor %}
             </div>
