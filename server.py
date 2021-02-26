@@ -165,10 +165,10 @@ def upvote_post_from_post():
     return jsonify({'status': 'ok', 'upvotes_count': upvotes_count, 'msg': msg})
 
 
-@app.route('/tree')
-def display_tree_page():
+@app.route('/tree/<cellist_id>')
+def display_tree_page(cellist_id):
 
-    return render_template('tree.html')
+    return render_template('tree.html', cellist_id=cellist_id)
 
 
 @app.route('/api/mega_tree')
@@ -205,27 +205,26 @@ def get_links_for_tree():
 
 @app.route('/api/tree/<cellist_id>')
 def show_tree_by_cellist_id(cellist_id):
-    # build button in cellist profile with onclick, passes in current cellist_id
-    # build ajax file to handle onclick
-    # take in cellist id based on button click
+    
+    cellist = crud.get_cellist_by_id(cellist_id)
+
     # query for links where teacher id is given id
     students_list = crud.get_students_by_cellist_id(cellist_id)
+
     # create py dict, loop through students
     # add id, fname, lname of teacher and each student to dict
     tree_data = {}
     tree_data["id"] = cellist_id
-    tree_data["fname"] = "fname"
-    tree_data["lname"] = "lname"
+    tree_data["fname"] = cellist.fname
+    tree_data["lname"] = cellist.lname
+    
     tree_data["children"] = []
     for student_link in students_list:
         tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
     
-    # pass through using jsonify
-    # access in D3
-    # !! use GET request on actual route?
-    # return render_template('tree.html')
+    # pass through using jsonify from access in D3
+
     return jsonify({'tree_data': tree_data})
-    # pass
 
 @app.route('/api/teacher_tree/<cellist_id>')
 def show_teacher_tree_by_cellist_id(cellist_id):
