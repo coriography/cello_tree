@@ -223,27 +223,25 @@ def show_tree_by_cellist_id(cellist_id):
 
 @app.route('/api/teacher_tree/<cellist_id>')
 def show_teacher_tree_by_cellist_id(cellist_id):
-    # build button in cellist profile with onclick, passes in current cellist_id
-    # build ajax file to handle onclick
-    # take in cellist id based on button click
+    
+    cellist = crud.get_cellist_by_id(cellist_id)
+
     # query for links where teacher id is given id
     teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
-    # create py dict, loop through students
-    # add id, fname, lname of teacher and each student to dict
+
+    # create py dict, loop through teachers
+    # add id, fname, lname of student and each teacher to dict
     tree_data = {}
     tree_data["id"] = cellist_id
-    tree_data["fname"] = "fname"
-    tree_data["lname"] = "lname"
+    tree_data["fname"] = cellist.fname
+    tree_data["lname"] = cellist.lname
     tree_data["children"] = []
     for teacher_link in teachers_list:
         tree_data["children"].append({"id": teacher_link.teacher.cellist_id, "fname": teacher_link.teacher.fname, "lname": teacher_link.teacher.lname})
     
-    # pass through using jsonify
-    # access in D3
-    # !! use GET request on actual route?
-    # return render_template('tree.html')
+    # pass through using jsonify from access in D3
+
     return jsonify({'tree_data': tree_data})
-    # pass
     
 
 
