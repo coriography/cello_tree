@@ -45,7 +45,6 @@ var data = {
 
 
 function growTree(data, svgElement) {
-    console.log(data);
     const container = $('#tree_layout');
     const width = container.width();
 
@@ -122,6 +121,9 @@ function growTree(data, svgElement) {
         .attr('transform', (d) => {
             return `translate(${d.y}, ${d.x})`;
         })
+        .attr('onclick', (d) => {
+            return `showNodeChildren(${d.data.id})`;
+        })
         .attr('id', (d) => {
             return `node_${d.data.id}`;
         });
@@ -161,13 +163,16 @@ function growTree(data, svgElement) {
 
 $( document ).ready( function () {
 
-    console.log("doc ready");
-
     let rootCellistId = $("#root_cellist_id").first().attr("data-id");
 
-    console.log(rootCellistId);   
     $.get(`/api/tree/${rootCellistId}`, (res) => {
         growTree(res.tree_data, "#tree_layout");
-        console.log(res.tree_data);
     })
 });
+
+function showNodeChildren(cellist_id) {
+
+    $.get(`/api/tree/${cellist_id}`, (res) => {
+        growTree(res.tree_data, `#node_${cellist_id}`);
+    });
+};
