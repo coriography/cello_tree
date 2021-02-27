@@ -94,7 +94,6 @@ $('#add_link').on('submit', (evt) => {
 
 });
 
-
 // event handler for add_post form on cellist_profile.html
 $('#add_post').on('submit', (evt) => {
     evt.preventDefault(); 
@@ -117,19 +116,6 @@ $('#add_post').on('submit', (evt) => {
 
 });
 
-
-// $('#upvote_form').on('submit', (evt) => {
-//     evt.preventDefault();
-
-//     const upvoteData = {
-//         'post_id': $('#post_id').val()
-//     }
-
-//     $.post('/api/upvote_post', upvoteData, (res) => {
-//         console.log(res);
-//     });
-// });
-
 // use button with onClick function and pass in post id
 // function defines post id as object and executes ajax call
 function toggleUpvote(post_id) {
@@ -143,15 +129,3 @@ function toggleUpvote(post_id) {
     });
 };
 
-// ?? don't need this if just rendering template in server!
-// use button with onClick function (on cellist_profile.html) and pass in cellist id
-// function defines cellist id as object and executes ajax call
-// function getTree(cellist_id) {
-//     const cellist_id = {
-//         'cellist_id': cellist_id
-//     }
-
-//     $.post(`/tree/${cellist_id}`, cellist_id, (res) => {
-//         console.log(res);
-//     });
-// };
