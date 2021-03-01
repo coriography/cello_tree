@@ -161,13 +161,24 @@ def upvote_post_from_post():
     return jsonify({'status': 'ok', 'upvotes_count': upvotes_count, 'msg': msg})
 
 
+@app.route('/oop_tree/<cellist_id>')
+def display_oop_tree(cellist_id):
+
+    return render_template('oop_tree.html', cellist_id=cellist_id)
+
+
+@app.route('/tree/all')
+def display_mega_tree():
+
+    return render_template('mega_tree.html')
+
 @app.route('/tree/<cellist_id>')
 def display_tree_page(cellist_id):
 
     return render_template('tree.html', cellist_id=cellist_id)
 
 
-@app.route('/api/mega_tree')
+@app.route('/api/tree/all')
 def get_links_for_tree():
 
     # get all links using db query
@@ -178,26 +189,42 @@ def get_links_for_tree():
 
     # links = crud.get_all_links
     # for link in links:
+    #     pass
     # check whether id exists on any level of dict??
     # !! ^ how??? do I need to order query by whether they have teachers and start with those who don't?
     # add id, fname, lname of teacher to dict
     # add id, fname, lname of each student to dict
     # add each of their students to dict
 
-
     # !! add new field in db "has teacher"
     # OR give all same non-teacher by default
 
+    # query for links where teacher id is given id
+    students_list = crud.get_students_by_cellist_id(49)
 
-    # ?? OR .... if I only display one cellist node at a time
-    # !! but.... D3 needs a "root node" and I would have to recalculate every time? idk
-    # query a cellist given ID
-    # get their teachers
-    # get anyone who has listed this cellist as their teacher
-    # then when clicking on a new person, query their teachers or students (depending on direction)
+    # create py dict, loop through students
+    # add id, fname, lname of teacher and each student to dict
+    tree_data = {}
+    tree_data["id"] = 49
+    tree_data["fname"] = "***Root"
+    tree_data["lname"] = "Node***"
+    tree_data["children"] = []
 
-    # return jsonify({'data': data})
-    pass
+    # tree_data0 = {}
+    # tree_data1 = { "id": 49, ... }
+    # tree_data2 = {...tree_data0, ...tree_data1}
+
+    def rec_children(cellist_id, tree_data):
+        students_list = crud.get_students_by_cellist_id(cellist_id)
+        # if (student_list.length === 0) return tree_data
+        # else return {...tree_data, children: student_list.map(s => { fname, lname, children: rec_children(s.id, tree_data)  }}
+        #
+
+        for student_link in students_list:
+            tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname, "children": []})
+
+    return jsonify({'tree_data': tree_data})
+    
 
 @app.route('/api/tree/<cellist_id>')
 def show_tree_by_cellist_id(cellist_id):
@@ -216,8 +243,9 @@ def show_tree_by_cellist_id(cellist_id):
     tree_data["children"] = []
     for student_link in students_list:
         tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
+
     
-    # pass through using jsonify from access in D3
+    # pass through using jsonify to access in D3
 
     return jsonify({'tree_data': tree_data})
 
@@ -240,6 +268,41 @@ def show_teacher_tree_by_cellist_id(cellist_id):
         tree_data["children"].append({"id": teacher_link.teacher.cellist_id, "fname": teacher_link.teacher.fname, "lname": teacher_link.teacher.lname})
     
     # pass through using jsonify from access in D3
+
+    return jsonify({'tree_data': tree_data})
+
+
+@app.route('/api/oop_tree')
+def test_oop_data():
+
+    return jsonify({"name": "Cori Lint", "id": "1", "_parents": [{"name": "Martha Baldwin","id": 3},{"name": "Anthony Elliott","id": 2}], "_children": [{"name": "student1","id": 8},{"name": "student2","id": 9}]})
+
+
+@app.route('/api/oop_tree/<cellist_id>')
+def get_oop_data(cellist_id):
+
+    # query for Cellist object associated with cellist_id
+    cellist = crud.get_cellist_by_id(cellist_id)
+
+    # query for links where teacher id is given id
+    students_list = crud.get_students_by_cellist_id(cellist_id)
+     # query for links where teacher id is given id
+    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
+
+    # create py dict, loop through students, then teachers
+    # add id, fname, lname of teacher and each student to dict
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["name"] = f"{cellist.fname} {cellist.lname}"
+    tree_data["_children"] = []
+    tree_data["_parents"] = []
+    for student_link in students_list:
+        tree_data["_parents"].append({"id": student_link.student.cellist_id, "name": f"{student_link.student.fname} {student_link.student.lname}"})
+    for teacher_link in teachers_list:
+        tree_data["_children"].append({"id": teacher_link.teacher.cellist_id, "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
+
+    
+    # pass through using jsonify to access in D3
 
     return jsonify({'tree_data': tree_data})
     
