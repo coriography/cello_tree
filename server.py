@@ -297,13 +297,11 @@ def get_oop_data(cellist_id):
     tree_data["_children"] = []
     tree_data["_parents"] = []
     for student_link in students_list:
-        tree_data["_parents"].append({"id": student_link.student.cellist_id, "name": f"{student_link.student.fname} {student_link.student.lname}"})
+        tree_data["_children"].append({"id": student_link.student.cellist_id, "name": f"{student_link.student.fname} {student_link.student.lname}"})
     for teacher_link in teachers_list:
-        tree_data["_children"].append({"id": teacher_link.teacher.cellist_id, "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
-
+        tree_data["_parents"].append({"id": teacher_link.teacher.cellist_id, "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
     
     # pass through using jsonify to access in D3
-
     return jsonify({'tree_data': tree_data})
     
 
