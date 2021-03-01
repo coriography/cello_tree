@@ -23,8 +23,11 @@ for cellist in data:
 cellist_id = 0
 for cellist in data:
     cellist_id += 1
-    for teacher_id in cellist['teacher_ids']:
-        crud.create_link(teacher_id, cellist_id)
+    if cellist['teacher_ids'] == [] and cellist['fname'] != "***Root":
+        crud.create_link(49, cellist_id)
+    else:
+        for teacher_id in cellist['teacher_ids']:
+            crud.create_link(teacher_id, cellist_id)
 
 
 # seed user data
