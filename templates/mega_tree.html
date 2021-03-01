@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<style>
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    #tree_layout { height: 500px; }
+  </style>
+
+{% endblock %}
+
+{% block body %}
+<h1>The Whole Goddamn Tree</h1>
+
+<div id="tree_layout"></div>
+
+<script src="/static/mega_tree.js"></script>
+
+{% endblock %}   
