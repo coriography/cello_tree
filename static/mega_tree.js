@@ -220,37 +220,20 @@ function growTree(data, svgElement) {
             }
         })
         .attr('font-size', 14)
-        .html((d) => {
-            return `
-                <a href="/tree/${d.data.id}">${d.data.fname} ${d.data.lname}</a>
-            `;
-        })
-        .clone(true).lower() // Copy text and give it a white outline
+        .text((d) => {
+            return `${d.data.fname} ${d.data.lname}`;
+        }).clone(true).lower() // Copy text and give it a white outline
         .attr('stroke', 'white');
 }
 
 
 $(document).ready(function () {
 
-    let rootCellistId = $("#root_cellist_id").first().attr("data-id");
+    // let rootCellistId = $("#root_cellist_id").first().attr("data-id");
 
-    $.get(`/api/tree/${rootCellistId}`, (res) => {
+    $.get(`/api/tree/all`, (res) => {
         growTree(res.tree_data, "#tree_layout");
     })
 
-    // $.get(`/api/tree/${rootCellistId}`, (res) => {
-    //     growTree(res.tree_data, "#tree_layout");
-    // })
     // growTree(testData, "#tree_layout");
 });
-
-function showNodeChildren(cellist_id) {
-
-    $.get(`/api/tree/${cellist_id}`, (res) => {
-        growTree(res.tree_data, `#node_${cellist_id}`);
-        //!! this appends entire new svg w/ root
-        // ?? can I make this append only the children
-        // ?? by inserting new node w/ children as var into original data structure?
-        // ?? for spacing to work I would prob have to re-render the whole thing
-    });
-};
