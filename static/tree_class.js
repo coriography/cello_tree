@@ -158,12 +158,11 @@ Tree.prototype.drawNodes = function (nodes, source) {
             return 'translate(' + (self.direction * (source.y0 + boxWidth / 2)) + ',' + source.x0 + ')';
         })
         .on('click', function (person) {
-            self.togglePerson(person);
+            location.href = `/node/${person.id}`;
         });
 
-    // Draw the rectangle person boxes.
-    // Start new boxes with 0 size so that
-    // we can transition them to their proper size.
+    // draw rectangles
+    // set at size 0 for transitions, width, and height set elsewhere
     nodeEnter.append("rect")
         .attr({
             x: 0,
@@ -179,9 +178,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
         .attr("text-anchor", "start")
         .attr('class', 'name')
         .html(function (d) {
-            return `
-                <a href="/oop_tree/${d.id}">${d.name}</a>
-            `;
+            return d.name;
         })
         .style('fill-opacity', 0);
 
