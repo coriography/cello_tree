@@ -89,7 +89,7 @@ def add_cellist():
     else:
         cellist = crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
 
-        return jsonify({'status': 'ok', 'is_logged_in': is_logged_in, 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname})
+        return jsonify({'status': 'ok', 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname, 'session': session})
 
 
 @app.route('/all_cellists')
@@ -97,6 +97,7 @@ def show_all_cellists():
     all_cellists = crud.get_all_cellists()
 
     return render_template('all_cellists.html', all_cellists=all_cellists)
+
 
 @app.route('/cellist_profile/<cellist_id>')
 def show_cellist(cellist_id):
@@ -161,45 +162,23 @@ def upvote_post_from_post():
     return jsonify({'status': 'ok', 'upvotes_count': upvotes_count, 'msg': msg})
 
 
-@app.route('/oop_tree/<cellist_id>')
-def display_oop_tree(cellist_id):
-
-    return render_template('oop_tree.html', cellist_id=cellist_id)
-
+#########** TREE AND NODE ROUTES **##########
 
 @app.route('/tree/all')
 def display_mega_tree():
 
     return render_template('mega_tree.html')
 
-@app.route('/tree/<cellist_id>')
-def display_tree_page(cellist_id):
-
-    return render_template('tree.html', cellist_id=cellist_id)
-
-
 @app.route('/api/tree/all')
 def get_links_for_tree():
 
-    # get all links using db query
-    # turn them into nested pydict
-    # send back through in a JSON object for D3 display
-
-    # data = {}
-
-    # links = crud.get_all_links
-    # for link in links:
-    #     pass
-    # check whether id exists on any level of dict??
-    # !! ^ how??? do I need to order query by whether they have teachers and start with those who don't?
     # add id, fname, lname of teacher to dict
     # add id, fname, lname of each student to dict
     # add each of their students to dict
 
-    # !! add new field in db "has teacher"
-    # OR give all same non-teacher by default
+    # !! add new field in db "has teacher" instead of "Root Node"
 
-    # query for links where teacher id is given id
+    # query for links where teacher id is given id ##!! passing in Root Node for testing
     students_list = crud.get_students_by_cellist_id(49)
 
     # create py dict, loop through students
@@ -210,75 +189,35 @@ def get_links_for_tree():
     tree_data["lname"] = "Node***"
     tree_data["children"] = []
 
-    # tree_data0 = {}
-    # tree_data1 = { "id": 49, ... }
-    # tree_data2 = {...tree_data0, ...tree_data1}
+    def rec_children(cellist_id, tree_data): 
+        ## ?? cellist_id being the root node?
+        ## ?? tree_data being the tree built so far?
 
-    def rec_children(cellist_id, tree_data):
+        # returns list of student objects [{}, {}, {}]
         students_list = crud.get_students_by_cellist_id(cellist_id)
-        # if (student_list.length === 0) return tree_data
-        # else return {...tree_data, children: student_list.map(s => { fname, lname, children: rec_children(s.id, tree_data)  }}
-        #
+
+        # check whether student has students
+        # if so, do this same dictionary-building thing with those
+        # keep executing for as many levels as exist
 
         for student_link in students_list:
-            tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname, "children": []})
-
-    return jsonify({'tree_data': tree_data})
-    
-
-@app.route('/api/tree/<cellist_id>')
-def show_tree_by_cellist_id(cellist_id):
-    
-    cellist = crud.get_cellist_by_id(cellist_id)
-
-    # query for links where teacher id is given id
-    students_list = crud.get_students_by_cellist_id(cellist_id)
-
-    # create py dict, loop through students
-    # add id, fname, lname of teacher and each student to dict
-    tree_data = {}
-    tree_data["id"] = cellist_id
-    tree_data["fname"] = cellist.fname
-    tree_data["lname"] = cellist.lname
-    tree_data["children"] = []
-    for student_link in students_list:
-        tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
-
-    
-    # pass through using jsonify to access in D3
-
-    return jsonify({'tree_data': tree_data})
-
-@app.route('/api/teacher_tree/<cellist_id>')
-def show_teacher_tree_by_cellist_id(cellist_id):
-    
-    cellist = crud.get_cellist_by_id(cellist_id)
-
-    # query for links where teacher id is given id
-    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
-
-    # create py dict, loop through teachers
-    # add id, fname, lname of student and each teacher to dict
-    tree_data = {}
-    tree_data["id"] = cellist_id
-    tree_data["fname"] = cellist.fname
-    tree_data["lname"] = cellist.lname
-    tree_data["children"] = []
-    for teacher_link in teachers_list:
-        tree_data["children"].append({"id": teacher_link.teacher.cellist_id, "fname": teacher_link.teacher.fname, "lname": teacher_link.teacher.lname})
-    
-    # pass through using jsonify from access in D3
+            tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname, "children": [rec_children(student_link.student.cellist_id, tree_data)]})
+            ## !! need to increment ("progress")
+                ##!! queue - enqueue node then its children
+                ## !! indicate whether node has been visited 
+            ## !! tree is a type of graph - similar algorithm
+            ## !! what is my base case? - when there are no more children
 
     return jsonify({'tree_data': tree_data})
 
 
-@app.route('/api/oop_tree')
-def test_oop_data():
+@app.route('/node/<cellist_id>')
+def display_oop_tree(cellist_id):
 
-    return jsonify({"name": "Cori Lint", "id": "1", "_parents": [{"name": "Martha Baldwin","id": 3},{"name": "Anthony Elliott","id": 2}], "_children": [{"name": "student1","id": 8},{"name": "student2","id": 9}]})
+    return render_template('oop_tree.html', cellist_id=cellist_id)
 
 
-@app.route('/api/oop_tree/<cellist_id>')
+@app.route('/api/node/<cellist_id>')
 def get_oop_data(cellist_id):
 
     # query for Cellist object associated with cellist_id
@@ -304,6 +243,53 @@ def get_oop_data(cellist_id):
     # pass through using jsonify to access in D3
     return jsonify({'tree_data': tree_data})
     
+
+######!! DEPRECATED ROUTES !!#######
+@app.route('/api/tree/<cellist_id>') # ! deprecated
+def show_tree_by_cellist_id(cellist_id):
+    
+    cellist = crud.get_cellist_by_id(cellist_id)
+
+    # query for links where teacher id is given id
+    students_list = crud.get_students_by_cellist_id(cellist_id)
+
+    # create py dict, loop through students
+    # add id, fname, lname of teacher and each student to dict
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["fname"] = cellist.fname
+    tree_data["lname"] = cellist.lname
+    tree_data["children"] = []
+    for student_link in students_list:
+        tree_data["children"].append({"id": student_link.student.cellist_id, "fname": student_link.student.fname, "lname": student_link.student.lname})
+
+    
+    # pass through using jsonify to access in D3
+
+    return jsonify({'tree_data': tree_data})
+
+@app.route('/api/teacher_tree/<cellist_id>') # ! deprecated
+def show_teacher_tree_by_cellist_id(cellist_id):
+    
+    cellist = crud.get_cellist_by_id(cellist_id)
+
+    # query for links where teacher id is given id
+    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
+
+    # create py dict, loop through teachers
+    # add id, fname, lname of student and each teacher to dict
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["fname"] = cellist.fname
+    tree_data["lname"] = cellist.lname
+    tree_data["children"] = []
+    for teacher_link in teachers_list:
+        tree_data["children"].append({"id": teacher_link.teacher.cellist_id, "fname": teacher_link.teacher.fname, "lname": teacher_link.teacher.lname})
+    
+    # pass through using jsonify from access in D3
+
+    return jsonify({'tree_data': tree_data})
+
 
 
 if __name__ == '__main__':

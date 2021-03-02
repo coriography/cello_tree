@@ -51,7 +51,7 @@ function rootProxy(root) {
 
 let rootCellistId = $("#root_cellist_id").first().attr("data-id");
 
-$.get(`/api/oop_tree/${rootCellistId}`, (json) => {
+$.get(`/api/node/${rootCellistId}`, (json) => {
 
     // the same node can't exist in two trees, 
     // but we need both trees (with different properties) to originate 
