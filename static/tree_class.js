@@ -1,22 +1,24 @@
-function rootProxy(root) {
-    return {
-        name: root.name,
-        id: root.id,
-        x0: 0,
-        y0: 0,
-        _children: root._children,
-        _parents: root._parents,
-        collapsed: false
-    };
-}
+// this code is adapted from justincy's example of a tree with both ancestors and descendants:
+// https://github.com/justincy/d3-pedigree-examples
 
-/**
- * Shared code for drawing ancestors or descendants.
- * `selector` is a class that will be applied to links
- * and nodes so that they can be queried later when
- * the tree is redrawn.
- * `direction` is either 1 (forward) or -1 (backward).
- */
+const boxWidth = 150,
+    boxHeight = 40,
+    nodeWidth = 100,
+    nodeHeight = 200,
+
+    // duration of transitions in ms
+    duration = 500,
+
+    // distance between nodes: node size mutiplied by "separation" value
+    separation = .5;
+
+// TODO: set width, height, translate to variables that can be adjusted for responsiveness
+
+// this code block draws ancestors or descendants
+// selector is a class applied to links and nodes
+// selector will be queried later when tree is redrawn
+// "direction" is 1 (forward) or -1 (backward)
+
 var Tree = function (svg, selector, direction) {
     this.svg = svg;
     this.selector = selector;
@@ -24,40 +26,34 @@ var Tree = function (svg, selector, direction) {
 
     this.tree = d3.layout.tree()
 
-        // Using nodeSize we are able to control
-        // the separation between nodes. If we used
-        // the size parameter instead then d3 would
-        // calculate the separation dynamically to fill
-        // the available space.
+        // controls separation between nodes
         .nodeSize([nodeWidth, nodeHeight])
 
-        // By default, cousins are drawn further apart than siblings.
-        // By returning the same value in all cases, we draw cousins
-        // the same distance apart as siblings.
+        // default behavior draws cousins further apart than siblings - 
+        // returning the same value for siblings or cousins ensures
+        // that all will be drawn the same distance apart
+        // despite the default behavior
         .separation(function () {
             return separation;
         });
 };
 
-/**
- * Set the `children` function for the tree
- */
+
+// set "children" function for tree
 Tree.prototype.children = function (fn) {
     this.tree.children(fn);
     return this;
 };
 
-/**
- * Set the root of the tree
- */
+
+// set root of tree
 Tree.prototype.data = function (data) {
     this.root = data;
     return this;
 };
 
-/**
- * Draw/redraw the tree
- */
+
+// set function to draw/redraw tree
 Tree.prototype.draw = function (source) {
     if (this.root) {
         var nodes = this.tree.nodes(this.root),
@@ -70,16 +66,17 @@ Tree.prototype.draw = function (source) {
     return this;
 };
 
-/**
- * Draw/redraw the connecting lines
- */
+
+// draw/redraw lines between nodes
 Tree.prototype.drawLinks = function (links, source) {
 
     var self = this;
 
+    // ?? why update?
     // Update links
     var link = self.svg.selectAll("path.link." + self.selector)
 
+        // ?? revisit
         // The function we are passing provides d3 with an id
         // so that it can track when data is being added and removed.
         // This is not necessary if the tree will only be drawn once
@@ -88,6 +85,7 @@ Tree.prototype.drawLinks = function (links, source) {
             return d.target.id;
         });
 
+    // ?? revisit
     // Add new links   
     // Transition new links from the source's
     // old position to the links final position

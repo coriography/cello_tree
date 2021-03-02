@@ -1,15 +1,5 @@
-const boxWidth = 150,
-    boxHeight = 40,
-    nodeWidth = 100,
-    nodeHeight = 200,
-
-    // duration of transitions in ms
-    duration = 500,
-
-    // distance between nodes: node size mutiplied by "separation" value
-    separation = .5;
-
-// TODO: set width, height, translate to variables that can be adjusted for responsiveness
+// this code is adapted from justincy's example of a tree with both ancestors and descendants:
+// https://github.com/justincy/d3-pedigree-examples
 
 // set up zoom and pan
 // ?? do I need this?? maybe not until second gen/third gen added?
@@ -46,6 +36,18 @@ var descendantsTree = new Tree(svg, 'descendant', 1);
 descendantsTree.children(function (person) {
     return person._children;
 });
+
+function rootProxy(root) {
+    return {
+        name: root.name,
+        id: root.id,
+        x0: 0,
+        y0: 0,
+        _children: root._children,
+        _parents: root._parents,
+        collapsed: false
+    };
+}
 
 let rootCellistId = $("#root_cellist_id").first().attr("data-id");
 
