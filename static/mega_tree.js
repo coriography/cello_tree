@@ -229,8 +229,6 @@ function growTree(data, svgElement) {
 
 $(document).ready(function () {
 
-    // let rootCellistId = $("#root_cellist_id").first().attr("data-id");
-
     $.get(`/api/tree/all`, (res) => {
         growTree(res.tree_data, "#tree_layout");
     })
