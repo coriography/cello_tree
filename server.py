@@ -97,7 +97,6 @@ def update_cellist_from_form():
     """Update an existing cellist in the database."""
 
     user_id = session['user_id']
-    # user = get_user
 
     # request.form.get - getting from request, not from html
     cellist_id = request.form.get('cellist_id')
@@ -110,6 +109,7 @@ def update_cellist_from_form():
 
     if user_id:
         cellist = crud.update_cellist(cellist_id, fname, lname, cello_details, bio, img_url, music_url)
+        crud.update_editor(cellist_id, user_id)
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'error'})
@@ -128,8 +128,9 @@ def show_cellist(cellist_id):
     cellist = crud.get_cellist_by_id(cellist_id)
     posts = crud.get_posts_by_cellist(cellist_id)
     all_cellists = crud.get_all_cellists()
+    editor = crud.get_user_by_id(cellist.editor_id)
 
-    return render_template('cellist_profile.html', cellist=cellist, posts=posts, all_cellists=all_cellists)
+    return render_template('cellist_profile.html', cellist=cellist, posts=posts, all_cellists=all_cellists, editor=editor)
 
 
 @app.route('/api/create_link', methods=['POST'])

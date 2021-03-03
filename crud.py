@@ -53,6 +53,19 @@ def update_cellist(cellist_id, fname="", lname="", cello_details="", bio="", img
     return cellist
 
 
+def update_editor(cellist_id, user_id):
+    """Add or update most recent editor of cellist profile."""
+
+    cellist = get_cellist_by_id(cellist_id)
+    cellist.editor_id = user_id
+    editor = get_user_by_id(user_id)
+
+    db.session.commit()
+
+    return editor
+
+
+
 def update_owner():
     """Add or update owner of cellist profile."""
     pass
@@ -155,6 +168,11 @@ def create_user(username, email, password, role="user"):
     db.session.commit()
 
     return user
+
+
+def get_user_by_id(user_id):
+    """Returns User object given user id."""
+    return User.query.get(user_id)
 
 
 def check_username(username):

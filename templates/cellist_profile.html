@@ -69,8 +69,11 @@
             <input type="text" id="update_music_url" placeholder="music url">
             <input type="submit">
         </form>
-        <h3 id="update_cellist_response"></h3>
     {% endif %}
+
+        {% if editor != None %}
+            <p>last edited by: <span id="last_edited">{{editor.username}}</span></p>
+        {% endif %}
     
         <h4>Forum</h4>
         <form id="add_post">
