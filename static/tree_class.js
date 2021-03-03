@@ -72,23 +72,16 @@ Tree.prototype.drawLinks = function (links, source) {
 
     var self = this;
 
-    // ?? why update?
-    // Update links
+    // update links (e.g. on page refresh)
     var link = self.svg.selectAll("path.link." + self.selector)
 
-        // ?? revisit
-        // The function we are passing provides d3 with an id
-        // so that it can track when data is being added and removed.
-        // This is not necessary if the tree will only be drawn once
-        // as in the basic example.
+        // provide d3 with an id for each link
         .data(links, function (d) {
             return d.target.id;
         });
 
-    // ?? revisit
-    // Add new links   
-    // Transition new links from the source's
-    // old position to the links final position
+    // add new links
+    // transition new links from old to new position
     link.enter().append("path")
         .attr("class", "link " + self.selector)
         .attr("d", function (d) {
@@ -102,17 +95,15 @@ Tree.prototype.drawLinks = function (links, source) {
             });
         });
 
-    // Update the old links positions
+    // update link positions
     link.transition()
         .duration(duration)
         .attr("d", function (d) {
             return elbow(d, self.direction);
         });
 
-    // Remove any links we don't need anymore
-    // if part of the tree was collapsed
-    // Transition exit links from their current position
-    // to the source's new position
+    // remove links that aren't needed
+    // transition exit links from current position to source's new position
     link.exit()
         .transition()
         .duration(duration)
@@ -130,33 +121,22 @@ Tree.prototype.drawLinks = function (links, source) {
 };
 
 
-/**
- * Draw/redraw the person boxes.
- */
+// draw/redraw the node rectangles and text inside them
 Tree.prototype.drawNodes = function (nodes, source) {
 
     var self = this;
 
-    // Update nodes    
+    // update nodes    
     var node = self.svg.selectAll("g.person." + self.selector)
 
-        // The function we are passing provides d3 with an id
-        // so that it can track when data is being added and removed.
-        // This is not necessary if the tree will only be drawn once
-        // as in the basic example.
+        // provide d3 with an id for each node
         .data(nodes, function (person) {
             return person.id;
         });
 
-    // Add any new nodes
+    // add any new nodes
     var nodeEnter = node.enter().append("g")
         .attr("class", "person " + self.selector)
-
-        // Add new nodes at the right side of their child's box.
-        // They will be transitioned into their proper position.
-        .attr('transform', function (person) {
-            return 'translate(' + (self.direction * (source.y0 + boxWidth / 2)) + ',' + source.x0 + ')';
-        })
         .on('click', function (person) {
             location.href = `/node/${person.id}`;
         });
