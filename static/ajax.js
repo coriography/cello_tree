@@ -27,6 +27,33 @@ $('#add_cellist').on('submit', (evt) => {
 });
 
 
+// event handler for update_cellist form in add_cellist.html
+$('#update_cellist').on('submit', (evt) => {
+    evt.preventDefault();
+
+     //get form input
+    const update_cellist_form_data = {
+        'cellist_id': $('#update_cellist_id').val(),
+        'fname': $('#update_fname').val(),
+        'lname': $('#update_lname').val(),
+        'cello_details': $('#update_cello_details').val(),
+        'bio': $('#update_bio').val(),
+        'img_url': $('#update_img_url').val(),
+        'music_url': $('#update_music_url').val(),
+    }
+
+    console.log(update_cellist_form_data);
+
+    //send data to server.py
+    $.post('/api/update_cellist', update_cellist_form_data, (res) => {
+        console.log(res);
+        if (res.status === 'ok') {
+            location.href = `/cellist_profile/${update_cellist_form_data.cellist_id}`;
+        }
+    });
+});
+
+
 // event handler for login form on home.html
 $('#login_form').on('submit', (evt) => {
     evt.preventDefault(); 

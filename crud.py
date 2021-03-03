@@ -30,9 +30,27 @@ def get_all_cellists():
     return cellists
 
 
-def edit_cellist():
-    """Edit a cellist profile."""
-    pass
+def update_cellist(cellist_id, fname="", lname="", cello_details="", bio="", img_url="", music_url=""):
+    """Update an existing cellist's database entry. Only logged-in users have access to this feature."""
+
+    cellist = get_cellist_by_id(cellist_id)
+
+    if fname != "":
+        cellist.fname = fname
+    if lname != "":
+        cellist.lname = lname
+    if cello_details != "":
+        cellist.cello_details = cello_details
+    if bio != "":
+        cellist.bio = bio
+    if img_url != "":
+        cellist.img_url = img_url
+    if music_url != "":
+        cellist.music_url = music_url
+
+    db.session.commit()
+
+    return cellist
 
 
 def update_owner():
@@ -82,8 +100,14 @@ def edit_post():
     pass
 
 
-def delete_post():
+def delete_post(post_id):
     """Delete a post. Only the post creator, an admin, or moderator can do this."""
+
+    # first delete any upvotes associated with this post
+    # then delete post
+    # .remove(item)
+    # don't need session.add()
+    # db.session.commit()
     pass
 
 

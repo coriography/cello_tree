@@ -54,8 +54,23 @@
     <!-- <button onclick="createNode(`{{cellist.cellist_id}}`)">View in tree</button> -->
     
     {% endif %}
-    <a href="/oop_tree/{{cellist.cellist_id}}">View in tree</a>
 
+    <a href="/node/{{cellist.cellist_id}}">View in tree</a>
+
+    {% if 'user_id' in session %}
+        <button>Update this cellist profile</button>
+        <form id="update_cellist">
+            <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}">
+            <input type="text" id="update_fname" placeholder="first name">
+            <input type="text" id="update_lname" placeholder="last name">
+            <input type="textarea" id="update_cello_details" placeholder="cello details">
+            <input type="textarea" id="update_bio" placeholder="short bio (limit 500 characters)" maxlength="500">
+            <input type="text" id="update_img_url" placeholder="image url">
+            <input type="text" id="update_music_url" placeholder="music url">
+            <input type="submit">
+        </form>
+        <h3 id="update_cellist_response"></h3>
+    {% endif %}
     
         <h4>Forum</h4>
         <form id="add_post">

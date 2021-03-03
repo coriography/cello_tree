@@ -89,7 +89,30 @@ def add_cellist():
     else:
         cellist = crud.create_cellist(fname, lname, cello_details, bio, img_url, music_url)
 
-        return jsonify({'status': 'ok', 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname, 'session': session})
+        return jsonify({'status': 'ok', 'cellist_id': cellist.cellist_id, 'fname': cellist.fname, 'lname': cellist.lname})
+
+
+@app.route('/api/update_cellist', methods=["POST"])
+def update_cellist_from_form():
+    """Update an existing cellist in the database."""
+
+    user_id = session['user_id']
+    # user = get_user
+
+    # request.form.get - getting from request, not from html
+    cellist_id = request.form.get('cellist_id')
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    cello_details = request.form.get('cello_details')
+    bio = request.form.get('bio')
+    img_url = request.form.get('img_url')
+    music_url = request.form.get('music_url')
+
+    if user_id:
+        cellist = crud.update_cellist(cellist_id, fname, lname, cello_details, bio, img_url, music_url)
+        return jsonify({'status': 'ok'})
+    else:
+        return jsonify({'status': 'error'})
 
 
 @app.route('/all_cellists')
