@@ -9,10 +9,12 @@
             <input type="textarea" id="cello_details" placeholder="cello details">
             <input type="textarea" id="bio" placeholder="short bio (limit 500 characters)" maxlength="500">
             <input type="text" id="img_url" placeholder="image url">
+            <input type="file" id="photo_upload">
             <input type="text" id="music_url" placeholder="music url">
             <input type="submit">
         </form>
         <h3 id="response_here"></h3>
+        <p id="cloudinary_data"></p>
     {% else %}
         <p>Please <a href="/">log in</a> to add a cellist.</p>
     {% endif %}

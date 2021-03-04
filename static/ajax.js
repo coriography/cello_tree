@@ -1,5 +1,36 @@
 "use strict";
 
+
+function imageUpload(files) {
+    const url = "https://api.cloudinary.com/v1_1/cellotree/image/upload";
+    const uploadData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        uploadData.append("file", file);
+        uploadData.append("upload_preset", "fb2hjysk");
+    
+        fetch(url, {
+          method: "POST",
+          body: uploadData
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(uploadData.values(), '------FORMDATA VALUES-----')
+            console.log(data.url)
+            return data
+        })
+        //   .then((response) => {
+        //     return response.text();
+        //   })
+        //   .then((data) => {
+        //     document.getElementById("cloudinary_data").innerHTML += data;
+        //     console.log(data.url)
+        //   })
+          ;
+    }
+}
+
 // event handler for add_cellist form in add_cellist.html
 $('#add_cellist').on('submit', (evt) => {
     evt.preventDefault();
@@ -14,11 +45,15 @@ $('#add_cellist').on('submit', (evt) => {
         'music_url': $('#music_url').val(),
     }
 
+    const files = document.querySelector("[type=file]").files;
+    // const files = $('#photo_upload').files;
+    // const files = $('[type=file]').files;
+    console.log(files);
     //send data to server.py
     $.post('/add_cellist', add_cellist_form_data, (res) => {
         if (res.status === 'ok') {
             $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`)
-
+            imageUpload(files);
         } else if (res.status === 'error') {
             $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`)
         }
