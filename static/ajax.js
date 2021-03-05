@@ -1,63 +1,52 @@
 "use strict";
 
 
-function imageUpload(files) {
+async function imageUpload(files) {
     const url = "https://api.cloudinary.com/v1_1/cellotree/image/upload";
-    const uploadData = new FormData();
+    const uploadData = new FormData(); 
 
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        uploadData.append("file", file);
-        uploadData.append("upload_preset", "fb2hjysk");
-    
-        fetch(url, {
-          method: "POST",
-          body: uploadData
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(uploadData.values(), '------FORMDATA VALUES-----')
-            console.log(data.url)
-            return data
-        })
-        //   .then((response) => {
-        //     return response.text();
-        //   })
-        //   .then((data) => {
-        //     document.getElementById("cloudinary_data").innerHTML += data;
-        //     console.log(data.url)
-        //   })
-          ;
-    }
+    let file = files[0];
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", "fb2hjysk");
+
+    let response = await fetch(url, {
+        method: "POST",
+        body: uploadData
+    });
+
+    let json = await response.json();
+
+    return json.url
 }
 
 // event handler for add_cellist form in add_cellist.html
 $('#add_cellist').on('submit', (evt) => {
     evt.preventDefault();
 
-     //get form input
-    const add_cellist_form_data = {
-        'fname': $('#fname').val(),
-        'lname': $('#lname').val(),
-        'cello_details': $('#cello_details').val(),
-        'bio': $('#bio').val(),
-        'img_url': $('#img_url').val(),
-        'music_url': $('#music_url').val(),
-    }
+    const media_files = $('#photo_upload').prop('files');
+    const cloud_url = imageUpload(media_files);
 
-    const files = document.querySelector("[type=file]").files;
-    // const files = $('#photo_upload').files;
-    // const files = $('[type=file]').files;
-    console.log(files);
-    //send data to server.py
-    $.post('/add_cellist', add_cellist_form_data, (res) => {
-        if (res.status === 'ok') {
-            $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`)
-            imageUpload(files);
-        } else if (res.status === 'error') {
-            $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`)
+    cloud_url.then((res_url) => {
+        //get form input
+        const add_cellist_form_data = {
+            'fname': $('#fname').val(),
+            'lname': $('#lname').val(),
+            'cello_details': $('#cello_details').val(),
+            'bio': $('#bio').val(),
+            'img_url': res_url,
+            'music_url': $('#music_url').val(),
         }
-    });  
+
+        // send data to server.py
+        $.post('/add_cellist', add_cellist_form_data, (res) => {
+            if (res.status === 'ok') {
+                $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`)
+            } else if (res.status === 'error') {
+                $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`)
+            }
+        });  
+    });
+    
 
 });
 
