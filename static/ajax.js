@@ -154,13 +154,20 @@ $('#add_post').on('submit', (evt) => {
     }
 
     $.post('/api/add_post', postData, (res) => {
-        // if (res.status === 'error') {
-        //     $('#add_link_response').text('error message.')
-        // } else if (res.status === 'link_exists') {
-        //     $('#add_link_response').text('That link already exists.')
-        // } else if (res.status === 'ok') { 
-        //     $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
-        // }
+        if (res.status === 'ok') {
+            $('#add_post').html(`<div>
+                    <h5>${res.new_username}</h5>
+                    <h6>${res.new_date}</h6>
+                    <p>${res.new_content}</p>
+                    
+                        <button id="toggle_upvote_${res.new_post_id}" onclick="toggleUpvote('${res.new_post_id}')">Upvote</button>
+                    
+                    <p id="upvotes_count_${res.new_post_id}">0</p>
+                </div>`);
+            console.log(res);
+        } else {
+
+        }
     });
 
 });
