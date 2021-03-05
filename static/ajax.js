@@ -135,10 +135,14 @@ $('#add_link').on('submit', (evt) => {
         } else if (res.status === 'link_exists') {
             $('#add_link_response').text('That link already exists.')
         } else if (res.status === 'ok') {
-            $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
-
-            // TODO: add ajax to populate into teacher list??
-
+            // $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
+            $('#teachers_list').prepend(`
+                <li>
+                    <a href="/cellist_profile/${res.teacher_id}">
+                        ${res.teacher_fname} ${res.teacher_lname}
+                    </a>
+                </li>
+            `)
         }
     });
 

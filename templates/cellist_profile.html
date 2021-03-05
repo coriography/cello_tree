@@ -39,14 +39,16 @@
     <p id="add_link_response"></p>
 
     {% if cellist.teacher_links %}
-    <ul id="teachers_list">TEACHERS
+    <h4>TEACHERS</h4>
+    <ul id="teachers_list">
         {% for teacher_link in cellist.teacher_links%}
         <li><a href="/cellist_profile/{{teacher_link.teacher_id}}">{{teacher_link.teacher.fname}} {{teacher_link.teacher.lname}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
     {% if cellist.student_links %}
-    <ul id="students_list">STUDENTS
+    <h4>STUDENTS</h4>
+    <ul id="students_list">
         {% for student_link in cellist.student_links%}
         <li><a href="/cellist_profile/{{student_link.student_id}}">{{student_link.student.fname}} {{student_link.student.lname}}</a></li>
         {% endfor %}
@@ -71,37 +73,37 @@
         </form>
     {% endif %}
 
-        {% if editor != None %}
-            <p>last edited by: <span id="last_edited">{{editor.username}}</span></p>
-        {% endif %}
-    
-        <h4>Forum</h4>
-        <form id="add_post">
-            {% if 'user_id' in session %}
-                <input id="post_content" type="textarea" placeholder="your post here">
-                <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
-                <input type="submit">
-            {% else %}
-                <p>Please <a href="/">log in</a> to add a post.</p>
-            {% endif %}
-        </form>
+    {% if editor != None %}
+        <p>last edited by: <span id="last_edited">{{editor.username}}</span></p>
+    {% endif %}
 
-        {% if posts %}
-            <div id="profile_forum">
-                {% for post in posts %}
-                    <div>
-                        <h5>{{post.user.username}}</h5>
-                        <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
-                        <p>{{post.content}}</p>
-                        {% if 'user_id' in session %}
-                            <button id="toggle_upvote_{{post.post_id}}" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
-                        {% endif %}
-                        <!-- if post.upvotes|length > 0 -->
-                        <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
-                        <!-- endif -->
-                    </div>
-                {% endfor %}
-            </div>
+    <h4>Forum</h4>
+    <form id="add_post">
+        {% if 'user_id' in session %}
+            <input id="post_content" type="textarea" placeholder="your post here">
+            <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
+            <input type="submit">
+        {% else %}
+            <p>Please <a href="/">log in</a> to add a post.</p>
         {% endif %}
+    </form>
+
+    {% if posts %}
+        <div id="profile_forum">
+            {% for post in posts %}
+                <div>
+                    <h5>{{post.user.username}}</h5>
+                    <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
+                    <p>{{post.content}}</p>
+                    {% if 'user_id' in session %}
+                        <button id="toggle_upvote_{{post.post_id}}" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
+                    {% endif %}
+                    <!-- if post.upvotes|length > 0 -->
+                    <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
+                    <!-- endif -->
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}   

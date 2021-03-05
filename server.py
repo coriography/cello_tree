@@ -136,11 +136,11 @@ def show_cellist(cellist_id):
 @app.route('/api/create_link', methods=['POST'])
 def create_link_from_profile():
 
-    # TODO: do db query to add teacher using names instead of id's
     # TODO: send teacher/student OBJECT through to be displayed w/ AJAX?
 
     teacher_id = request.form.get('teacher_id')
     student_id = request.form.get('student_id')
+    teacher = crud.get_cellist_by_id(teacher_id)
 
     # check that id's are not the same
     if teacher_id == student_id:
@@ -150,7 +150,7 @@ def create_link_from_profile():
         return jsonify({'status': 'link_exists', 'teacher_id': teacher_id, 'student_id': student_id})
     else:
         crud.create_link(teacher_id, student_id)
-        return jsonify({'status': 'ok', 'teacher_id': teacher_id, 'student_id': student_id})
+        return jsonify({'status': 'ok', 'teacher_id': teacher_id, 'teacher_fname': teacher.fname, 'teacher_lname': teacher.lname, 'student_id': student_id})
 
 
 @app.route('/api/add_post', methods=['POST'])
@@ -191,12 +191,46 @@ def upvote_post_from_post():
 
 #########** TREE AND NODE ROUTES **##########
 
-@app.route('/tree/all')
+@app.route('/node/<cellist_id>')
+def display_oop_tree(cellist_id):
+
+    return render_template('oop_tree.html', cellist_id=cellist_id)
+
+
+@app.route('/api/node/<cellist_id>')
+def get_oop_data(cellist_id):
+
+    # query for Cellist object associated with cellist_id
+    cellist = crud.get_cellist_by_id(cellist_id)
+
+    # query for links where teacher id is given id
+    students_list = crud.get_students_by_cellist_id(cellist_id)
+     # query for links where teacher id is given id
+    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
+
+    # create py dict, loop through students, then teachers
+    # add id, fname, lname of teacher and each student to dict
+    tree_data = {}
+    tree_data["id"] = cellist_id
+    tree_data["name"] = f"{cellist.fname} {cellist.lname}"
+    tree_data["_children"] = []
+    tree_data["_parents"] = []
+    for student_link in students_list:
+        tree_data["_children"].append({"id": student_link.student.cellist_id, "name": f"{student_link.student.fname} {student_link.student.lname}"})
+    for teacher_link in teachers_list:
+        tree_data["_parents"].append({"id": teacher_link.teacher.cellist_id, "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
+    
+    # pass through using jsonify to access in D3
+    return jsonify({'tree_data': tree_data})
+    
+
+
+@app.route('/tree/all') # !! incomplete/in development
 def display_mega_tree():
 
     return render_template('mega_tree.html')
 
-@app.route('/api/tree/all')
+@app.route('/api/tree/all') # !! incomplete/in development
 def get_links_for_tree():
 
     # add id, fname, lname of teacher to dict
@@ -238,40 +272,9 @@ def get_links_for_tree():
     return jsonify({'tree_data': tree_data})
 
 
-@app.route('/node/<cellist_id>')
-def display_oop_tree(cellist_id):
 
-    return render_template('oop_tree.html', cellist_id=cellist_id)
+########!! DEPRECATED ROUTES !!#########
 
-
-@app.route('/api/node/<cellist_id>')
-def get_oop_data(cellist_id):
-
-    # query for Cellist object associated with cellist_id
-    cellist = crud.get_cellist_by_id(cellist_id)
-
-    # query for links where teacher id is given id
-    students_list = crud.get_students_by_cellist_id(cellist_id)
-     # query for links where teacher id is given id
-    teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
-
-    # create py dict, loop through students, then teachers
-    # add id, fname, lname of teacher and each student to dict
-    tree_data = {}
-    tree_data["id"] = cellist_id
-    tree_data["name"] = f"{cellist.fname} {cellist.lname}"
-    tree_data["_children"] = []
-    tree_data["_parents"] = []
-    for student_link in students_list:
-        tree_data["_children"].append({"id": student_link.student.cellist_id, "name": f"{student_link.student.fname} {student_link.student.lname}"})
-    for teacher_link in teachers_list:
-        tree_data["_parents"].append({"id": teacher_link.teacher.cellist_id, "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
-    
-    # pass through using jsonify to access in D3
-    return jsonify({'tree_data': tree_data})
-    
-
-######!! DEPRECATED ROUTES !!#######
 @app.route('/api/tree/<cellist_id>') # ! deprecated
 def show_tree_by_cellist_id(cellist_id):
     
