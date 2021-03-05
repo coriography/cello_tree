@@ -55,26 +55,28 @@ $('#add_cellist').on('submit', (evt) => {
 $('#update_cellist').on('submit', (evt) => {
     evt.preventDefault();
 
-     //get form input
-    const update_cellist_form_data = {
-        'cellist_id': $('#update_cellist_id').val(),
-        'fname': $('#update_fname').val(),
-        'lname': $('#update_lname').val(),
-        'cello_details': $('#update_cello_details').val(),
-        'bio': $('#update_bio').val(),
-        'img_url': $('#update_img_url').val(),
-        'music_url': $('#update_music_url').val(),
-    }
+    const media_files = $('#update_photo').prop('files');
+    const cloud_url = imageUpload(media_files);
 
-    console.log(update_cellist_form_data);
-
-    //send data to server.py
-    $.post('/api/update_cellist', update_cellist_form_data, (res) => {
-        console.log(res);
-        if (res.status === 'ok') {
-            location.href = `/cellist_profile/${update_cellist_form_data.cellist_id}`;
+    cloud_url.then((res_url) => {
+        //get form input
+        const update_cellist_form_data = {
+            'cellist_id': $('#update_cellist_id').val(),
+            'fname': $('#update_fname').val(),
+            'lname': $('#update_lname').val(),
+            'cello_details': $('#update_cello_details').val(),
+            'bio': $('#update_bio').val(),
+            'img_url': res_url,
+            'music_url': $('#update_music_url').val(),
         }
-    });
+
+        //send data to server.py
+        $.post('/api/update_cellist', update_cellist_form_data, (res) => {
+            if (res.status === 'ok') {
+                location.href = `/cellist_profile/${update_cellist_form_data.cellist_id}`;
+            }
+        });
+    })
 });
 
 
@@ -88,7 +90,6 @@ $('#login_form').on('submit', (evt) => {
     }
 
     $.post('/api/login', loginData, (res) => {
-        console.log(res);
         if (res.status === 'ok') {
             $('#display_response').text(`${res.username_email} is logged in`)
         } else if (res.status === 'error') {
@@ -108,7 +109,6 @@ $('#create_account').on('submit', (evt) => {
     }
 
     $.post('/api/create_account', loginData, (res) => {
-        console.log(res);
         if (res.status === 'username_error') {
             $('#display_response').text(`${res.username} already exists`)
         } else if (res.status === 'email_error') {
@@ -130,7 +130,6 @@ $('#add_link').on('submit', (evt) => {
     }
 
     $.post('/api/create_link', linkData, (res) => {
-        console.log(res);
         if (res.status === 'teacher_eq_student') {
             $('#add_link_response').text('Cannot add link between a teacher and themselves.')
         } else if (res.status === 'link_exists') {
@@ -155,7 +154,6 @@ $('#add_post').on('submit', (evt) => {
     }
 
     $.post('/api/add_post', postData, (res) => {
-        console.log(res);
         // if (res.status === 'error') {
         //     $('#add_link_response').text('error message.')
         // } else if (res.status === 'link_exists') {
