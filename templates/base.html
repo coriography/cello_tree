@@ -31,7 +31,12 @@
 <body>
     <h1>Cello Tree</h1>
     <h2>Header</h2>
-    <a href="/">Log in or create account | </a>
+
+    {% if 'user_id' in session %}
+        <a href="/" id="nav_login_logout">Log out {{session.username}} | </a>
+    {% else %}
+        <a href="/" id="nav_login_logout">Log in or create account | </a>
+    {% endif %}
     <a href="/all_cellists">View all cellists by alpha | </a>
     <a href="/tree/3">View tree - id_3 | </a>
     <a href="/add_cellist">Add a cellist | </a>

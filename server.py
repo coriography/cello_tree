@@ -34,10 +34,12 @@ def login():
     if user_by_username != None and user_by_username.password == password:
         # add user to session
         session['user_id'] = user_by_username.user_id
-        return jsonify({'status': 'ok', 'username_email': username_email})
+        session['username'] = user_by_username.username
+        return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
     elif user_by_email != None and user_by_email.password == password:
         session['user_id'] = user_by_email.user_id
-        return jsonify({'status': 'ok', 'username_email': username_email})
+        session['username'] = user_by_username.username
+        return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
     else:
         # display error text 
         # TODO: display create account form
@@ -135,8 +137,6 @@ def show_cellist(cellist_id):
 
 @app.route('/api/create_link', methods=['POST'])
 def create_link_from_profile():
-
-    # TODO: send teacher/student OBJECT through to be displayed w/ AJAX?
 
     teacher_id = request.form.get('teacher_id')
     student_id = request.form.get('student_id')

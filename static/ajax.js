@@ -91,9 +91,10 @@ $('#login_form').on('submit', (evt) => {
 
     $.post('/api/login', loginData, (res) => {
         if (res.status === 'ok') {
-            $('#display_response').text(`${res.username_email} is logged in`)
+            $('#display_response').text(`${res.username_email} is logged in`);
+            $('#nav_login_logout').text(`Log out ${res.username} | `);
         } else if (res.status === 'error') {
-            $('#display_response').text(res.msg)
+            $('#display_response').text(res.msg);
         }
     });
 });
