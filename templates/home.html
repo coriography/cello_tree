@@ -2,13 +2,16 @@
 
 {% block body %}
 
-<!-- if user is not logged in: -->
-<h3>Log In</h3>
-<form id="login_form">
-    <input type="text" id="username_email" placeholder="username or email">
-    <input type="text" id="login_password" placeholder="password">
-    <input type="submit">
-</form>
+{% if 'user_id' not in session %}
+
+<div>
+    <h3>Log In</h3>
+    <form id="login_form">
+        <input type="text" id="username_email" placeholder="username or email">
+        <input type="text" id="login_password" placeholder="password">
+        <input type="submit">
+    </form>
+</div>
 
 <h3>OR Create Account</h3>
 <form id="create_account">
@@ -18,11 +21,15 @@
     <input type="submit">
 </form>
 
-<!-- if user is logged in:
-display "hello, username"
--->
-
 <h3 id="display_response"></h3>
+
+{% else %}
+
+<p>Hello, {{session.username}}!</p>
+
+{% endif %}
+
+
 
 <h3>About Cello Tree</h3>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
