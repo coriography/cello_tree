@@ -1,3 +1,6 @@
+// this file is taken from the Hackbright D3 example.
+// this may be used, along with tree.js, to build a tree of all cellists.
+
 "use strict";
 
 const multiStudent = {

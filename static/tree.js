@@ -1,3 +1,5 @@
+// this file is taken from the Hackbright D3 example and is no longer in use.
+
 "use strict";
 
 const multiStudent = {
@@ -237,13 +239,10 @@ $(document).ready(function () {
     $.get(`/api/tree/${rootCellistId}`, (res) => {
         growTree(res.tree_data, "#tree_layout");
     })
-
-    // $.get(`/api/tree/${rootCellistId}`, (res) => {
-    //     growTree(res.tree_data, "#tree_layout");
-    // })
-    // growTree(testData, "#tree_layout");
 });
 
+
+// !! not currently in use
 function showNodeChildren(cellist_id) {
 
     $.get(`/api/tree/${cellist_id}`, (res) => {
