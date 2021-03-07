@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, flash, session
+from flask import Flask, render_template, jsonify, request, flash, session, redirect
 
 from model import connect_to_db
 
@@ -45,6 +45,13 @@ def login():
         # TODO: display create account form
         return jsonify({'status': 'error', 'msg': 'NOPE, password does not match a user in the db'})
 
+
+@app.route('/api/logout')
+def logout():
+
+    session.clear()
+
+    return redirect('/')
 
 @app.route('/api/create_account', methods=['POST'])
 def create_account():

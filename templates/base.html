@@ -33,7 +33,7 @@
     <h2>Header</h2>
 
     {% if 'user_id' in session %}
-        <a href="/" id="nav_login_logout">Log out {{session.username}} | </a>
+        <a href="/api/logout" id="nav_login_logout">Log out {{session.username}} | </a>
     {% else %}
         <a href="/" id="nav_login_logout">Log in or create account | </a>
     {% endif %}
