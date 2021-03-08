@@ -151,7 +151,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
             height: 0
         });
 
-    // Draw the person's name and position it inside the box
+    // draw name and position it inside their rectangle
     nodeEnter.append("text")
         .attr("dx", 0)
         .attr("dy", 0)
