@@ -169,9 +169,6 @@ $('#add_post').on('submit', (evt) => {
                     
                     <p id="upvotes_count_${res.new_post_id}">0</p>
                 </div>`);
-            console.log(res);
-        } else {
-
         }
     });
 
