@@ -42,8 +42,7 @@ def login():
         return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
     else:
         # display error text 
-        # TODO: display create account form
-        return jsonify({'status': 'error', 'msg': 'NOPE, password does not match a user in the db'})
+        return jsonify({'status': 'error', 'msg': 'Sorry, this password and user do not match. Please try again.'})
 
 
 @app.route('/api/logout')
