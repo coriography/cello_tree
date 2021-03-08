@@ -29,7 +29,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand alt-font" href="/">Cello Tree</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,18 +51,21 @@
                         <a class="nav-link" href="/all_cellists">All Cellists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/add_cellist">Add a cellist</a>
+                        <a class="nav-link" href="/add_cellist">Add Cellist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     
-    <div class="container">
-        {% block body %}
-        <!-- see templates -->
-        {% endblock %}
-    </div>
+    
+    {% block body %}
+    <!-- see templates -->
+    {% endblock %}
+    
     
     <script 
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

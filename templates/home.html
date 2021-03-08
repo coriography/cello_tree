@@ -1,40 +1,101 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="bkg-img" style="background-image: url(/static/img/tree_5.jpg); top: 0"></div>
+<!-- <div class="overlay-dark"></div> -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="home-container">
+                <h1 class="text-center main-title">Cello<br>Tree</h1>
+                <p class="text-center subtitle">Discover your cello family - honor their stories - connect with the
+                    cellist community</p>
+            </div>
 
-{% if 'user_id' not in session %}
+            {% if 'user_id' not in session %}
 
-<div>
-    <h3>Log In</h3>
-    <form id="login_form">
-        <input type="text" id="username_email" placeholder="username or email">
-        <input type="text" id="login_password" placeholder="password">
-        <input type="submit">
-    </form>
+            <div class="d-flex justify-content-around">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Log In</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#createAccountModal">Create
+                    Account</button>
+            </div>
+
+            <div>
+                <h3 id="display_response"></h3>
+            </div>
+
+            {% else %}
+
+            <p>Hello, {{session.username}}!</p>
+
+            {% endif %}
+
+
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Log In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="login_form" class="d-flex flex-column">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="username_email"
+                                        placeholder="username or email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="login_password" placeholder="password">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="submit" class="btn btn-primary">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="createAccountModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create Account</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="create_account" class="d-flex flex-column">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="username"
+                                        placeholder="username">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="email" id="email" placeholder="email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="create_password" placeholder="password">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="submit" class="btn btn-primary">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-
-<h3>OR Create Account</h3>
-<form id="create_account">
-    <input type="text" id="username" placeholder="username">
-    <input type="email" id="email" placeholder="email">
-    <input type="text" id="create_password" placeholder="password">
-    <input type="submit">
-</form>
-
-<h3 id="display_response"></h3>
-
-{% else %}
-
-<p>Hello, {{session.username}}!</p>
-
-{% endif %}
-
-
-
-<h3>About Cello Tree</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-
-
 
 {% endblock %}
