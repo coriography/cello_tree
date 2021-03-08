@@ -31,50 +31,31 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Cello Tree</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            {% if 'user_id' in session %}
+                <li class="nav-item">
+                    <a id="nav_login_logout" class="nav-link" href="/api/logout">Log out {{session.username}}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a id="nav_login_logout" class="nav-link" href="/">Log in or create account</a>
+                </li>
+            {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="/all_cellists">All Cellists</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              <a class="nav-link" href="/add_cellist">Add a cellist</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
       </nav>
-
-    {% if 'user_id' in session %}
-        <a href="/api/logout" id="nav_login_logout">Log out {{session.username}} | </a>
-    {% else %}
-        <a href="/" id="nav_login_logout">Log in or create account | </a>
-    {% endif %}
-    <a href="/all_cellists">View all cellists by alpha | </a>
-    <a href="/tree/3">View tree - id_3 | </a>
-    <a href="/add_cellist">Add a cellist | </a>
-    <p>____________</p>
-    
     
     <div class="container">
         {% block body %}
@@ -82,8 +63,6 @@
         {% endblock %}
     </div>
     
-    
-
     <script 
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
