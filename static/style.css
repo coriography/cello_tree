@@ -75,6 +75,19 @@ h1, h2, h3, h4, h5, h6 {
     z-index: -1;
 }
 
+.cellist-card {
+    border: 2px solid black;
+    border-radius: 0;
+}
+
+.cellist-card-img {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
 .overlay-dark {
     height: 100%;
     width: 100%;

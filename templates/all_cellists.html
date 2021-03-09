@@ -1,10 +1,40 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>View All Cellists</h1>
+<div class="container">
+    <h1>Browse all cellists</h1>
+    <p>or search</p>
+    <p>alpha index by last name</p>
+    <p>Don't see who you're looking for?</p>
+    <button class="btn btn-secondary">Add cellist</button>
 
-{% for cellist in all_cellists %}
-    <a href="/cellist_profile/{{cellist.cellist_id}}">{{cellist.lname}}, {{cellist.fname}}</a><br>
-{% endfor %}
+    <div class="row">
+        {% for cellist in all_cellists %}
+        <div class="col-12 col-md-6 col-lg-4 card cellist-card p-0 mb-3">
+            <div class="row no-gutters">
+                <div class="col-4">
+                    {% if cellist.img_url %}
+                    <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
+                    
+                    <!-- <img src="{{cellist.img_url}}" class="card-img" alt="image of {{cellist.lname}}, {{cellist.fname}}"> -->
+                    {% else %}
+                    <!-- <img src="/static/img/cello_1.jpg" class="card-img" alt="image of a cello"> -->
+                    <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
+                    {% endif %}
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title text-black"><a href="/cellist_profile/{{cellist.cellist_id}}">{{cellist.lname}}, {{cellist.fname}}</a></h5>
+                        <p class="card-text">Some text here</p>
+                        <p class="card-text"><small class="text-muted">some smol text</small></p>
+                        <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-primary">View profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-{% endblock %}   
+
+{% endblock %}
