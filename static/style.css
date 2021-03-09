@@ -33,6 +33,14 @@ h1, h2, h3, h4, h5, h6 {
     /* border-radius: 5rem; */
 }
 
+.box-shadow {
+    box-shadow: 0 2rem 4.6rem rgba(0,0,0,0.9);
+}
+
+.box-shadow-sm {
+    box-shadow: 0 1rem 2rem 0.5rem rgba(0,0,0,0.3);
+}
+
 .navbar-custom {
     /* background-color: rgba(255,255,255,.5)!important; */
 }
