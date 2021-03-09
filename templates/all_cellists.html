@@ -24,10 +24,19 @@
                 </div>
                 <div class="col-8">
                     <div class="card-body">
-                        <h5 class="card-title text-black"><a href="/cellist_profile/{{cellist.cellist_id}}">{{cellist.lname}}, {{cellist.fname}}</a></h5>
-                        <p class="card-text">Some text here</p>
-                        <p class="card-text"><small class="text-muted">some smol text</small></p>
-                        <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-primary">View profile</a>
+                        <h5 class="card-title text-black">{{cellist.lname}}, {{cellist.fname}}</h5>
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="card-text">4 <small class="text-muted">teachers</small></p>
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">5 <small class="text-muted">students</small></p>
+                            </div>
+                            <div class="col-4">
+                                <p class="card-text">25 <small class="text-muted">posts</small></p>
+                            </div>
+                        </div>
+                        <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-primary mt-3">View profile</a>
                     </div>
                 </div>
             </div>
