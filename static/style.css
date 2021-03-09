@@ -78,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 .cellist-card {
     border: 2px solid black;
     border-radius: 0;
+    margin-bottom: 30px;
 }
 
 .cellist-card-img {
@@ -89,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-text small {
-    font-size: 70%;
+    /* font-size: 70%; */
 }
 
 .overlay-dark {
