@@ -5,10 +5,16 @@
     <h1>Browse all cellists</h1>
     <p>or search</p>
     <p>alpha index by last name</p>
-    <p>Don't see who you're looking for?</p>
-    <button class="btn btn-secondary">Add cellist</button>
+    <div class="d-flex align-items-baseline">
+        <p class="small">Don't see who you're looking for?</p>
+        <a href="/add_cellist" class="btn btn-secondary ml-3">
+            <span class="fa fa-plus"></span>
+            Add cellist
+        </a>
+    </div>
+    
 
-    <div class="row">
+    <div class="row mt-5">
         {% for cellist in all_cellists %}
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card cellist-card">
@@ -16,10 +22,7 @@
                     <div class="col-4">
                         {% if cellist.img_url %}
                         <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
-                        
-                        <!-- <img src="{{cellist.img_url}}" class="card-img" alt="image of {{cellist.lname}}, {{cellist.fname}}"> -->
                         {% else %}
-                        <!-- <img src="/static/img/cello_1.jpg" class="card-img" alt="image of a cello"> -->
                         <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
                         {% endif %}
                     </div>
