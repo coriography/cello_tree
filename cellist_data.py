@@ -383,13 +383,5 @@ data = [
     'music_url': '',
     'teacher_ids': []
     },
-    {'fname': '***Root',
-    'lname': 'Node***',
-    'cello_details': '',
-    'bio': '',
-    'img_url': '',
-    'music_url': '',
-    'teacher_ids': []
-    },
 ]
 
