@@ -10,25 +10,25 @@
                 <h1 class="text-center main-title">Cello<br>Tree</h1>
                 <p class="text-center subtitle">Discover your cello family - honor their stories - connect with the
                     cellist community</p>
+                    {% if 'user_id' not in session %}
+
+                    <div class="d-flex justify-content-center align-items-baseline">
+                        <button class="btn btn-secondary box-shadow-sm mr-3" data-toggle="modal" data-target="#loginModal">Log In</button>OR
+                        <button class="btn btn-secondary box-shadow-sm ml-3" data-toggle="modal" data-target="#createAccountModal">Create
+                            Account</button>
+                    </div>
+                    <div>
+                        <h3 id="display_response"></h3>
+                    </div>
+        
+                    {% else %}
+        
+                    <p>Hello, {{session.username}}!</p>
+        
+                    {% endif %}
             </div>
 
-            {% if 'user_id' not in session %}
-
-            <div class="d-flex justify-content-around">
-                <button class="btn btn-primary box-shadow-sm" data-toggle="modal" data-target="#loginModal">Log In</button>
-                <button class="btn btn-primary box-shadow-sm" data-toggle="modal" data-target="#createAccountModal">Create
-                    Account</button>
-            </div>
-
-            <div>
-                <h3 id="display_response"></h3>
-            </div>
-
-            {% else %}
-
-            <p>Hello, {{session.username}}!</p>
-
-            {% endif %}
+            
 
 
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
