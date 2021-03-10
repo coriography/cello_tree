@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="bkg-img" style="background-image: url(/static/img/tree_5.jpg); top: 0"></div>
 <div class="container">
     <h1>Browse all cellists</h1>
     <p>or search</p>
@@ -17,7 +18,7 @@
     <div class="row mt-5">
         {% for cellist in all_cellists %}
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="card cellist-card">
+            <div class="card cellist-card box-shadow-sm">
                 <div class="row no-gutters">
                     <div class="col-4">
                         {% if cellist.img_url %}
@@ -40,7 +41,7 @@
                                     <p class="card-text">25 <br><small class="text-muted">posts</small></p>
                                 </div>
                             </div>
-                            <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-primary mt-3">View profile</a>
+                            <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-secondary mt-3">View profile</a>
                         </div>
                     </div>
                 </div>
