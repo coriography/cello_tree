@@ -5,3 +5,4 @@ __pycache__/
 /static/tree.js
 /templates/tree.html
 /templates/mega_tree.js
+/templates/xcellist_profile.html
