@@ -14,8 +14,8 @@ var zoom = d3.behavior.zoom()
 
 // find DOM element and append graphic to it
 var svg = d3.select("#double_tree_container").append("svg")
-    .attr('width', 1000) //?? can this be dynamic - i.e. calculate viewport width?
-    .attr('height', 500) //?? same here
+    .attr('width', '100%') //?? can this be dynamic - i.e. calculate viewport width?
+    .attr('height', '100%') //?? same here
     .call(zoom) // TODO: disable here if not using
     .append('g') // ?? what is this?
 

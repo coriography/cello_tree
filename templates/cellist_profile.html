@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-12">
                             {% if cellist.music_url %}
-                            <a href="{{cellist.music_url}}" class="btn btn-secondary border-white mb-3">
+                            <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white mb-3">
                                 <i class="fas fa-music mr-1"></i>
                                 Listen now
                                 <i class="fas fa-external-link-alt ml-1"></i>
@@ -68,12 +68,76 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12 col-md-10 offset-1">
+            <div class="profile-section tree-section position-relative box-shadow-sm mb-5">
+                <div class="profile-section-overlay"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2>The Tree</h2>
+                        <p>Tip: click, pan, and zoom to explore the branches of the tree!</p>
+                        <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
+                        <div id="double_tree_container"></div>
 
-    <div style="background-color: white;">
-        <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
-        <div id="double_tree_container"></div>
+                        <div>
+                            <h5>Add a branch to this tree</h5>
+                            {% if 'user_id' in session %}
+                            <form id="add_link">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Default checkbox
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Checked checkbox
+                                    </label>
+                                </div>
+                                <select name="teacher_id_select" class="form-control" id="teacher_id" required>
+                                    {% for c_option in all_cellists %}
+                                    <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                <input id="student_id" type="hidden" placeholder="student id"
+                                    value="{{cellist.cellist_id}}">
+                                <input type="submit" class="form-control">
+
+                                <p class="small">Don't see who you're looking for?</p>
+                                <a href="/add_cellist" class="btn btn-secondary ml-3">
+                                    <span class="fa fa-plus"></span>
+                                    Add cellist to database
+                                </a>
+
+                            </form>
+
+                            <p id="add_link_response"></p>
+                            
+                            {% else %}
+                            <p>Please <a href="/">log in</a> to add a teacher.</p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+    <div class="row">
+        <div class="col-12 col-md-10 offset-1">
+            <div class="profile-section position-relative box-shadow-sm">
+                <div class="profile-section-overlay"></div>
+                <div class="profile-inner-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     {% if cellist.bio %}
     <div class="row">
@@ -88,45 +152,13 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
     {% endif %}
 
-    <div class="row">
-        <div class="col-12 col-md-10 offset-1">
-            <div class="profile-section position-relative box-shadow-sm">
-                <div class="profile-section-overlay"></div>
-                <div class="profile-inner-container">
-                    <form id="add_link">
-                        <h5>add a teacher</h5>
-                
-                        {% if 'user_id' in session %}
-                        <select name="teacher_id_select" id="teacher_id" required>
-                            {% for c_option in all_cellists %}
-                            <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}</option>
-                            {% endfor %}
-                        </select>
-                        <input id="student_id" type="hidden" placeholder="student id" value="{{cellist.cellist_id}}">
-                        <input type="submit">
-                
-                        <p class="small">Don't see who you're looking for?</p>
-                        <a href="/add_cellist" class="btn btn-secondary ml-3">
-                            <span class="fa fa-plus"></span>
-                            Add cellist
-                        </a>
-                        {% else %}
-                
-                        <p>Please <a href="/">log in</a> to add a teacher.</p>
-                        {% endif %}
-                    </form>
-                
-                    <p id="add_link_response"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     {% if 'user_id' in session %}
     <button>Update this cellist profile</button>

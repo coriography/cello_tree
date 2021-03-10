@@ -172,8 +172,9 @@ h1, h2, h3, h4, h5, h6 {
 /** THE TREE **/
 
 svg {
-    margin: 60px;
-    border: 2px solid #cccccc;
+    position: relative;
+    border: 2px solid var(--blackish);
+    min-height: 500px;
 }
 
 .person rect {
