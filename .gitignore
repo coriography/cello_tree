@@ -6,3 +6,4 @@ __pycache__/
 /templates/tree.html
 /templates/mega_tree.js
 /templates/xcellist_profile.html
+/templates/oop_tree.html

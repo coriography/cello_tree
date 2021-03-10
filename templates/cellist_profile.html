@@ -68,6 +68,13 @@
         </div>
     </div>
 
+
+    <div style="background-color: white;">
+        <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
+        <div id="double_tree_container"></div>
+    </div>
+    
+
     {% if cellist.bio %}
     <div class="row">
         <div class="col-12 col-md-10 offset-1">
@@ -165,6 +172,7 @@
     {% endif %}
 </div>
 
-
+<script src="/static/tree_class.js"></script>
+<script src="/static/oop_asc_desc.js"></script>
 
 {% endblock %}

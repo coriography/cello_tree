@@ -138,7 +138,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
     var nodeEnter = node.enter().append("g")
         .attr("class", "person " + self.selector)
         .on('click', function (person) {
-            location.href = `/node/${person.id}`;
+            location.href = `/cellist_profile/${person.id}`;
         });
 
     // draw rectangles
