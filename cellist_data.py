@@ -43,8 +43,8 @@ data = [
     'lname': 'Starker',
     'cello_details': '',
     'bio': '',
-    'img_url': '',
-    'music_url': '',
+    'img_url': 'https://csoarchives.files.wordpress.com/2013/05/jc3a1nos-starker.jpg',
+    'music_url': 'https://open.spotify.com/artist/6D7itIGHznFfHx3ZDqCk3j',
     'teacher_ids': [36]
     },
     {'fname': 'Brant',
