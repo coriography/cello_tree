@@ -25,6 +25,8 @@ Font-Size: 17px; */
     /* #3D8B37 too dark for button */
     /* #397D02 too dark for button */
     /* #308014 too dark for button */
+    --whitish: #F5F6F4;
+    --alabaster: #E1E4DD;
     --green: #617317;
     --artichoke: #849071;
     --blackish: #0e2002;
@@ -141,6 +143,20 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
 }
 
+.profile-section {
+    padding: 2rem;
+}
+
+.profile-section-overlay {
+    background-color: var(--alabaster);
+    opacity: .9;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .profile-inner-container {
     padding: 2rem;
     height: 100%;
@@ -149,5 +165,5 @@ h1, h2, h3, h4, h5, h6 {
 .profile-name-container {
     padding: 1rem;
     background-color: rgba(255,255,255,.1);
-    border: 2px solid white;
+    border: 2px solid var(--whitish);
 }
