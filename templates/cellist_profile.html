@@ -1,35 +1,85 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>{{cellist.fname}} {{cellist.lname}}</h1>
+<div class="bkg-img" style="background-image: url(/static/img/tree_2.jpg); top: 0"></div>
+<div class="container">
 
-    {% if cellist.img_url %}
-        <img src="{{cellist.img_url}}" alt="">
-    {% endif %}
+    <div class="profile-header text-white position-relative">
+        <div class="profile-header-overlay"></div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="profile-inner-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="profile-name-container mb-5">
+                                <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
+                            </div>
+                        </div>
+                        <div class="col-4 pr-0">
+                            <p class="card-text">4 <br><small class="">teachers</small></p>
+                        </div>
+                        <div class="col-4 pr-0">
+                            <p class="card-text">5 <br><small class="">students</small></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="card-text">25 <br><small class="">posts</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                {% if cellist.img_url %}
+                <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
+                <!-- <img src="{{cellist.img_url}}" alt="image of {{cellist.fname}} {{cellist.lname}}"> -->
+                {% else %}
+                <img src="/static/img/cello_1" alt="image of a cello">
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="profile-inner-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-secondary border-white mb-3">
+                                <i class="fas fa-edit mr-1"></i>
+                                Edit profile
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            {% if cellist.music_url %}
+                            <a href="{{cellist.music_url}}" class="btn btn-secondary border-white mb-3">
+                                <i class="fas fa-music mr-1"></i>
+                                Listen now
+                                <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            {% if cellist.cello_details %}
+                            <p>Instrument: {{cellist.cello_details}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     {% if cellist.bio %}
-        <p>{{cellist.bio}}</p>
-    {% endif %}
-
-    {% if cellist.cello_details %}
-        <p>Instrument: {{cellist.cello_details}}</p>
-    {% endif %}
-
-    {% if cellist.music_url %}
-        <a target="_blank" href="{{cellist.music_url}}">Listen here</a>
+    <p>{{cellist.bio}}</p>
     {% endif %}
 
     <form id="add_link">
         <h5>add a teacher</h5>
-        
+
         {% if 'user_id' in session %}
-            <select name="teacher_id_select" id="teacher_id" required>
-                {% for c_option in all_cellists %}
-                    <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}</option>
-                {% endfor %}
-            </select>
-            <input id="student_id" type="hidden" placeholder="student id" value="{{cellist.cellist_id}}">
-            <input type="submit">
+        <select name="teacher_id_select" id="teacher_id" required>
+            {% for c_option in all_cellists %}
+            <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}</option>
+            {% endfor %}
+        </select>
+        <input id="student_id" type="hidden" placeholder="student id" value="{{cellist.cellist_id}}">
+        <input type="submit">
         {% else %}
 
         <p>Please <a href="/">log in</a> to add a teacher.</p>
@@ -42,7 +92,8 @@
     <h4>TEACHERS</h4>
     <ul id="teachers_list">
         {% for teacher_link in cellist.teacher_links%}
-        <li><a href="/cellist_profile/{{teacher_link.teacher_id}}">{{teacher_link.teacher.fname}} {{teacher_link.teacher.lname}}</a></li>
+        <li><a href="/cellist_profile/{{teacher_link.teacher_id}}">{{teacher_link.teacher.fname}}
+                {{teacher_link.teacher.lname}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -50,60 +101,64 @@
     <h4>STUDENTS</h4>
     <ul id="students_list">
         {% for student_link in cellist.student_links%}
-        <li><a href="/cellist_profile/{{student_link.student_id}}">{{student_link.student.fname}} {{student_link.student.lname}}</a></li>
+        <li><a href="/cellist_profile/{{student_link.student_id}}">{{student_link.student.fname}}
+                {{student_link.student.lname}}</a></li>
         {% endfor %}
     </ul>
     <!-- <button onclick="createNode(`{{cellist.cellist_id}}`)">View in tree</button> -->
-    
+
     {% endif %}
 
     <a href="/node/{{cellist.cellist_id}}">View in tree</a>
 
     {% if 'user_id' in session %}
-        <button>Update this cellist profile</button>
-        <form id="update_cellist">
-            <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}">
-            <input type="text" id="update_fname" placeholder="first name">
-            <input type="text" id="update_lname" placeholder="last name">
-            <input type="textarea" id="update_cello_details" placeholder="cello details">
-            <input type="textarea" id="update_bio" placeholder="short bio (limit 500 characters)" maxlength="500">
-            <input type="file" id="update_photo">Update profile photo
-            <input type="text" id="update_music_url" placeholder="music url">
-            <input type="submit">
-        </form>
+    <button>Update this cellist profile</button>
+    <form id="update_cellist">
+        <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}">
+        <input type="text" id="update_fname" placeholder="first name">
+        <input type="text" id="update_lname" placeholder="last name">
+        <input type="textarea" id="update_cello_details" placeholder="cello details">
+        <input type="textarea" id="update_bio" placeholder="short bio (limit 500 characters)" maxlength="500">
+        <input type="file" id="update_photo">Update profile photo
+        <input type="text" id="update_music_url" placeholder="music url">
+        <input type="submit">
+    </form>
     {% endif %}
 
     {% if editor != None %}
-        <p>last edited by: <span id="last_edited">{{editor.username}}</span></p>
+    <p>last edited by: <span id="last_edited">{{editor.username}}</span></p>
     {% endif %}
 
     <h4>Forum</h4>
     <form id="add_post">
         {% if 'user_id' in session %}
-            <input id="post_content" type="textarea" placeholder="your post here">
-            <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
-            <input type="submit">
+        <input id="post_content" type="textarea" placeholder="your post here">
+        <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
+        <input type="submit">
         {% else %}
-            <p>Please <a href="/">log in</a> to add a post.</p>
+        <p>Please <a href="/">log in</a> to add a post.</p>
         {% endif %}
     </form>
 
     {% if posts %}
-        <div id="profile_forum">
-            {% for post in posts %}
-                <div>
-                    <h5>{{post.user.username}}</h5>
-                    <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
-                    <p>{{post.content}}</p>
-                    {% if 'user_id' in session %}
-                        <button id="toggle_upvote_{{post.post_id}}" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
-                    {% endif %}
-                    <!-- if post.upvotes|length > 0 -->
-                    <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
-                    <!-- endif -->
-                </div>
-            {% endfor %}
+    <div id="profile_forum">
+        {% for post in posts %}
+        <div>
+            <h5>{{post.user.username}}</h5>
+            <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
+            <p>{{post.content}}</p>
+            {% if 'user_id' in session %}
+            <button id="toggle_upvote_{{post.post_id}}" onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
+            {% endif %}
+            <!-- if post.upvotes|length > 0 -->
+            <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
+            <!-- endif -->
         </div>
+        {% endfor %}
+    </div>
     {% endif %}
+</div>
 
-{% endblock %}   
+
+
+{% endblock %}
