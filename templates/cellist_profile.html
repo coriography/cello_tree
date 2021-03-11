@@ -3,72 +3,77 @@
 {% block body %}
 <div class="bkg-img" style="background-image: url(/static/img/tree_2.jpg); top: 0"></div>
 <div class="container">
-
-    <div class="profile-header text-white position-relative box-shadow-sm mb-5">
-        <div class="profile-header-overlay"></div>
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <div class="profile-inner-container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="profile-name-container mb-5">
-                                <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="profile-header text-white position-relative box-shadow-sm mb-5">
+                <div class="profile-header-overlay"></div>
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="profile-inner-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="profile-name-container mb-5">
+                                        <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
+                                    </div>
+                                </div>
+                                <div class="col-4 pr-0">
+                                    <p class="card-text">4 <br><small class="">teachers</small></p>
+                                </div>
+                                <div class="col-4 pr-0">
+                                    <p class="card-text">5 <br><small class="">students</small></p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="card-text">25 <br><small class="">posts</small></p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-4 pr-0">
-                            <p class="card-text">4 <br><small class="">teachers</small></p>
-                        </div>
-                        <div class="col-4 pr-0">
-                            <p class="card-text">5 <br><small class="">students</small></p>
-                        </div>
-                        <div class="col-4">
-                            <p class="card-text">25 <br><small class="">posts</small></p>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                {% if cellist.img_url %}
-                <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
-                {% else %}
-                <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
-                {% endif %}
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="profile-inner-container">
-                    <div class="row">
-                        {% if 'user_id' in session %}
-                        <div class="col-12">
-                            <button class="btn btn-secondary border-white mb-3" data-toggle="modal" data-target="#updateModal">
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit profile
-                            </button>
-                        </div>
+                    <div class="col-12 col-md-3">
+                        {% if cellist.img_url %}
+                        <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
+                        {% else %}
+                        <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
                         {% endif %}
-                        <div class="col-12">
-                            {% if cellist.music_url %}
-                            <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white mb-3">
-                                <i class="fas fa-music mr-1"></i>
-                                Listen now
-                                <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                            {% endif %}
-                        </div>
-                        <div class="col-12">
-                            {% if cellist.cello_details %}
-                            <p>Instrument: {{cellist.cello_details}}</p>
-                            {% endif %}
-                        </div>
-                        <div class="col-12">
-                            {% if editor != None %}
-                            <small>last edited by: <span id="last_edited">{{editor.username}}</span></small>
-                            {% endif %}
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="profile-inner-container">
+                            <div class="row">
+                                {% if 'user_id' in session %}
+                                <div class="col-12">
+                                    <button class="btn btn-secondary border-white mb-3" data-toggle="modal" data-target="#updateModal">
+                                        <i class="fas fa-edit mr-1"></i>
+                                        Edit profile
+                                    </button>
+                                </div>
+                                {% endif %}
+                                <div class="col-12">
+                                    {% if cellist.music_url %}
+                                    <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white mb-3">
+                                        <i class="fas fa-music mr-1"></i>
+                                        Listen now
+                                        <i class="fas fa-external-link-alt ml-1"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12">
+                                    {% if cellist.cello_details %}
+                                    <p>Instrument: {{cellist.cello_details}}</p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12">
+                                    {% if editor != None %}
+                                    <small>last edited by: <span id="last_edited">{{editor.username}}</span></small>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    
 
     <div class="row">
         <div class="col-12 col-md-10 offset-1">

@@ -46,15 +46,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn.btn-primary {
     background-color: var(--green);
-    border-color: var(--green);
-    color: var(--blackish);
-    border: 1px solid var(--blackish);
-    padding: .5rem 1.5rem!important;
+    color: var(--whitish);
+    border: 1px solid var(--green);
 }
 
 .btn.btn-secondary {
     background-color: var(--artichoke);
-    border-color: var(--artichoke);
+    color: var(--whitish);
+    border: 1px solid var(--artichoke);
+    /* background-color: transparent;
+    color: var(--artichoke);
+    border: 1px solid var(--artichoke); */
 }
 
 .box-shadow {
