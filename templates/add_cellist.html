@@ -11,8 +11,8 @@
                 <div class="profile-inner-container border-black">
                     <h1>Add cellist</h1>
                     {% if 'user_id' in session %}
-                    <p>Before you add a cellist, please check that they are not already in the <a href="/all_cellists">Cello Tree database.</a></p>
                     <form id="add_cellist">
+                        <p>Before you add a cellist, please check that they are not already in the <a href="/all_cellists">Cello Tree database.</a></p>
                         <div class="form-group form-row">
                             <div class="col">
                                 <input type="text" id="fname" placeholder="first name" class="form-control">
@@ -36,8 +36,9 @@
                         </div>
                         <input type="submit" class="form-control btn btn-primary">
                     </form>
-                    <h3 id="response_here"></h3>
-                    <p id="cloudinary_data"></p>
+                    <div id="add_another_container">
+                        
+                    </div>
                     {% else %}
                     <p>Please <a href="/" class="btn btn-primary">log in</a> to add a cellist.</p>
                     {% endif %}

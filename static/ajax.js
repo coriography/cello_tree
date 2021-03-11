@@ -40,14 +40,14 @@ $('#add_cellist').on('submit', (evt) => {
         // send data to server.py
         $.post('/add_cellist', add_cellist_form_data, (res) => {
             if (res.status === 'ok') {
-                $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`)
+                $('#add_cellist').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`);
+                $('#add_another_container').html(`<button class="btn btn-primary mt-3">Add another cellist</button>`);
             } else if (res.status === 'error') {
-                $('#response_here').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`)
-            }
+                $('#add_cellist').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`);
+                $('#add_another_container').html(`<button class="btn btn-primary mt-3">Add another cellist</button>`);
+            };
         });  
     });
-    
-
 });
 
 
