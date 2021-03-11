@@ -65,12 +65,13 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 1rem 2rem 0.5rem rgba(0,0,0,0.3);
 }
 
-.navbar-custom {
-    /* background-color: rgba(255,255,255,.5)!important; */
-}
-
 .navbar.navbar-custom a {
     color: black;
+}
+
+label {
+    font-style: italic;
+    font-size: 80%;
 }
 
 /** HOME PAGE **/

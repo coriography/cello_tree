@@ -39,7 +39,7 @@
                     <div class="row">
                         {% if 'user_id' in session %}
                         <div class="col-12">
-                            <button class="btn btn-secondary border-white mb-3">
+                            <button class="btn btn-secondary border-white mb-3" data-toggle="modal" data-target="#updateModal">
                                 <i class="fas fa-edit mr-1"></i>
                                 Edit profile
                             </button>
@@ -181,18 +181,63 @@
 
 
 
-<button>Update this cellist profile</button>
-<form id="update_cellist">
-    <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}">
-    <input type="text" id="update_fname" placeholder="first name">
-    <input type="text" id="update_lname" placeholder="last name">
-    <input type="textarea" id="update_cello_details" placeholder="cello details">
-    <input type="textarea" id="update_bio" placeholder="short bio (limit 500 characters)" maxlength="500">
-    <input type="file" id="update_photo">Update profile photo
-    <input type="text" id="update_music_url" placeholder="music url">
-    <input type="submit">
-</form>
 
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update {{cellist.fname}} {{cellist.lname}}'s profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="update_cellist">
+                    
+                    <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}" class="form-control">
+                    <div class="form-group form-row">
+                        <div class="col-6">
+                            <label for="update_fname">First Name</label>
+                            <input type="text" id="update_fname" value="{{cellist.fname}}" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="update_lname">Last Name</label>
+                            <input type="text" id="update_lname"  value="{{cellist.lname}}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group form-row">
+                        <label for="update_music_url">Website or music URL</label>
+                        <input type="text" id="update_music_url"  value="{{cellist.music_url}}" class="form-control">
+                    </div>
+                    <div class="form-group form-row">
+                        <label for="update_cello_details">Cello details</label>
+                        <textarea id="update_cello_details" value="{{cellist.cello_details}}" class="form-control">{{cellist.cello_details}}</textarea>
+                    </div>
+                    <div class="form-group form-row">
+                        <label for="update_bio">Bio</label>
+                        <textarea id="update_bio" value="{{cellist.bio}}" maxlength="500" class="form-control">{{cellist.bio}}</textarea>
+                    </div>
+                    <div class="form-group form-row">
+                        {% if cellist.img_url %}
+                        <img src="{{cellist.img_url}}" style="max-height: 100px;" alt="current cellist photo">
+                        {% else %}
+                        <p>This profile does not have a photo yet. Add one!</p>
+                        {% endif %}
+                    </div>
+                    <div class="form-group form-row">
+                        <label for="update_photo">Photo</label>
+                        <input type="file" id="update_photo" class="form-control" value="{{cellist.img_url}}">
+                    </div>
+                    <div class="form-group form-row">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="/static/tree_class.js"></script>
