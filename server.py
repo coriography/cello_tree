@@ -175,11 +175,12 @@ def add_post_from_page():
 
     new_post = crud.create_post(user_id, cellist_id, post_content, post_date)
     new_username = crud.get_user_by_id(new_post.user_id).username
-    new_date = new_post.post_date
+    new_date = new_post.post_date.strftime('%b. %d, %Y, %H:%M')
     new_content = new_post.content
     new_post_id = new_post.post_id
-    
-    return jsonify({'status': 'ok', 'new_username': new_username,'new_date': new_date, 'new_content': new_content, 'new_post_id': new_post_id})
+    new_post_upvotes = new_post.upvotes
+
+    return jsonify({'status': 'ok', 'new_username': new_username,'new_date': new_date, 'new_content': new_content, 'new_post_id': new_post_id, 'new_post_upvotes': new_post_upvotes})
 
 
 @app.route('/api/upvote_post', methods=['POST'])
@@ -195,7 +196,7 @@ def upvote_post_from_post():
         msg = "Upvote"
     else:
         crud.create_upvote(user_id, post_id)
-        msg = "Undo Upvote"
+        msg = 'Undo Upvote'
 
     upvotes_count = crud.get_upvotes_count(post_id)
 

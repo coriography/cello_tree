@@ -151,7 +151,7 @@
                 <div class="profile-section-overlay"></div>
                 <div class="profile-inner-container">
                     <h4>Forum</h4>
-                    <form id="add_post" class="mb-5">
+                    <form id="add_post">
                         {% if 'user_id' in session %}
                         <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}" class="form-control">
                         <div class="form-group form-row">
@@ -170,20 +170,23 @@
                     {% if posts %}
                     <div id="profile_forum">
                         {% for post in posts %}
-                        <div>
+                        <div class="py-4">
                             <h5>{{post.user.username}}</h5>
                             <h6>{{post.post_date.strftime('%b. %d, %Y, %H:%M')}} UTC</h6>
                             <p>{{post.content}}</p>
+                            <p>
+                                <i id="upvote_icon_{{post.post_id}}" class="fas fa-arrow-alt-circle-up"></i>
+                                <span id="upvotes_count_{{post.post_id}}" class="">
+                                    {{post.upvotes|length}} upvotes
+                                </span>
+                            </p>
+                            
                             {% if 'user_id' in session %}
-                            <button id="toggle_upvote_{{post.post_id}}"
+                            <button id="toggle_upvote_{{post.post_id}}" class="btn btn-secondary"
                                 onclick="toggleUpvote(`{{post.post_id}}`)">
-                                <i class="fas fa-arrow-alt-circle-up"></i>
                                 Upvote
                             </button>
                             {% endif %}
-                            <!-- if post.upvotes|length > 0 -->
-                            <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
-                            <!-- endif -->
                         </div>
                         {% endfor %}
                     </div>

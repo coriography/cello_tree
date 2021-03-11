@@ -160,15 +160,23 @@ $('#add_post').on('submit', (evt) => {
 
     $.post('/api/add_post', postData, (res) => {
         if (res.status === 'ok') {
-            $('#add_post').html(`<div>
+            $('#add_post').html(`
+                <div class="my-4">
                     <h5>${res.new_username}</h5>
-                    <h6>${res.new_date}</h6>
+                    <h6>${res.new_date} UTC</h6>
                     <p>${res.new_content}</p>
-                    
-                        <button id="toggle_upvote_${res.new_post_id}" onclick="toggleUpvote('${res.new_post_id}')">Upvote</button>
-                    
-                    <p id="upvotes_count_${res.new_post_id}">0</p>
-                </div>`);
+                    <p>
+                        <i id="upvote_icon_${res.new_post_id}" class="fas fa-arrow-alt-circle-up"></i>
+                        <span id="upvotes_count_${res.new_post_id}" class="">
+                            ${res.new_post_upvotes|length} upvotes
+                        </span>
+                    </p>
+                    <button id="toggle_upvote_${res.new_post_id}" class="btn btn-secondary"
+                        onclick="toggleUpvote('${res.new_post_id}')">
+                        Upvote
+                    </button>
+                </div>
+            `);
         }
     });
 
@@ -182,7 +190,8 @@ function toggleUpvote(post_id) {
     }
 
     $.post('/api/upvote_post', upvoteData, (res) => {
-        $(`#upvotes_count_${post_id}`).text(res.upvotes_count);
+        console.log(res);
+        $(`#upvotes_count_${post_id}`).text(`${res.upvotes_count} upvotes`);
         $(`#toggle_upvote_${post_id}`).text(res.msg);
     });
 };
