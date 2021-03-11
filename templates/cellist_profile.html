@@ -8,7 +8,7 @@
             <div class="profile-header text-white position-relative box-shadow-sm mb-5">
                 <div class="profile-header-overlay"></div>
                 <div class="row">
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-8">
                         <div class="profile-inner-container">
                             <div class="row">
                                 <div class="col-12">
@@ -26,17 +26,6 @@
                                     <p class="card-text">25 <br><small class="">posts</small></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        {% if cellist.img_url %}
-                        <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
-                        {% else %}
-                        <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
-                        {% endif %}
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="profile-inner-container">
                             <div class="row">
                                 {% if 'user_id' in session %}
                                 <div class="col-12">
@@ -67,6 +56,13 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        {% if cellist.img_url %}
+                        <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
+                        {% else %}
+                        <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
