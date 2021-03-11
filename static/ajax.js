@@ -40,16 +40,31 @@ $('#add_cellist').on('submit', (evt) => {
         // send data to server.py
         $.post('/add_cellist', add_cellist_form_data, (res) => {
             if (res.status === 'ok') {
-                $('#add_cellist').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`);
-                $('#add_another_container').html(`<button class="btn btn-primary mt-3">Add another cellist</button>`);
+                // hide add_cellist form, display response message,
+                // display add_another button, reset form fields
+                $('#add_cellist').addClass("d-none");
+                $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`);
+                $('#add_another_btn').removeClass("d-none");
+                $('#add_cellist').trigger('reset');
             } else if (res.status === 'error') {
-                $('#add_cellist').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`);
-                $('#add_another_container').html(`<button class="btn btn-primary mt-3">Add another cellist</button>`);
+                // hide add_cellist form, display response message,
+                // display add_another button, reset form fields
+                $('#add_cellist').addClass("d-none");
+                $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`);
+                $('#add_another_btn').removeClass("d-none");
+                $('#add_cellist').trigger('reset');
             };
         });  
     });
 });
 
+
+// event handler for add another cellist button
+$('#add_another_btn').on('click', function() {
+    $('#add_cellist').removeClass("d-none");
+    $('#add_response').html('');
+    $('#add_another_btn').addClass("d-none");
+});
 
 // event handler for update_cellist form in add_cellist.html
 $('#update_cellist').on('submit', (evt) => {
