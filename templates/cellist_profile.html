@@ -82,43 +82,52 @@
                         <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
                         <div id="double_tree_container"></div>
 
-                        <div>
+                        <div  class="profile-inner-container">
                             <h5>Add a branch to this tree</h5>
                             {% if 'user_id' in session %}
                             <form id="add_link">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Default checkbox
-                                    </label>
+                                <div class="form-group d-flex">
+                                    <div class="">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="teacher_checked" checked>
+                                            <label class="form-check-label" for="teacher_checked">
+                                                Add a teacher of {{cellist.fname}} {{cellist.lname}}
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="student_checked">
+                                            <label class="form-check-label" for="student_checked">
+                                                Add a student of {{cellist.fname}} {{cellist.lname}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <select name="teacher_id_select" class="form-control" id="teacher_id" required>
+                                            {% for c_option in all_cellists %}
+                                            <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="ml-3">
+                                        <input id="student_id" type="hidden" placeholder="student id"
+                                        value="{{cellist.cellist_id}}">
+                                        <input type="submit" class="form-control btn btn-primary">
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                        checked>
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Checked checkbox
-                                    </label>
-                                </div>
-                                <select name="teacher_id_select" class="form-control" id="teacher_id" required>
-                                    {% for c_option in all_cellists %}
-                                    <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                                <input id="student_id" type="hidden" placeholder="student id"
-                                    value="{{cellist.cellist_id}}">
-                                <input type="submit" class="form-control">
-
-                                <p class="small">Don't see who you're looking for?</p>
-                                <a href="/add_cellist" class="btn btn-secondary ml-3">
-                                    <span class="fa fa-plus"></span>
-                                    Add cellist to database
-                                </a>
 
                             </form>
 
                             <p id="add_link_response"></p>
 
+                            <div class="mt-5">
+                                <p class="small d-inline">Don't see who you're looking for?</p>
+                                <a href="/add_cellist" class="btn btn-secondary ml-3 d-inline">
+                                    <span class="fa fa-plus"></span>
+                                    Add cellist to database
+                                </a>
+                            </div>
+                            
                             {% else %}
                             <p>Please <a href="/">log in</a> to add a teacher.</p>
                             {% endif %}
@@ -142,11 +151,17 @@
                 <div class="profile-section-overlay"></div>
                 <div class="profile-inner-container">
                     <h4>Forum</h4>
-                    <form id="add_post">
+                    <form id="add_post" class="mb-5">
                         {% if 'user_id' in session %}
-                        <input id="post_content" type="textarea" placeholder="your post here">
-                        <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}">
-                        <input type="submit">
+                        <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}" class="form-control">
+                        <div class="form-group form-row">
+                            <textarea id="post_content" rows="4" class="w-100">your post here</textarea>
+                            
+                        </div>
+                        <div class="form-group form-row">
+                            <input type="submit" class="btn btn-primary form-control" style="max-width: 100px;">
+                        </div>
+                        
                         {% else %}
                         <p>Please <a href="/">log in</a> to add a post.</p>
                         {% endif %}
@@ -161,7 +176,10 @@
                             <p>{{post.content}}</p>
                             {% if 'user_id' in session %}
                             <button id="toggle_upvote_{{post.post_id}}"
-                                onclick="toggleUpvote(`{{post.post_id}}`)">Upvote</button>
+                                onclick="toggleUpvote(`{{post.post_id}}`)">
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                Upvote
+                            </button>
                             {% endif %}
                             <!-- if post.upvotes|length > 0 -->
                             <p id="upvotes_count_{{post.post_id}}">{{post.upvotes|length}}</p>
@@ -178,9 +196,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
