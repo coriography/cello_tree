@@ -71,6 +71,10 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
 }
 
+.border-black {
+    border: 1px solid var(--blackish);
+}
+
 label {
     font-style: italic;
     font-size: 80%;

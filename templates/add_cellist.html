@@ -1,21 +1,51 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Add cellist</h1>
-    {% if 'user_id' in session %}
-        <form id="add_cellist">
-            <input type="text" id="fname" placeholder="first name">
-            <input type="text" id="lname" placeholder="last name">
-            <input type="textarea" id="cello_details" placeholder="cello details">
-            <input type="textarea" id="bio" placeholder="short bio (limit 500 characters)" maxlength="500">
-            <input type="file" id="photo_upload">Upload a profile photo
-            <input type="text" id="music_url" placeholder="music url">
-            <input type="submit">
-        </form>
-        <h3 id="response_here"></h3>
-        <p id="cloudinary_data"></p>
-    {% else %}
-        <p>Please <a href="/" class="btn btn-primary">log in</a> to add a cellist.</p>
-    {% endif %}
+<div class="bkg-img" style="background-image: url(/static/img/tree_5.jpg); top: 0"></div>
+<div class="container">
 
-{% endblock %}   
+    <div class="row">
+        <div class="col-12 col-md-8 offset-2">
+            <div class="profile-section tree-section position-relative box-shadow-sm mb-5">
+                <div class="profile-section-overlay"></div>
+                <div class="profile-inner-container border-black">
+                    <h1>Add cellist</h1>
+                    {% if 'user_id' in session %}
+                    <p>Before you add a cellist, please check that they are not already in the <a href="/all_cellists">Cello Tree database.</a></p>
+                    <form id="add_cellist">
+                        <div class="form-group form-row">
+                            <div class="col">
+                                <input type="text" id="fname" placeholder="first name" class="form-control">
+                            </div>
+                            <div class="col">
+                                <input type="text" id="lname" placeholder="last name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <textarea id="cello_details" rows="3" class="form-control">cello details</textarea>
+                        </div>
+                        <div class="form-group form-row">
+                            <textarea id="bio" rows="5" class="form-control">short bio (limit 500 characters)</textarea>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="photo_upload">Upload a profile photo</label>
+                            <input type="file" id="photo_upload" class="form-control">
+                        </div>
+                        <div class="form-group form-row">
+                            <input type="text" id="music_url" placeholder="music url" class="form-control">
+                        </div>
+                        <input type="submit" class="form-control btn btn-primary">
+                    </form>
+                    <h3 id="response_here"></h3>
+                    <p id="cloudinary_data"></p>
+                    {% else %}
+                    <p>Please <a href="/" class="btn btn-primary">log in</a> to add a cellist.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

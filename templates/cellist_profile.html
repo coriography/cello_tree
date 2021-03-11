@@ -141,7 +141,7 @@
             {% if cellist.bio %}
             <div class="profile-section position-relative box-shadow-sm mb-5">
                 <div class="profile-section-overlay"></div>
-                <div class="profile-inner-container">
+                <div class="profile-inner-container border-black">
                     <h3>About {{cellist.fname}} {{cellist.lname}}</h3>
                     <p>{{cellist.bio}}</p>
                 </div>
@@ -150,13 +150,13 @@
 
             <div class="profile-section position-relative box-shadow-sm mb-5">
                 <div class="profile-section-overlay"></div>
-                <div class="profile-inner-container">
+                <div class="profile-inner-container border-black">
                     <h4>Forum</h4>
                     <form id="add_post">
                         {% if 'user_id' in session %}
                         <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}" class="form-control">
                         <div class="form-group form-row">
-                            <textarea id="post_content" rows="4" class="w-100">your post here</textarea>
+                            <textarea id="post_content" rows="4" class="w-100" class="form-control">your post here</textarea>
                             
                         </div>
                         <div class="form-group form-row">
