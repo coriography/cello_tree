@@ -156,8 +156,8 @@
                         {% if 'user_id' in session %}
                         <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}" class="form-control">
                         <div class="form-group form-row">
-                            <textarea id="post_content" rows="4" class="w-100" class="form-control">your post here</textarea>
-                            
+                            <label for="post_content">Do you have a memory or question to share about this cellist? Drop it here! Or just browse below.</label>
+                            <textarea id="post_content" rows="4" class="w-100" class="form-control"></textarea>
                         </div>
                         <div class="form-group form-row">
                             <input type="submit" class="btn btn-primary form-control" style="max-width: 100px;">
@@ -178,7 +178,7 @@
                             <p>
                                 <i id="upvote_icon_{{post.post_id}}" class="fas fa-arrow-alt-circle-up"></i>
                                 <span id="upvotes_count_{{post.post_id}}" class="">
-                                    {{post.upvotes|length}} upvotes
+                                    Upvotes: {{post.upvotes|length}} 
                                 </span>
                             </p>
                             
@@ -231,12 +231,12 @@
                         <input type="text" id="update_music_url"  value="{{cellist.music_url}}" class="form-control">
                     </div>
                     <div class="form-group form-row">
-                        <label for="update_cello_details">Cello details</label>
-                        <textarea id="update_cello_details" value="{{cellist.cello_details}}" class="form-control">{{cellist.cello_details}}</textarea>
+                        <label for="update_cello_details">Cello details (limit 150 characters)</label>
+                        <textarea id="update_cello_details" value="{{cellist.cello_details}}" class="form-control" rows="3">{{cellist.cello_details}}</textarea>
                     </div>
                     <div class="form-group form-row">
-                        <label for="update_bio">Bio</label>
-                        <textarea id="update_bio" value="{{cellist.bio}}" maxlength="500" class="form-control">{{cellist.bio}}</textarea>
+                        <label for="update_bio">Bio (limit 800 characters)</label>
+                        <textarea id="update_bio" value="{{cellist.bio}}" maxlength="800" class="form-control" rows="10">{{cellist.bio}}</textarea>
                     </div>
                     <div class="form-group form-row">
                         {% if cellist.img_url %}
