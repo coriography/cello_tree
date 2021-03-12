@@ -88,22 +88,22 @@
                             {% if 'user_id' in session %}
                             <form id="add_link">
                                 <div class="form-group d-flex">
-                                    <div class="">
+                                    <div class="d-flex flex-column">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="teacher_checked" checked>
-                                            <label class="form-check-label" for="teacher_checked">
+                                            <input class="form-check-input" type="radio" name="ts_radio" id="teacher_radio">
+                                            <label class="form-check-label" for="teacher_radio">
                                                 Add a teacher of {{cellist.fname}} {{cellist.lname}}
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="student_checked">
-                                            <label class="form-check-label" for="student_checked">
+                                            <input class="form-check-input" type="radio" name="ts_radio" id="student_radio" checked>
+                                            <label class="form-check-label" for="student_radio">
                                                 Add a student of {{cellist.fname}} {{cellist.lname}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="ml-3">
-                                        <select name="teacher_id_select" class="form-control" id="teacher_id" required>
+                                        <select name="new_id_select" class="form-control" id="new_id" required>
                                             {% for c_option in all_cellists %}
                                             <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}
                                             </option>
@@ -111,7 +111,7 @@
                                         </select>
                                     </div>
                                     <div class="ml-3">
-                                        <input id="student_id" type="hidden" placeholder="student id"
+                                        <input id="current_id" type="hidden"
                                         value="{{cellist.cellist_id}}">
                                         <input type="submit" class="form-control btn btn-primary">
                                     </div>
