@@ -206,7 +206,7 @@ function toggleUpvote(post_id) {
 
     $.post('/api/upvote_post', upvoteData, (res) => {
         console.log(res);
-        $(`#upvotes_count_${post_id}`).text(`${res.upvotes_count} upvotes`);
+        $(`#upvotes_count_${post_id}`).text(`Upvotes: ${res.upvotes_count}`);
         $(`#toggle_upvote_${post_id}`).text(res.msg);
     });
 };
