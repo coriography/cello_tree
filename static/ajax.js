@@ -71,27 +71,49 @@ $('#update_cellist').on('submit', (evt) => {
     evt.preventDefault();
 
     const media_files = $('#update_photo').prop('files');
-    const cloud_url = imageUpload(media_files);
+    console.log(media_files);
 
-    cloud_url.then((res_url) => {
-        //get form input
+    // if a new photo has been uploaded
+    if (media_files.length !== 0) {
+        const cloud_url = imageUpload(media_files);
+
+        cloud_url.then((res_url) => {
+            //get form input
+            const update_cellist_form_data = {
+                'cellist_id': $('#update_cellist_id').val(),
+                'fname': $('#update_fname').val(),
+                'lname': $('#update_lname').val(),
+                'cello_details': $('#update_cello_details').val(),
+                'bio': $('#update_bio').val(),
+                'img_url': res_url,
+                'music_url': $('#update_music_url').val(),
+            }
+            //send data to server.py
+            $.post('/api/update_cellist', update_cellist_form_data, (res) => {
+                if (res.status === 'ok') {
+                    location.href = `/cellist_profile/${update_cellist_form_data.cellist_id}`;
+                }
+            });
+        });
+
+    } else { // if a new photo is not uploaded
+        // keep what is already in the database/don't replace
         const update_cellist_form_data = {
             'cellist_id': $('#update_cellist_id').val(),
             'fname': $('#update_fname').val(),
             'lname': $('#update_lname').val(),
             'cello_details': $('#update_cello_details').val(),
             'bio': $('#update_bio').val(),
-            'img_url': res_url,
+            'img_url': "", // because crud function does not update if val is empty
             'music_url': $('#update_music_url').val(),
-        }
-
-        //send data to server.py
-        $.post('/api/update_cellist', update_cellist_form_data, (res) => {
+        };
+         //send data to server.py
+         $.post('/api/update_cellist', update_cellist_form_data, (res) => {
             if (res.status === 'ok') {
                 location.href = `/cellist_profile/${update_cellist_form_data.cellist_id}`;
             }
         });
-    })
+    }
 });
 
 
