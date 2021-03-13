@@ -32,13 +32,13 @@
                             <h5 class="card-title text-black">{{cellist.lname}}, {{cellist.fname}}</h5>
                             <div class="row">
                                 <div class="col-4 pr-0">
-                                    <p class="card-text">4 <br><small class="text-muted">teachers</small></p>
+                                    <p class="card-text">{{cellist.teacher_links|length}} <br><small class="text-muted">teachers</small></p>
                                 </div>
                                 <div class="col-4 pr-0">
-                                    <p class="card-text">5 <br><small class="text-muted">students</small></p>
+                                    <p class="card-text">{{cellist.student_links|length}} <br><small class="text-muted">students</small></p>
                                 </div>
                                 <div class="col-4">
-                                    <p class="card-text">25 <br><small class="text-muted">posts</small></p>
+                                    <p class="card-text">{{cellist.posts|length}} <br><small class="text-muted">posts</small></p>
                                 </div>
                             </div>
                             <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-secondary mt-3">View profile</a>

@@ -16,14 +16,15 @@
                                         <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
                                     </div>
                                 </div>
+                                
                                 <div class="col-4 pr-0">
-                                    <p class="card-text">4 <br><small class="">teachers</small></p>
+                                    <p class="card-text"><small class="">teachers: </small> {{cellist.teacher_links|length}}</p>
                                 </div>
                                 <div class="col-4 pr-0">
-                                    <p class="card-text">5 <br><small class="">students</small></p>
+                                    <p class="card-text"><small class="">students: </small>{{cellist.student_links|length}}</p>
                                 </div>
                                 <div class="col-4">
-                                    <p class="card-text">25 <br><small class="">posts</small></p>
+                                    <p class="card-text"><small class="">posts: </small>{{cellist.posts|length}}</p>
                                 </div>
                             </div>
                             <div class="row">
