@@ -74,7 +74,7 @@
     <div class="row">
         <div class="col-12 col-md-10 offset-1">
 
-            <div class="profile-section tree-section position-relative box-shadow-sm mb-5">
+            <div id="treeSection" class="profile-section tree-section position-relative box-shadow-sm mb-5">
                 <div class="profile-section-overlay"></div>
                 <div class="row">
                     <div class="col-12">
@@ -90,13 +90,13 @@
                                 <div class="form-group d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="ts_radio" id="teacher_radio">
+                                            <input class="form-check-input" type="radio" name="ts_radio" id="teacher_radio" value="teacher_radio">
                                             <label class="form-check-label" for="teacher_radio">
                                                 Add a teacher of {{cellist.fname}} {{cellist.lname}}
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="ts_radio" id="student_radio" checked>
+                                            <input class="form-check-input" type="radio" name="ts_radio" id="student_radio" value="student_radio" checked>
                                             <label class="form-check-label" for="student_radio">
                                                 Add a student of {{cellist.fname}} {{cellist.lname}}
                                             </label>

@@ -161,7 +161,7 @@ def create_link_from_profile():
         return jsonify({'status': 'link_exists', 'teacher_id': teacher_id, 'student_id': student_id})
     else:
         crud.create_link(teacher_id, student_id)
-        return jsonify({'status': 'ok', 'teacher_id': teacher_id, 'teacher_fname': teacher.fname, 'teacher_lname': teacher.lname, 'student_id': student_id})
+        return jsonify({'status': 'ok'})
 
 
 @app.route('/api/add_post', methods=['POST'])

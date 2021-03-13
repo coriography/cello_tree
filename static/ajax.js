@@ -162,27 +162,45 @@ $('#create_account').on('submit', (evt) => {
 $('#add_link').on('submit', (evt) => {
     evt.preventDefault(); 
 
-    const linkData = {
-        'teacher_id': $('#teacher_id').val(),
-        'student_id': $('#student_id').val()
-    }
+    let ts_radio = $("input[name='ts_radio']:checked").val();
+    let current_id = $('#current_id').val();
+    let new_id = $('#new_id').val();
 
-    $.post('/api/create_link', linkData, (res) => {
-        if (res.status === 'teacher_eq_student') {
-            $('#add_link_response').text('Cannot add link between a teacher and themselves.')
-        } else if (res.status === 'link_exists') {
-            $('#add_link_response').text('That link already exists.')
-        } else if (res.status === 'ok') {
-            // $('#add_link_response').text(`${res.teacher_id} added as teacher.`)
-            $('#teachers_list').prepend(`
-                <li>
-                    <a href="/cellist_profile/${res.teacher_id}">
-                        ${res.teacher_fname} ${res.teacher_lname}
-                    </a>
-                </li>
-            `)
-        }
-    });
+    if (ts_radio === "teacher_radio") {
+        const linkData = {
+            'ts_radio': ts_radio,
+            'teacher_id': new_id,
+            'student_id': current_id
+        };
+
+        $.post('/api/create_link', linkData, (res) => {
+            if (res.status === 'teacher_eq_student') {
+                $('#add_link_response').text('Cannot add link between a teacher and themselves.')
+            } else if (res.status === 'link_exists') {
+                $('#add_link_response').text('That link already exists.')
+            } else if (res.status === 'ok') {
+                location.href = `/cellist_profile/${linkData.student_id}`;
+            }
+        });
+
+    } else if (ts_radio === "student_radio") {
+        const linkData = {
+            'ts_radio': ts_radio,
+            'teacher_id': current_id,
+            'student_id': new_id
+        };
+
+        $.post('/api/create_link', linkData, (res) => {
+            if (res.status === 'teacher_eq_student') {
+                $('#add_link_response').text('Cannot add link between a teacher and themselves.')
+            } else if (res.status === 'link_exists') {
+                $('#add_link_response').text('That link already exists.')
+            } else if (res.status === 'ok') {
+                location.href = `/cellist_profile/${linkData.teacher_id}`;
+            }
+        });
+
+    };
 
 });
 
