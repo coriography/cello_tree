@@ -115,6 +115,10 @@ label {
     border: 2px solid var(--blackish);
     border-radius: 0;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 .cellist-card-img {
@@ -123,6 +127,13 @@ label {
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
+}
+
+.cellist-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 .overlay-dark {

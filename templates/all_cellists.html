@@ -17,18 +17,18 @@
 
     <div class="row mt-5">
         {% for cellist in all_cellists %}
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 d-flex">
             <div class="card cellist-card box-shadow-sm">
-                <div class="row no-gutters">
+                <div class="row no-gutters h-100">
                     <div class="col-4">
                         {% if cellist.img_url %}
-                        <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
+                        <div class="cellist-card-img w-100 h-100" style="background-image: url('{{cellist.img_url}}')"></div>
                         {% else %}
-                        <div class="cellist-card-img" style="background-image: url('/static/img/cello_1.jpg')"></div>
+                        <div class="cellist-card-img w-100 h-100" style="background-image: url('/static/img/cello_1.jpg')"></div>
                         {% endif %}
                     </div>
                     <div class="col-8">
-                        <div class="card-body">
+                        <div class="card-body h-100">
                             <h5 class="card-title text-black">{{cellist.lname}}, {{cellist.fname}}</h5>
                             <div class="row">
                                 <div class="col-4 pr-0">
