@@ -179,7 +179,8 @@ $('#add_link').on('submit', (evt) => {
             } else if (res.status === 'link_exists') {
                 $('#add_link_response').text('That link already exists.')
             } else if (res.status === 'ok') {
-                location.href = `/cellist_profile/${linkData.student_id}`;
+                d3.select("svg").remove(); 
+                treeSetup();
             }
         });
 
@@ -196,7 +197,8 @@ $('#add_link').on('submit', (evt) => {
             } else if (res.status === 'link_exists') {
                 $('#add_link_response').text('That link already exists.')
             } else if (res.status === 'ok') {
-                location.href = `/cellist_profile/${linkData.teacher_id}`;
+                d3.select("svg").remove(); 
+                treeSetup();
             }
         });
 
