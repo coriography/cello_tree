@@ -1,7 +1,7 @@
 // this code is adapted from justincy's example of a tree with both ancestors and descendants:
 // https://github.com/justincy/d3-pedigree-examples
 
-const boxWidth = 150,
+const boxWidth = 180,
     boxHeight = 40,
     nodeWidth = 100,
     nodeHeight = 200,
