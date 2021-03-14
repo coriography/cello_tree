@@ -3,25 +3,25 @@
 
 // set up zoom and pan
 // ?? do I need this?? maybe not until second gen/third gen added?
-var zoom = d3.behavior.zoom()
-    // sets max zoom [out, in]
-    .scaleExtent([.5, 2])
-    .on('zoom', function () {
-        svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-    })
-    // set to same offset as graphic so that first pan and zoom does not jump to cursor
-    .translate([400, 200]);
+// var zoom = d3.behavior.zoom()
+//     // sets max zoom [out, in]
+//     .scaleExtent([.5, 2])
+//     .on('zoom', function () {
+//         svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+//     })
+//     // set to same offset as graphic so that first pan and zoom does not jump to cursor
+//     .translate([427,175]);
 
 // find DOM element and append graphic to it
 var svg = d3.select("#double_tree_container").append("svg")
     .attr('width', '100%') //?? can this be dynamic - i.e. calculate viewport width?
     .attr('height', '100%') //?? same here
-    .call(zoom) // TODO: disable here if not using
+    // .call(zoom) // TODO: disable here if not using
     .append('g') // ?? what is this?
 
     // adjust tree so that the whole root node is on the screen (x, y)
     // TODO: adjust for mobile
-    .attr("transform", "translate(400,200)");
+    .attr("transform", "translate(427,175)");
 
 
 // create one tree to display ancestors

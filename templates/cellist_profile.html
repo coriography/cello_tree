@@ -8,57 +8,43 @@
             <div class="profile-header text-white position-relative box-shadow-sm mb-5">
                 <div class="profile-header-overlay"></div>
                 <div class="row">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-5">
                         <div class="profile-inner-container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="profile-name-container mb-5">
-                                        <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-4 pr-0">
-                                    <p class="card-text"><small class="">teachers: </small> {{cellist.teacher_links|length}}</p>
-                                </div>
-                                <div class="col-4 pr-0">
-                                    <p class="card-text"><small class="">students: </small>{{cellist.student_links|length}}</p>
-                                </div>
-                                <div class="col-4">
-                                    <p class="card-text"><small class="">posts: </small>{{cellist.posts|length}}</p>
-                                </div>
+                            <div class="profile-name-container mb-5">
+                                <h1>{{cellist.fname}}<br>{{cellist.lname}}</h1>
                             </div>
-                            <div class="row">
-                                {% if 'user_id' in session %}
-                                <div class="col-12">
-                                    <button class="btn btn-secondary border-white mb-3" data-toggle="modal" data-target="#updateModal">
-                                        <i class="fas fa-edit mr-1"></i>
-                                        Edit profile
-                                    </button>
-                                </div>
-                                {% endif %}
-                                <div class="col-12">
-                                    {% if cellist.music_url %}
-                                    <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white mb-3">
-                                        <i class="fas fa-music mr-1"></i>
-                                        Listen now
-                                        <i class="fas fa-external-link-alt ml-1"></i>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                                <div class="col-12">
-                                    {% if cellist.cello_details %}
-                                    <p>Instrument: {{cellist.cello_details}}</p>
-                                    {% endif %}
-                                </div>
-                                <div class="col-12">
-                                    {% if editor != None %}
-                                    <small>last edited by: <span id="last_edited">{{editor.username}}</span></small>
-                                    {% endif %}
-                                </div>
-                            </div>
+                            {% if 'user_id' in session %}
+                            <button class="btn btn-secondary border-white mr-3" data-toggle="modal"
+                                data-target="#updateModal">
+                                <i class="fas fa-edit mr-1"></i>
+                                Edit profile
+                            </button>
+                            {% endif %}
+                            {% if cellist.music_url %}
+                            <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white">
+                                <i class="fas fa-music mr-1"></i>
+                                Listen now
+                                <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
+                        <div class="profile-inner-container">
+                            <p class="card-text"><small class="">teachers: </small> {{cellist.teacher_links|length}}
+                            </p>
+                            <p class="card-text"><small class="">students: </small>{{cellist.student_links|length}}
+                            </p>
+                            <p class="card-text"><small class="">posts: </small>{{cellist.posts|length}}</p>
+                            {% if cellist.cello_details %}
+                            <p>Instrument: {{cellist.cello_details}}</p>
+                            {% endif %}
+                            {% if editor != None %}
+                            <small>last edited by: <span id="last_edited">{{editor.username}}</span></small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
                         {% if cellist.img_url %}
                         <div class="cellist-card-img" style="background-image: url('{{cellist.img_url}}')"></div>
                         {% else %}
@@ -70,7 +56,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="row">
         <div class="col-12 col-md-10 offset-1">
@@ -84,20 +70,22 @@
                         <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
                         <div id="double_tree_container"></div>
 
-                        <div  class="profile-inner-container">
+                        <div class="profile-inner-container">
                             <h5>Add a branch to this tree</h5>
                             {% if 'user_id' in session %}
                             <form id="add_link">
                                 <div class="form-group d-flex">
                                     <div class="d-flex flex-column">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="ts_radio" id="teacher_radio" value="teacher_radio">
+                                            <input class="form-check-input" type="radio" name="ts_radio"
+                                                id="teacher_radio" value="teacher_radio">
                                             <label class="form-check-label" for="teacher_radio">
                                                 Add a teacher of {{cellist.fname}} {{cellist.lname}}
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="ts_radio" id="student_radio" value="student_radio" checked>
+                                            <input class="form-check-input" type="radio" name="ts_radio"
+                                                id="student_radio" value="student_radio" checked>
                                             <label class="form-check-label" for="student_radio">
                                                 Add a student of {{cellist.fname}} {{cellist.lname}}
                                             </label>
@@ -106,14 +94,14 @@
                                     <div class="ml-3">
                                         <select name="new_id_select" class="form-control" id="new_id" required>
                                             {% for c_option in all_cellists %}
-                                            <option value="{{c_option.cellist_id}}">{{c_option.lname}}, {{c_option.fname}}
+                                            <option value="{{c_option.cellist_id}}">{{c_option.lname}},
+                                                {{c_option.fname}}
                                             </option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                     <div class="ml-3">
-                                        <input id="current_id" type="hidden"
-                                        value="{{cellist.cellist_id}}">
+                                        <input id="current_id" type="hidden" value="{{cellist.cellist_id}}">
                                         <input type="submit" class="form-control btn btn-primary">
                                     </div>
                                 </div>
@@ -129,7 +117,7 @@
                                     Add cellist to database
                                 </a>
                             </div>
-                            
+
                             {% else %}
                             <p>Please <a href="/">log in</a> to add a teacher.</p>
                             {% endif %}
@@ -155,15 +143,17 @@
                     <h4>Forum</h4>
                     <form id="add_post">
                         {% if 'user_id' in session %}
-                        <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}" class="form-control">
+                        <input id="cellist_id_from_profile" type="hidden" value="{{cellist.cellist_id}}"
+                            class="form-control">
                         <div class="form-group form-row">
-                            <label for="post_content">Do you have a memory or question to share about this cellist? Drop it here! Or just browse below.</label>
+                            <label for="post_content">Do you have a memory or question to share about this cellist? Drop
+                                it here! Or just browse below.</label>
                             <textarea id="post_content" rows="4" class="w-100" class="form-control"></textarea>
                         </div>
                         <div class="form-group form-row">
                             <input type="submit" class="btn btn-primary form-control" style="max-width: 100px;">
                         </div>
-                        
+
                         {% else %}
                         <p>Please <a href="/">log in</a> to add a post.</p>
                         {% endif %}
@@ -179,10 +169,10 @@
                             <p>
                                 <i id="upvote_icon_{{post.post_id}}" class="fas fa-arrow-alt-circle-up"></i>
                                 <span id="upvotes_count_{{post.post_id}}" class="">
-                                    Upvotes: {{post.upvotes|length}} 
+                                    Upvotes: {{post.upvotes|length}}
                                 </span>
                             </p>
-                            
+
                             {% if 'user_id' in session %}
                             <button id="toggle_upvote_{{post.post_id}}" class="btn btn-secondary"
                                 onclick="toggleUpvote(`{{post.post_id}}`)">
@@ -208,14 +198,15 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Update {{cellist.fname}} {{cellist.lname}}'s profile</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Update {{cellist.fname}} {{cellist.lname}}'s profile
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="update_cellist">
-                    
+
                     <input type="hidden" id="update_cellist_id" value="{{cellist.cellist_id}}" class="form-control">
                     <div class="form-group form-row">
                         <div class="col-6">
@@ -224,20 +215,22 @@
                         </div>
                         <div class="col-6">
                             <label for="update_lname">Last Name</label>
-                            <input type="text" id="update_lname"  value="{{cellist.lname}}" class="form-control">
+                            <input type="text" id="update_lname" value="{{cellist.lname}}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group form-row">
                         <label for="update_music_url">Website or music URL</label>
-                        <input type="text" id="update_music_url"  value="{{cellist.music_url}}" class="form-control">
+                        <input type="text" id="update_music_url" value="{{cellist.music_url}}" class="form-control">
                     </div>
                     <div class="form-group form-row">
                         <label for="update_cello_details">Cello details (limit 150 characters)</label>
-                        <textarea id="update_cello_details" value="{{cellist.cello_details}}" class="form-control" rows="3">{{cellist.cello_details}}</textarea>
+                        <textarea id="update_cello_details" value="{{cellist.cello_details}}" class="form-control"
+                            rows="3">{{cellist.cello_details}}</textarea>
                     </div>
                     <div class="form-group form-row">
                         <label for="update_bio">Bio (limit 800 characters)</label>
-                        <textarea id="update_bio" value="{{cellist.bio}}" maxlength="800" class="form-control" rows="10">{{cellist.bio}}</textarea>
+                        <textarea id="update_bio" value="{{cellist.bio}}" maxlength="800" class="form-control"
+                            rows="10">{{cellist.bio}}</textarea>
                     </div>
                     <div class="form-group form-row">
                         {% if cellist.img_url %}
