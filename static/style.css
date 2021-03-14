@@ -116,6 +116,15 @@ label {
     z-index: -1;
 }
 
+.custom-modal .modal-content {
+    background-color: var(--art100);
+    border-radius: 0;
+}
+
+.custom-modal .modal-header {
+    border-color: var(--art200);
+}
+
 /** ALL CELLISTS PAGE **/
 
 .cellist-card {
