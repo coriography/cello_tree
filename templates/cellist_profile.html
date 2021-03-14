@@ -206,7 +206,7 @@
 </div>
 
 
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade custom-modal" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -245,16 +245,17 @@
                         <textarea id="update_bio" value="{{cellist.bio}}" maxlength="800" class="form-control"
                             rows="10">{{cellist.bio}}</textarea>
                     </div>
-                    <div class="form-group form-row">
+                    <div class="form-group">
+                        <label class="d-block" for="current_photo">Current photo</label>
                         {% if cellist.img_url %}
-                        <img src="{{cellist.img_url}}" style="max-height: 100px;" alt="current cellist photo">
+                        <img src="{{cellist.img_url}}" id="current-photo" style="max-height: 100px;" alt="current cellist photo">
                         {% else %}
                         <p>This profile does not have a photo yet. Add one!</p>
                         {% endif %}
                     </div>
-                    <div class="form-group form-row">
-                        <label for="update_photo">Photo</label>
-                        <input type="file" id="update_photo" class="form-control" value="{{cellist.img_url}}">
+                    <div class="form-group">
+                        <label class="d-block" for="update_photo">New photo</label>
+                        <input type="file" id="update_photo" value="{{cellist.img_url}}">
                     </div>
                     <div class="form-group form-row">
                         <input type="submit" class="btn btn-primary">
