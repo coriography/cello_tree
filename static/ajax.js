@@ -128,9 +128,21 @@ $('#login_form').on('submit', (evt) => {
 
     $.post('/api/login', loginData, (res) => {
         if (res.status === 'ok') {
-            $('#display_response').text(`${res.username_email} is logged in`);
-            $('#nav_login_logout').text(`Log out ${res.username} | `);
+            $('#loginModal').modal('hide');
+            $('#display_response').empty();
+            $('.navbar-nav').append(`<li class="nav-item ml-2">
+                <a id="nav_logout" class="nav-link btn btn-secondary border text-white" href="/api/logout">
+                    Log out ${res.username}
+                </a>
+            </li>`);
+            $('#home-buttons').html(`
+                <a href="/all_cellists" class="btn btn-primary box-shadow-sm mr-3">Browse Cellists</a> OR 
+                <a href="/add_cellist" class="btn btn-primary box-shadow-sm ml-3">Add a Cellist</a>
+            `);
         } else if (res.status === 'error') {
+            $('#loginModal').modal('hide');
+            $('#display_response').removeClass('text-success');
+            $('#display_response').addClass('text-danger');
             $('#display_response').text(res.msg);
         }
     });
@@ -148,11 +160,20 @@ $('#create_account').on('submit', (evt) => {
 
     $.post('/api/create_account', loginData, (res) => {
         if (res.status === 'username_error') {
-            $('#display_response').text(`${res.username} already exists`)
+            $('#createAccountModal').modal('hide');
+            $('#display_response').removeClass('text-success');
+            $('#display_response').addClass('text-danger');
+            $('#display_response').text(`Username ${res.username} already exists!`);
         } else if (res.status === 'email_error') {
-            $('#display_response').text(`${res.email} already exists`)
+            $('#createAccountModal').modal('hide');
+            $('#display_response').removeClass('text-success');
+            $('#display_response').addClass('text-danger');
+            $('#display_response').text(`Email ${res.email} already exists!`);
         } else if (res.status === 'ok') {
-            $('#display_response').text(`account created for ${res.username}`)
+            $('#createAccountModal').modal('hide');
+            $('#display_response').removeClass('text-danger');
+            $('#display_response').addClass('text-success');
+            $('#display_response').text(`Account created for ${res.username}!`);
         }
     });
 

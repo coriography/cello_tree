@@ -40,15 +40,6 @@
         
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                {% if 'user_id' in session %}
-                    <li class="nav-item">
-                        <a id="nav_login_logout" class="nav-link" href="/api/logout">Log out {{session.username}}</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a id="nav_login_logout" class="nav-link" href="/">Log in or create account</a>
-                    </li>
-                {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="/all_cellists">All Cellists</a>
                     </li>
@@ -58,6 +49,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
+                    {% if 'user_id' in session %}
+                    <li class="nav-item ml-2">
+                        <a id="nav_logout" class="nav-link btn btn-secondary border text-white" href="/api/logout">
+                            Log out {{session.username}}
+                        </a>
+                    </li>
+                    {% endif %}
+
                 </ul>
             </div>
         </div>
