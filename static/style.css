@@ -193,7 +193,7 @@ label {
 svg {
     position: relative;
     border: 2px solid var(--blackish);
-    min-height: 500px;
+    min-height: 350px;
 }
 
 .person rect {
