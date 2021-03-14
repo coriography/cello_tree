@@ -89,10 +89,10 @@ data = [
     },
     {'fname': 'Tina',
     'lname': 'Guo',
-    'cello_details': '',
-    'bio': '',
+    'cello_details': 'Tina performs on her Gand & Bernardel Cello made in Paris, France, in 1880. On electric cello, she plays a customized Yamaha SVC-210.  Tina also plays an Erhu made in Shanghai, China and Native American Flutes made in the Navajo Nation.',
+    'bio': 'Internationally acclaimed, GRAMMY Award-nominated and BRIT Female Artist of the Year-nominated musician Tina Guo has established an international career as a virtuoso acoustic/electric cellist, multi-instrumentalist, composer, and entrepreneur. Known for her unique genre-crossing style, she is one of the most recorded Solo Cellists of all time and can be heard on hundreds of Blockbuster Film, Television, and Game Soundtracks.  Tina is currently recording for four feature film soundtracks remotely from her home studio during the coronavirus pandemic, including DUNE (2021) and Top Gun: Maverick (2021).  She has just completed her upcoming 2020 winter album WINTER NIGHT: TRACES IN THE SNOW and 2021 solo album DIES IRAE released on Sony Masterworks. ',
     'img_url': 'https://res.cloudinary.com/cellotree/image/upload/v1615508899/seed_cellist_photos/tinaguo2_sviclj.jpg',
-    'music_url': '',
+    'music_url': 'https://tinaguo.com/music',
     'teacher_ids': [13, 38]
     },
     {'fname': 'Nathaniel',
