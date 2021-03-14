@@ -27,8 +27,13 @@ Font-Size: 17px; */
     /* #308014 too dark for button */
     --whitish: #F5F6F4;
     --alabaster: #E1E4DD;
-    --green: #617317;
+    --green-olive: #617317;
+    --art600: #545B48;
+    --art500: #69725A;
     --artichoke: #849071;
+    --art300: #9FA890;
+    --art200: #BAC0AF;
+    --art100: #CDD2C6;
     --blackish: #0e2002;
   }
 
@@ -45,20 +50,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn.btn-primary {
-    background-color: var(--green);
+    background-color: var(--green-olive);
     color: var(--whitish);
-    border: 1px solid var(--green);
+    border: 1px solid var(--green-olive);
     min-width: 150px;
-    margin-right: .5rem!important;
-    margin-left: .5rem!important;
+    margin-right: .5rem;
+    margin-left: .5rem;
 }
 
 .btn.btn-secondary {
     background-color: var(--artichoke);
     color: var(--whitish);
     border: 1px solid var(--artichoke);
-    margin-right: .5rem!important;
-    margin-left: .5rem!important;
+    margin-right: .5rem;
+    margin-left: .5rem;
 }
 
 .box-shadow {
@@ -154,7 +159,7 @@ label {
 }
 
 .profile-header-overlay {
-    background-color: var(--green);
+    background-color: var(--green-olive);
     opacity: .9;
     height: 100%;
     width: 100%;

@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="profile-header text-white position-relative box-shadow-sm mb-5">
+            <div class="profile-header text-white position-relative box-shadow-sm mb-5 mt-3">
                 <div class="profile-header-overlay"></div>
                 <div class="row">
                     <div class="col-12 col-md-5">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="profile-inner-container d-flex flex-column justify-content-end pl-0">
+                        <div class="profile-inner-container d-flex flex-column justify-content-between pl-0">
                             <div class="pb-2">
                                 <p class="m-0"><strong>Teachers:</strong> {{cellist.teacher_links|length}}
                                 </p>
@@ -43,12 +43,12 @@
                             </div>
                             {% if cellist.cello_details %}
                             <p class="border-top pt-2 pb-2 mb-0">
-                                <strong>Instrument:</strong> {{cellist.cello_details}}
+                                <strong>Cello details:</strong> {{cellist.cello_details}}
                             </p>
                             {% endif %}
                             {% if cellist.music_url %}
                             <div class="pt-2">
-                                <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white">
+                                <a href="{{cellist.music_url}}" target="_blank" class="btn btn-secondary border-white mx-0">
                                     <i class="fas fa-music mr-1"></i>
                                     Listen now
                                     <i class="fas fa-external-link-alt ml-1"></i>
@@ -83,7 +83,7 @@
                         <p id="root_cellist_id" data-id="{{cellist.cellist_id}}"></p>
                         <div id="double_tree_container"></div>
 
-                        <div class="profile-inner-container">
+                        <div class="m-4">
                             <h5>Add a branch to this tree</h5>
                             {% if 'user_id' in session %}
                             <form id="add_link">
@@ -123,7 +123,7 @@
 
                             <p id="add_link_response"></p>
 
-                            <div class="mt-5">
+                            <div class="mt-4">
                                 <p class="small d-inline">Don't see who you're looking for?</p>
                                 <a href="/add_cellist" class="btn btn-secondary ml-3 d-inline">
                                     <span class="fa fa-plus"></span>
