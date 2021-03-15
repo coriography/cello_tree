@@ -145,7 +145,7 @@ def get_all_cellists():
 
     cellist_list = []
     for cellist in all_cellists:
-        cellist_list.append({"id": cellist.cellist_id, "name": f"{cellist.fname} {cellist.lname}"})
+        cellist_list.append({"id": cellist.cellist_id, "name": f"{cellist.fname} {cellist.lname}", "img_url": cellist.img_url, "num_teachers": len(cellist.teacher_links), "num_students": len(cellist.student_links), "num_posts": len(cellist.posts)})
 
     return jsonify({'cellist_list': cellist_list})
 

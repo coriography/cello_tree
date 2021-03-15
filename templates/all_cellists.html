@@ -30,47 +30,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-inner-container border-300">
-                    <div id="cellistsList"></div>
-                </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-5">
-        {% for cellist in all_cellists %}
-        <div class="col-12 col-md-6 col-lg-4 d-flex">
-            <div class="card cellist-card box-shadow-sm">
-                <div class="row no-gutters h-100">
-                    <div class="col-4">
-                        {% if cellist.img_url %}
-                        <div class="cellist-card-img w-100 h-100" style="background-image: url('{{cellist.img_url}}')"></div>
-                        {% else %}
-                        <div class="cellist-card-img w-100 h-100" style="background-image: url('/static/img/cello_1.jpg')"></div>
-                        {% endif %}
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body h-100">
-                            <h5 class="card-title text-black">{{cellist.lname}}, {{cellist.fname}}</h5>
-                            <div class="row">
-                                <div class="col-4 pr-0">
-                                    <p class="card-text">{{cellist.teacher_links|length}} <br><small class="text-muted">teachers</small></p>
-                                </div>
-                                <div class="col-4 pr-0">
-                                    <p class="card-text">{{cellist.student_links|length}} <br><small class="text-muted">students</small></p>
-                                </div>
-                                <div class="col-4">
-                                    <p class="card-text">{{cellist.posts|length}} <br><small class="text-muted">posts</small></p>
-                                </div>
-                            </div>
-                            <a href="/cellist_profile/{{cellist.cellist_id}}" class="btn btn-secondary mt-3 mx-0">View profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        {% endfor %}
+    <div id="cellistsList" class="row mt-5">
+
     </div>
 </div>
 
