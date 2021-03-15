@@ -133,6 +133,23 @@ def show_all_cellists():
     return render_template('all_cellists.html', all_cellists=all_cellists)
 
 
+@app.route('/api/all_cellists')
+def get_all_cellists():
+    """Show all cellists in alphabetical order."""
+
+    all_cellists = crud.get_all_cellists()
+
+    # create py list, loop through cellists
+    # add id, fname, lname, img_url, student_links.length, teacher_links.length, posts.length
+    # of each cellist to list
+
+    cellist_list = []
+    for cellist in all_cellists:
+        cellist_list.append({"id": cellist.cellist_id, "name": f"{cellist.fname} {cellist.lname}"})
+
+    return jsonify({'cellist_list': cellist_list})
+
+
 @app.route('/cellist_profile/<cellist_id>')
 def show_cellist(cellist_id):
     """Show a cellist's profile, given cellist id."""

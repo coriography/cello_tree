@@ -12,10 +12,10 @@
                     <h1>All Cellists</h1>
                     <div class="row">
                         <div class="col-12 col-md-7">
-                            <form id="searchBar">
+                            <form id="searchWrapper">
                                 <div class="form-group form-row">
                                     <label for="search_box">Search for a cellist by name</label>
-                                    <input type="search" class="form-control" placeholder="Search...">
+                                    <input id="searchBar" type="search" class="form-control" placeholder="Search...">
                                 </div>
                             </form>
                         </div>
@@ -29,6 +29,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="profile-inner-container border-300">
+                    <div id="cellistsList"></div>
                 </div>
             </div>
         </div>
@@ -71,6 +74,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/static/search.js"></script>
+
 
 {% endblock %}
