@@ -2,11 +2,11 @@
 
 {% block body %}
 <div class="bkg-img" style="background-image: url(/static/img/tree_5.jpg); top: 0"></div>
+<div class="overlay-dark"></div>
 <div class="container">
-
     <div class="row">
         <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div class="profile-section tree-section position-relative box-shadow-sm mb-5">
+            <div class="profile-section tree-section position-relative box-shadow-sm mb-5 mt-3">
                 <div class="profile-section-overlay"></div>
                 <div class="profile-inner-container border-black">
                     <h1>Add cellist</h1>
@@ -46,7 +46,7 @@
                         <button id="add_another_btn" class="d-none btn btn-primary mt-3 mx-0">Add another cellist</button>
                     </div>
                     {% else %}
-                    <p>Please <a href="/" class="btn btn-primary">log in</a> to add a cellist.</p>
+                    <p>Please <a href="/">log in</a> to add a cellist.</p>
                     {% endif %}
                 </div>
             </div>
