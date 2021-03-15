@@ -92,7 +92,7 @@ a:hover {
 }
 
 .nav-link.btn {
-    font-weight: normal;
+    font-weight: normal!important;
 }
 
 .border-black {
@@ -109,8 +109,8 @@ label {
 .home-container {
     margin: 2rem 0;
     padding: 1rem;
-    background-color: rgba(255,255,255,.7);
-    border: 2px solid var(--blackish);
+    background-color: var(--alabaster);
+    border: 1px solid var(--dk-green);
 }
 
 .main-title {
@@ -146,7 +146,7 @@ label {
 /** ALL CELLISTS PAGE **/
 
 .cellist-card {
-    border: 2px solid var(--blackish);
+    border: 1px solid var(--dk-green);
     border-radius: 0;
     margin-bottom: 30px;
     display: flex;
@@ -184,10 +184,11 @@ label {
 
 .profile-header {
     padding: 2rem;
+    border: 1px solid var(--art600);
 }
 
 .profile-header-overlay {
-    background-color: var(--green-olive);
+    background-color: var(--art500);
     opacity: .9;
     height: 100%;
     width: 100%;
@@ -224,6 +225,10 @@ label {
     height: 100%;
 }
 
+.profile-inner-container.border-300 {
+    border: 1px solid var(--art300);
+}
+
 .profile-name-container {
     padding: 1rem;
     background-color: rgba(255,255,255,.1);
@@ -235,7 +240,7 @@ label {
 
 svg {
     position: relative;
-    border: 2px solid var(--blackish);
+    border: 1px solid var(--art600);
     min-height: 350px;
 }
 
