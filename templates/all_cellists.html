@@ -10,15 +10,24 @@
                 <div class="profile-section-overlay"></div>
                 <div class="profile-inner-container border-300">
                     <h1>All Cellists</h1>
-                    <div>
-                        <form action=""></form>
-                    </div>
-                    <div class="d-flex align-items-baseline">
-                        <p class="small">Don't see who you're looking for?</p>
-                        <a href="/add_cellist" class="btn btn-primary ml-3">
-                            <span class="fa fa-plus"></span>
-                            Add cellist
-                        </a>
+                    <div class="row">
+                        <div class="col-12 col-md-7">
+                            <form id="searchBar">
+                                <div class="form-group form-row">
+                                    <label for="search_box">Search for a cellist by name</label>
+                                    <input type="search" class="form-control" placeholder="Search...">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex align-items-baseline">
+                                <p class="small">Don't see who you're looking for?</p>
+                                <a href="/add_cellist" class="btn btn-primary ml-3">
+                                    <span class="fa fa-plus"></span>
+                                    Add cellist
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,5 +71,6 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/static/search.js"></script>
 
 {% endblock %}
