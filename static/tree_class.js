@@ -84,6 +84,8 @@ Tree.prototype.drawLinks = function (links, source) {
     // transition new links from old to new position
     link.enter().append("path")
         .attr("class", "link " + self.selector)
+        // .style("stroke", "#485511") //!!!!!
+        // .style("opacity", .2) //!!!!
         .attr("d", function (d) {
             var o = {
                 x: source.x0,
@@ -138,7 +140,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
     var nodeEnter = node.enter().append("g")
         .attr("class", "person " + self.selector)
         .on('click', function (person) {
-            location.href = `/cellist_profile/${person.id}`;
+            location.href = `/cellist_profile/${person.id}#treeSection`;
         });
 
     // draw rectangles
@@ -157,6 +159,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
         .attr("dy", 0)
         .attr("text-anchor", "start")
         .attr('class', 'name')
+        // .style("fill", "#485511") //!!!!!!
         .html(function (d) {
             return d.name;
         })
@@ -171,6 +174,9 @@ Tree.prototype.drawNodes = function (nodes, source) {
 
     // Grow boxes to their proper size    
     nodeUpdate.select('rect')
+        // .style("stroke", "#485511") //!!!!!!!
+        // .style("fill", "#8FAA22") //!!!!!!!!
+        .style("fill-opacity", ".2")
         .attr({
             x: -(boxWidth / 2),
             y: -(boxHeight / 2),
@@ -200,7 +206,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
             x: 0,
             y: 0,
             width: 0,
-            height: 0
+            height: 0,
         });
 
     // Fade out the text as we remove it
