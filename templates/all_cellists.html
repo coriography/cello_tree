@@ -4,17 +4,26 @@
 <div class="bkg-img" style="background-image: url(/static/img/tree_5.jpg); top: 0"></div>
 <div class="overlay-dark"></div>
 <div class="container">
-    <h1>Browse all cellists</h1>
-    <p>or search</p>
-    <p>alpha index by last name</p>
-    <div class="d-flex align-items-baseline">
-        <p class="small">Don't see who you're looking for?</p>
-        <a href="/add_cellist" class="btn btn-primary ml-3">
-            <span class="fa fa-plus"></span>
-            Add cellist
-        </a>
+    <div class="row">
+        <div class="col-12">
+            <div class="profile-section tree-section position-relative box-shadow-sm mt-3">
+                <div class="profile-section-overlay"></div>
+                <div class="profile-inner-container border-300">
+                    <h1>All Cellists</h1>
+                    <div>
+                        <form action=""></form>
+                    </div>
+                    <div class="d-flex align-items-baseline">
+                        <p class="small">Don't see who you're looking for?</p>
+                        <a href="/add_cellist" class="btn btn-primary ml-3">
+                            <span class="fa fa-plus"></span>
+                            Add cellist
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
 
     <div class="row mt-5">
         {% for cellist in all_cellists %}
