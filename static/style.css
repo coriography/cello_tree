@@ -86,7 +86,13 @@ a:hover {
 }
 
 .navbar.navbar-custom a {
-    color: var(--whitish);
+    color: white;
+    font-weight: bold;
+    letter-spacing: .3px;
+}
+
+.nav-link.btn {
+    font-weight: normal;
 }
 
 .border-black {
@@ -169,8 +175,8 @@ label {
     width: 100%;
     top: 0;
     position: fixed;
-    background-color: var(--art600);
-    opacity: .8;
+    background-color: var(--art500);
+    opacity: .9;
     z-index: -1;
 }
 
