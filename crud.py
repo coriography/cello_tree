@@ -33,6 +33,10 @@ def get_all_cellists():
 def update_cellist(cellist_id, fname="", lname="", cello_details="", bio="", img_url="", music_url=""):
     """Update an existing cellist's database entry. Only logged-in users have access to this feature."""
 
+    # TODO: use kwargs
+    # TODO: use None instead of empty string
+    # TODO: add check to see whether fields have changed
+
     cellist = get_cellist_by_id(cellist_id)
 
     if fname != "":

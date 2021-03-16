@@ -29,6 +29,7 @@ def login():
     # get username or email from db
     user_by_username = crud.check_username(username_email)
     user_by_email = crud.check_email(username_email)
+    # TODO: only perform second db query if first fails
     
     # if username exists OR email exists in db and user password matches form password:
     if user_by_username != None and user_by_username.password == password:
@@ -137,6 +138,9 @@ def show_all_cellists():
 def get_all_cellists():
     """Show all cellists in alphabetical order."""
 
+    # TODO: handle the filter query on the back end
+    # TODO: pagination on the front end/queries load a few at a time
+
     all_cellists = crud.get_all_cellists()
 
     # create py list, loop through cellists
@@ -184,6 +188,8 @@ def create_link_from_profile():
 @app.route('/api/add_post', methods=['POST'])
 def add_post_from_page():
     """Create a post on a given cellist's profile."""
+
+    # TODO: handle time zones on the front end - JS library?
 
     user_id = session['user_id']
     cellist_id = request.form.get('cellist_id_from_profile')
