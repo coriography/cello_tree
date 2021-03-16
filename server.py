@@ -119,7 +119,7 @@ def update_cellist_from_form():
 
     if user_id:
         cellist = crud.update_cellist(cellist_id, fname, lname, cello_details, bio, img_url, music_url)
-        crud.update_editor(cellist_id, user_id)
+        # crud.update_editor(cellist_id, user_id)
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'error'})
