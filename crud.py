@@ -61,11 +61,8 @@ def update_editor(cellist_id, user_id):
     """Add or update most recent editor of cellist profile."""
 
     cellist = get_cellist_by_id(cellist_id)
-    print(f"!!!!!!!**********Cellist = {cellist}**********!!!!!!!!")
     cellist.editor_id = user_id
-    print(f"!!!!!!!**********cellist.editor_id = {cellist.editor_id}**********!!!!!!!!")
-    # editor = get_user_by_id(user_id)
-    # print(f"!!!!!!!********* editor = {editor}***********!!!!!!!!")
+    editor = get_user_by_id(user_id)
 
     db.session.commit()
 
