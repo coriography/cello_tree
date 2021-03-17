@@ -1,10 +1,9 @@
-# Cello Tree
+# Cello Tree :notes: :deciduous_tree:
 
 Cello Tree is a “family tree” of cellists, joined by teacher-student links, revealing connections among the international cellist community across generations. Users can browse Cello Tree for their favorite cellists, or create an account to add and update new cellists - along with their teachers and students - to the database. Users can upload a photo, include a link to the artist’s music, write about the instrument they perform on, and share stories about other cellists in a forum (and upvote their favorite posts). Whether you’ve played cello for one year or fifty years, you perform on YouTube or in Carnegie Hall, or you just want to explore the lives and music of cellists, you can contribute, share stories, and help grow the Cello Tree.
 
-Front end: JavaScript/jQuery, AJAX, JSON, HTML/Jinja, CSS/Bootstrap, D3.js
-Back end: Python/Flask, SQL/PostgreSQL, SQLAlchemy ORM, Cloudinary API
-Tools: Agile/Scrum, Trello
+**Front end:** JavaScript/jQuery, AJAX, JSON, HTML/Jinja, CSS/Bootstrap, D3.js (data visualization library)
+**Back end:** Python/Flask, SQL/PostgreSQL, SQLAlchemy ORM, Cloudinary API (media hosting)
 
 View technical demo on YouTube: https://www.youtube.com/watch?v=RK0CSYA__Ec
 
