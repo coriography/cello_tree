@@ -48,31 +48,41 @@ $ source env/bin/activate
 $ pip3 install -r requirements.txt
 ```
 
-5. Create your database, "tree":
+5. Set a secret key to run Flask by creating /secrets.sh in your root directory:
+
+![app screenshot](/static/img/secret_key.png)
+
+6. Add your key to your environmental variables:
+
+```
+$ source secrets.sh
+```
+
+7. Create your database, "tree":
 
 ```
 $ createdb tree
 ```
 
-6. Create database tables:
+8. Create database tables:
 
 ```
 $ python3 model.py
 ```
 
-7. Populate the app with data:
+9. Populate the app with data:
 
 ```
 $ python3 seed.py
 ```
 
-8. Launch the server:
+10. Launch the server:
 
 ```
 $ python3 server.py
 ```
 
-9. Go to localhost:5000 in your browser
+11. Go to localhost:5000 in your browser
 
 
 ## Roadmap :blue_car:
