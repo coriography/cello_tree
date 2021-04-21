@@ -4,6 +4,13 @@ from datetime import datetime, timezone, timedelta
 
 from flask_sqlalchemy import SQLAlchemy
 
+import bcrypt
+
+
+def get_hash(password):
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(15))
+    
+
 def create_cellist(fname, lname, cello_details, bio, img_url="", music_url=""):
     """Create a cellist profile."""
     cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
@@ -166,7 +173,7 @@ def delete_upvote(user_id, post_id):
 
 def create_user(username, email, password, role="user"):
     """Create a user."""
-    user = User(username=username, email=email, password=password, role=role)
+    user = User(username=username, email=email, password_hashed=password, role=role)
 
     db.session.add(user)
     db.session.commit()

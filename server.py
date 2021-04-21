@@ -34,15 +34,15 @@ def login():
     # TODO: only perform second db query if first fails
     
     # if username exists OR email exists in db and user password matches form password:
-    if user_by_username != None and user_by_username.password == password:
+    if user_by_username != None and user_by_username.check_password(password):
         # add user to session
         session['user_id'] = user_by_username.user_id
         session['username'] = user_by_username.username
         return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
-    elif user_by_email != None and user_by_email.password == password:
+    elif user_by_email != None and user_by_email.check_password(password):
         session['user_id'] = user_by_email.user_id
-        session['username'] = user_by_username.username
-        return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
+        session['username'] = user_by_email.username
+        return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_email.username})
     else:
         # display error text 
         return jsonify({'status': 'error', 'msg': 'Sorry, this password and user do not match. Please try again.'})
@@ -71,7 +71,7 @@ def create_account():
         return jsonify({'status': 'email_error', 'email': email})
     else:
         # add to db (crud function)
-        crud.create_user(username, email, create_password)
+        crud.create_user(username, email, crud.get_hash(create_password))
         return jsonify({'status': 'ok', 'username': username})
     
 

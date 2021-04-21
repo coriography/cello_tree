@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime, timezone, timedelta
 
+import bcrypt
+
 db = SQLAlchemy()
 
 
@@ -121,8 +123,12 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password_hashed = db.Column(db.Binary(128), nullable=False)
     role = db.Column(db.String(50), nullable=False)
+
+    def check_password(self, password):
+        encoded_password = password.encode("utf-8")
+        return bcrypt.checkpw(encoded_password, self.password_hashed)
 
     # cellist_profiles: a list of Cellist objects associated with User.
     # posts: a list of Post objects associated with User.
@@ -132,8 +138,6 @@ class User(db.Model):
         """Display info about User."""
 
         return f'<User user_id={self.user_id}, username={self.username}, email={self.email}>'
-
-        # test_user = User(username='tester', email='test@test.com', password='123')
 
 
 

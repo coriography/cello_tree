@@ -8,3 +8,4 @@ __pycache__/
 /templates/xcellist_profile.html
 /templates/oop_tree.html
 secrets.sh
+scratch.py
