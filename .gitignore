@@ -2,10 +2,13 @@ env
 .vscode
 __pycache__/
 .DS_Store
-/static/tree.js
-/templates/tree.html
-/templates/mega_tree.js
+/static/xtree.js
+/templates/xmega_tree.html
+/templates/xtree.html
+/static/xmega_tree.js
 /templates/xcellist_profile.html
-/templates/oop_tree.html
+/templates/xtree_landing.html
+/templates/xoop_tree.html
+/static/xscratch.js
 secrets.sh
 scratch.py
