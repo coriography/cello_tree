@@ -33,7 +33,7 @@ $ git clone https://github.com/coriography/cello_tree
 2. Create virtual environment:
 
 ```
-$ virtualenv env
+$ python3 -m venv env
 ```
 
 3. Activate your virtual environment:
@@ -57,32 +57,21 @@ $ pip3 install -r requirements.txt
 ```
 $ source secrets.sh
 ```
-
-7. Create your database, "tree":
-
-```
-$ createdb tree
 ```
 
-8. Create database tables:
-
-```
-$ python3 model.py
-```
-
-9. Populate the app with data:
+7. Create database and populate the app with data:
 
 ```
 $ python3 seed.py
 ```
 
-10. Launch the server:
+8. Launch the server:
 
 ```
 $ python3 server.py
 ```
 
-11. Go to localhost:5000 in your browser
+9. Go to localhost:5000 in your browser
 
 
 ## Roadmap :blue_car:
@@ -90,7 +79,7 @@ $ python3 server.py
 Up next:
 
 1. add the YouTube and Spotify API’s to make it easier to link a cellist with their music
-2. add a “verified” feature so that a cellist can own and have exclusive edit access to their own profile
+2. add a “verified” feature so that a cellist can have ownership and exclusive edit access to their own profile
 3. implement the security features needed to deploy the app
 
 
