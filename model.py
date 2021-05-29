@@ -46,6 +46,7 @@ class Cellist(db.Model):
     editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
+    # ?? is it possible to enable "lazy load" for these joins?
     # teacher_links: a list of Link objects associated with Cellist.
     # student_links: a list of Link objects associated with Cellist.
     # posts: a list of Post objects associated with Cellist.
@@ -123,7 +124,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(50), nullable=False)
-    password_hashed = db.Column(db.Binary(128), nullable=False)
+    password_hashed = db.Column(db.LargeBinary(128), nullable=False)
     role = db.Column(db.String(50), nullable=False)
 
     def check_password(self, password):
