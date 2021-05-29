@@ -30,24 +30,24 @@ for cellist in data:
         crud.create_link(teacher_id, cellist_id)
 
 
-# # seed user data
-# for i in range(10):
+# seed user data
+for i in range(10):
 
-#     username = random.choice([f"cellochick{i}", f"cellobello{i}", f"cellomynameis{i}", f"tinaguofan{i}", f"{i}cellos", f"celloitsme{i}", f"nostrings{i}", f"celloshots{i}"])
-#     email = f"email{i}@email.com"
-#     password = f"password{i}"
+    username = random.choice([f"cellochick{i}", f"cellobello{i}", f"cellomynameis{i}", f"tinaguofan{i}", f"{i}cellos", f"celloitsme{i}", f"nostrings{i}", f"celloshots{i}"])
+    email = f"email{i}@email.com"
+    password = crud.get_hash(f"password{i}")
 
-#     crud.create_user(username, email, password)
+    crud.create_user(username, email, password)
 
 
-# # seed post data
-# for cellist in data:
-#     for i in range(5):
-#         user_id = random.choice(range(1, 10))
-#         cellist_id = random.choice(range(1, len(data)))
-#         content = random.choice(["I met this cellist at the Sitka Cello Festival, 2018! She is a fantastic teacher and taught me how to use bow speed to get a better sound. I hope to work with her again soon!", "Does anyone know where she's teaching this summer? I heard she is releasing a new album soon! Can't wait to hear it.", "Her playing style reminds me of Piatagorsky's - I checked out her Tree and realized that it's because she is 'related' to him! Pretty cool.", "My favorite piece she plays is Salut d'Amour. I learned that piece for my school audition last year.", "We have the same teacher's teacher! Does that make us cello cousins? :)"])
-#         post_date = datetime.now(timezone.utc) - timedelta(days=i)
-#         crud.create_post(user_id, cellist_id, content, post_date)
+# seed post data
+for cellist in data:
+    for i in range(5):
+        user_id = random.choice(range(1, 10))
+        cellist_id = random.choice(range(1, len(data)))
+        content = random.choice(["I met this cellist at the Sitka Cello Festival, 2018! She is a fantastic teacher and taught me how to use bow speed to get a better sound. I hope to work with her again soon!", "Does anyone know where she's teaching this summer? I heard she is releasing a new album soon! Can't wait to hear it.", "Her playing style reminds me of Piatagorsky's - I checked out her Tree and realized that it's because she is 'related' to him! Pretty cool.", "My favorite piece she plays is Salut d'Amour. I learned that piece for my school audition last year.", "We have the same teacher's teacher! Does that make us cello cousins? :)"])
+        post_date = datetime.now(timezone.utc) - timedelta(days=i)
+        crud.create_post(user_id, cellist_id, content, post_date)
 
 
 
