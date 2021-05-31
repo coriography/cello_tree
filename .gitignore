@@ -12,3 +12,4 @@ __pycache__/
 /static/xscratch.js
 secrets.sh
 scratch.py
+settings.json
