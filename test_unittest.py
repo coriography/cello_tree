@@ -22,34 +22,34 @@ class serverTests(unittest.TestCase):
     # TODO: user login
 
 
-# class TestDb(unittest.TestCase):
-#     """Runs tests on database"""
+class TestDb(unittest.TestCase):
+    """Runs tests on database"""
 
-#     def setUp(self):
-#         """Code to run before every test."""
+    def setUp(self):
+        """Code to run before every test."""
 
-#         self.client = app.test_client()
-#         app.config['TESTING'] = True
+        self.client = app.test_client()
+        app.config['TESTING'] = True
 
-#         connect_to_db(app, db_uri='postgresql:///pt')
+        connect_to_db(app, db_uri='postgresql:///tree')
 
-#         db.create_all()
-#         test_db.test_all()
-#         ####### ** see db_tests.py for test_all function ** #######
+        db.create_all()
+        test_db.test_all()
+        ####### ** see db_tests.py for test_all function ** #######
 
-#     def test_homepage(self):
-#         """Can I add everything to my db?"""
+    def test_homepage(self):
+        """Can I add everything to my db?"""
 
-#         result = self.client.get('/')
-#         self.assertEqual(result.status_code, 200)
-#         self.assertIn(b'<h1 class="text-center main-title">Cello<br>Tree</h1>', result.data)
+        result = self.client.get('/')
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b'<h1 class="text-center main-title">Cello<br>Tree</h1>', result.data)
 
-#     def tearDown(self):
-#         """Code to run after every test"""
+    def tearDown(self):
+        """Code to run after every test"""
 
-#         db.session.remove()
-#         db.drop_all()
-#         db.engine.dispose()
+        db.session.remove()
+        db.drop_all()
+        db.engine.dispose()
 
 
 if __name__ == "__main__":
