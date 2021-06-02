@@ -4,9 +4,9 @@ from crud import *
 def test_all():
     test_user()
     test_cellist()
-    # test_link()
-    # test_post()
-    # test_upvote()
+    test_link()
+    test_post()
+    test_upvote()
 
 def test_user():
     """Creates test User in test database"""
@@ -31,20 +31,20 @@ def test_link():
     db.session.add(test_cellist_2)
     db.session.commit()
 
-    test_link = Link(0, 1)
+    test_link = create_link(1, 2)
     db.session.add(test_link)
     db.session.commit()
 
 
 def test_post():
     """Creates test Post in test database"""
-    test_post = create_post(1, 0, "omg best cellist everrrr", post_date=datetime.now(timezone.utc))
+    test_post = create_post(1, 2, "omg best cellist everrrr", post_date=datetime.now(timezone.utc))
     db.session.add(test_post)
     db.session.commit()
 
 
 def test_upvote():
     """Creates test Upvote in test database"""
-    test_upvote = Upvote(0, 0)
+    test_upvote = create_upvote(1,1)
     db.session.add(test_upvote)
     db.session.commit()

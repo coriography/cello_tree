@@ -2,6 +2,9 @@ from server import app
 from model import db, connect_to_db
 import unittest
 import test_db
+import testing.postgresql
+from sqlalchemy import create_engine
+import os
 
 class serverTests(unittest.TestCase):
     """Runs tests on routes/page render"""
@@ -29,9 +32,14 @@ class TestDb(unittest.TestCase):
         """Code to run before every test."""
 
         self.client = app.test_client()
-        app.config['TESTING'] = True
+        os.system('dropdb testdb')
+        os.system('createdb testdb')
+        self.postgresql = testing.postgresql.Postgresql(name="testdb", port=7654)
+        
+        engine = create_engine(self.postgresql.url())
 
-        connect_to_db(app, db_uri='postgresql:///tree')
+        app.config['TESTING'] = True
+        connect_to_db(app, db_uri="postgresql:///testdb")
 
         db.create_all()
         test_db.test_all()
@@ -50,6 +58,8 @@ class TestDb(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         db.engine.dispose()
+
+        self.postgresql.stop()
 
 
 if __name__ == "__main__":
