@@ -10,7 +10,7 @@ def test_all():
 
 def test_user():
     """Creates test User in test database"""
-    test_user = create_user('Guppy', 'guppy@thecat.com', 'badpw')
+    test_user = create_user('Guppy', 'guppy@thecat.com', get_hash('badpw'))
     db.session.add(test_user)
     db.session.commit()
 

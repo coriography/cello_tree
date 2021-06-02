@@ -173,7 +173,6 @@ def delete_upvote(user_id, post_id):
 
 def create_user(username, email, password, role="user"):
     """Create a user."""
-    password = get_hash(password)
     user = User(username=username, email=email, password_hashed=password, role=role)
 
     db.session.add(user)

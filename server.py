@@ -71,7 +71,7 @@ def create_account():
         return jsonify({'status': 'email_error', 'email': email})
     else:
         # add to db (crud function)
-        crud.create_user(username, email, create_password)
+        crud.create_user(username, email, crud.get_hash(create_password))
         return jsonify({'status': 'ok', 'username': username})
     
 
