@@ -22,7 +22,7 @@ class serverTests(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertIn(b'<h1 class="text-center main-title">Cello<br>Tree</h1>', result.data)
 
-    # TODO: user login
+    # TODO: test what renders based on user login 
 
 
 class TestDb(unittest.TestCase):
