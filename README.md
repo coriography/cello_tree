@@ -57,7 +57,6 @@ $ pip3 install -r requirements.txt
 ```
 $ source secrets.sh
 ```
-```
 
 7. Create database and populate the app with data:
 
