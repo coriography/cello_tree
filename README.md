@@ -57,21 +57,26 @@ $ pip3 install -r requirements.txt
 ```
 $ source secrets.sh
 ```
+
+7. Test database and server:
+
+```
+$ python3 test_unittest.py
 ```
 
-7. Create database and populate the app with data:
+8. Create database and populate the app with data:
 
 ```
 $ python3 seed.py
 ```
 
-8. Launch the server:
+9. Launch the server:
 
 ```
 $ python3 server.py
 ```
 
-9. Go to localhost:5000 in your browser
+10. Go to localhost:5000 in your browser
 
 
 ## Roadmap :blue_car:
