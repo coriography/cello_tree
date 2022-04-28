@@ -14,3 +14,4 @@ secrets.sh
 scratch.py
 settings.json
 .coverage
+.idea
