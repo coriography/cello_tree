@@ -1,14 +1,11 @@
-from flask import Flask, render_template, jsonify, request, flash, session, redirect
-
-from model import connect_to_db
-
-import crud
-
 import os
+from datetime import datetime, timezone
 
+from flask import Flask, render_template, jsonify, request, session, redirect
 from jinja2 import StrictUndefined
 
-from datetime import datetime, timezone, timedelta
+import crud
+from model import connect_to_db
 
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
@@ -34,12 +31,12 @@ def login():
     # TODO: only perform second db query if first fails
 
     # if username exists OR email exists in db and user password matches form password:
-    if user_by_username != None and user_by_username.check_password(password):
+    if user_by_username is not None and user_by_username.check_password(password):
         # add user to session
         session['user_id'] = user_by_username.user_id
         session['username'] = user_by_username.username
         return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_username.username})
-    elif user_by_email != None and user_by_email.check_password(password):
+    elif user_by_email is not None and user_by_email.check_password(password):
         session['user_id'] = user_by_email.user_id
         session['username'] = user_by_email.username
         return jsonify({'status': 'ok', 'username_email': username_email, 'username': user_by_email.username})
@@ -65,9 +62,9 @@ def create_account():
     create_password = request.form.get('create_password')
 
     # check if username or email already exists (crud function)
-    if crud.check_username(username) != None:
+    if crud.check_username(username) is not None:
         return jsonify({'status': 'username_error', 'username': username})
-    elif crud.check_email(email) != None:
+    elif crud.check_email(email) is not None:
         return jsonify({'status': 'email_error', 'email': email})
     else:
         # add to db (crud function)
@@ -96,7 +93,7 @@ def add_cellist():
 
     # check whether name combo already exists in db
     existing_cellist = crud.get_cellist_by_name(fname, lname)
-    if existing_cellist != None:
+    if existing_cellist is not None:
         return jsonify({'status': 'error', 'cellist_id': existing_cellist.cellist_id, 'fname': existing_cellist.fname,
                         'lname': existing_cellist.lname})
     else:
@@ -258,11 +255,7 @@ def get_oop_data(cellist_id):
 
     # create py dict, loop through students, then teachers
     # add id, fname, lname of teacher and each student to dict
-    tree_data = {}
-    tree_data["id"] = cellist_id
-    tree_data["name"] = f"{cellist.fname} {cellist.lname}"
-    tree_data["_children"] = []
-    tree_data["_parents"] = []
+    tree_data = {"id": cellist_id, "name": f"{cellist.fname} {cellist.lname}", "_children": [], "_parents": []}
     for student_link in students_list:
         tree_data["_children"].append({"id": student_link.student.cellist_id,
                                        "name": f"{student_link.student.fname} {student_link.student.lname}"})
@@ -292,11 +285,7 @@ def get_links_for_tree():
 
     # create py dict, loop through students
     # add id, fname, lname of teacher and each student to dict
-    tree_data = {}
-    tree_data["id"] = 49
-    tree_data["fname"] = "***Root"
-    tree_data["lname"] = "Node***"
-    tree_data["children"] = []
+    tree_data = {"id": 49, "fname": "***Root", "lname": "Node***", "children": []}
 
     def rec_children(cellist_id, tree_data):
         ## ?? cellist_id being the root node?
