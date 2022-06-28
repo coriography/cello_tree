@@ -52,7 +52,7 @@ for cellist in data:
 
 
 if __name__ == '__main__':
-    print("we're in seed")
+    print("Database seed complete!")
 
 
 

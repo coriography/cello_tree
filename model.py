@@ -28,6 +28,7 @@ class Link(db.Model):
 
     # link = Link(teacher_id='1', student_id='1')
 
+
 class Cellist(db.Model):
     """Data model for a cellist."""
 
@@ -46,6 +47,7 @@ class Cellist(db.Model):
     editor_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
+
     # ?? is it possible to enable "lazy load" for these joins?
     # teacher_links: a list of Link objects associated with Cellist.
     # student_links: a list of Link objects associated with Cellist.
@@ -97,7 +99,6 @@ class Post(db.Model):
         # post = Post(user_id=1, cellist_id=1, content="contenttttttttttttt", post_date=datetime.now(timezone.utc))
 
 
-
 class Upvote(db.Model):
     """Data model for post upvote."""
 
@@ -141,7 +142,6 @@ class User(db.Model):
         return f'<User user_id={self.user_id}, username={self.username}, email={self.email}>'
 
 
-
 def connect_to_db(flask_app, db_uri='postgresql:///tree', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     # flask_app.config['SQLALCHEMY_ECHO'] = echo
@@ -150,8 +150,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///tree', echo=True):
     db.app = flask_app
     db.init_app(flask_app)
 
-    print('Connected to the db!')        
-
+    print('Connected to the db!')
 
 
 if __name__ == '__main__':
@@ -163,5 +162,3 @@ if __name__ == '__main__':
     # query it executes.
 
     connect_to_db(app)
-
-    
