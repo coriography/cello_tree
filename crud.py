@@ -1,19 +1,16 @@
-from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
-
-from datetime import datetime, timezone, timedelta
-
-from flask_sqlalchemy import SQLAlchemy
-
 import bcrypt
+
+from model import db, connect_to_db, Cellist, Link, Post, Upvote, User
 
 
 def get_hash(password):
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(15))
-    
+
 
 def create_cellist(fname, lname, cello_details, bio, img_url="", music_url=""):
     """Create a cellist profile."""
-    cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url, music_url=music_url)
+    cellist = Cellist(fname=fname, lname=lname, cello_details=cello_details, bio=bio, img_url=img_url,
+                      music_url=music_url)
 
     db.session.add(cellist)
     db.session.commit()
@@ -76,7 +73,6 @@ def update_editor(cellist_id, user_id):
     return editor
 
 
-
 def update_owner():
     """Add or update owner of cellist profile."""
     pass
@@ -86,7 +82,7 @@ def create_link(teacher_id, student_id):
     """Create a teacher/student link."""
 
     link = Link(teacher_id=teacher_id, student_id=student_id)
-    
+
     db.session.add(link)
     db.session.commit()
 
@@ -137,7 +133,7 @@ def delete_post(post_id):
 
 def create_upvote(user_id, post_id):
     """Create an upvote on a post."""
-    
+
     upvote = Upvote(user_id=user_id, post_id=post_id)
     db.session.add(upvote)
     db.session.commit()
@@ -147,7 +143,7 @@ def create_upvote(user_id, post_id):
 
 def get_upvote(user_id, post_id):
     """Get upvote from db given user_id and post_id."""
-    
+
     upvote = Upvote.query.filter(Upvote.user_id == user_id, Upvote.post_id == post_id).first()
 
     return upvote
@@ -218,6 +214,7 @@ def get_all_links():
 
     return Link.query.all()
 
+
 def get_students_by_cellist_id(cellist_id):
     """Return list of student links associated with cellist id."""
 
@@ -233,4 +230,5 @@ def get_teachers_by_cellist_id(cellist_id):
 if __name__ == '__main__':
     print("we're in crud")
     from server import app
+
     connect_to_db(app)

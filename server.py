@@ -119,7 +119,7 @@ def update_cellist_from_form():
     music_url = request.form.get('music_url')
 
     if user_id:
-        cellist = crud.update_cellist(cellist_id, fname, lname, cello_details, bio, img_url, music_url)
+        crud.update_cellist(cellist_id, fname, lname, cello_details, bio, img_url, music_url)
         crud.update_editor(cellist_id, user_id)
         return jsonify({'status': 'ok'})
     else:
@@ -143,10 +143,6 @@ def get_all_cellists():
     # TODO: pagination on the front end/queries load a few at a time
 
     all_cellists = crud.get_all_cellists()
-
-    # create py list, loop through cellists
-    # add id, fname, lname, img_url, student_links.length, teacher_links.length, posts.length
-    # of each cellist to list
 
     cellist_list = []
     for cellist in all_cellists:
@@ -177,13 +173,12 @@ def create_link_from_profile():
 
     teacher_id = request.form.get('teacher_id')
     student_id = request.form.get('student_id')
-    teacher = crud.get_cellist_by_id(teacher_id)
 
     # check that id's are not the same
     if teacher_id == student_id:
         return jsonify({'status': 'teacher_eq_student', 'teacher_id': teacher_id, 'student_id': student_id})
     # check whether link already exists in db
-    elif crud.check_link(teacher_id, student_id) != None:
+    elif crud.check_link(teacher_id, student_id) is not None:
         return jsonify({'status': 'link_exists', 'teacher_id': teacher_id, 'student_id': student_id})
     else:
         crud.create_link(teacher_id, student_id)
@@ -220,7 +215,7 @@ def upvote_post_from_post():
     user_id = session['user_id']
 
     # check whether upvote exists
-    if crud.get_upvote(user_id, post_id) != None:
+    if crud.get_upvote(user_id, post_id) is not None:
         crud.delete_upvote(user_id, post_id)
         msg = "Upvote"
     else:
@@ -245,16 +240,10 @@ def display_oop_tree(cellist_id):
 def get_oop_data(cellist_id):
     """Query the database to create a cellist node, given a cellist id."""
 
-    # query for Cellist object associated with cellist_id
     cellist = crud.get_cellist_by_id(cellist_id)
-
-    # query for links where teacher id is given id
     students_list = crud.get_students_by_cellist_id(cellist_id)
-    # query for links where teacher id is given id
     teachers_list = crud.get_teachers_by_cellist_id(cellist_id)
 
-    # create py dict, loop through students, then teachers
-    # add id, fname, lname of teacher and each student to dict
     tree_data = {"id": cellist_id, "name": f"{cellist.fname} {cellist.lname}", "_children": [], "_parents": []}
     for student_link in students_list:
         tree_data["_children"].append({"id": student_link.student.cellist_id,
@@ -263,7 +252,6 @@ def get_oop_data(cellist_id):
         tree_data["_parents"].append({"id": teacher_link.teacher.cellist_id,
                                       "name": f"{teacher_link.teacher.fname} {teacher_link.teacher.lname}"})
 
-    # pass through using jsonify to access in D3
     return jsonify({'tree_data': tree_data})
 
 

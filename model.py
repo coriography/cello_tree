@@ -1,8 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
-
-from datetime import datetime, timezone, timedelta
-
 import bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
@@ -26,8 +23,6 @@ class Link(db.Model):
 
         return f'<Link link_id={self.link_id}; teacher_id={self.teacher_id}, student_id ={self.student_id}>'
 
-    # link = Link(teacher_id='1', student_id='1')
-
 
 class Cellist(db.Model):
     """Data model for a cellist."""
@@ -48,7 +43,6 @@ class Cellist(db.Model):
 
     creator = db.relationship('User', foreign_keys=[creator_id], backref='cellist_profiles')
 
-    # ?? is it possible to enable "lazy load" for these joins?
     # teacher_links: a list of Link objects associated with Cellist.
     # student_links: a list of Link objects associated with Cellist.
     # posts: a list of Post objects associated with Cellist.
@@ -60,7 +54,8 @@ class Cellist(db.Model):
 
 
 class Location(db.Model):
-    """Data model for a cellist location."""
+    """Data model for a cellist location.
+    This featured is not currently active."""
 
     __tablename__ = "locations"
 
@@ -95,8 +90,6 @@ class Post(db.Model):
         """Display info about Post."""
 
         return f'<Post post_id={self.post_id} cellist_id={self.cellist_id}>'
-
-        # post = Post(user_id=1, cellist_id=1, content="contenttttttttttttt", post_date=datetime.now(timezone.utc))
 
 
 class Upvote(db.Model):
