@@ -84,8 +84,8 @@ Tree.prototype.drawLinks = function (links, source) {
     // transition new links from old to new position
     link.enter().append("path")
         .attr("class", "link " + self.selector)
-        .style("stroke", "#485511") //!!!!!
-        .style("opacity", .2) //!!!!
+        .style("stroke", "#485511")
+        .style("opacity", .2)
         .attr("d", function (d) {
             var o = {
                 x: source.x0,
@@ -159,7 +159,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
         .attr("dy", 0)
         .attr("text-anchor", "start")
         .attr('class', 'name')
-        .style("fill", "#0e2002") //!!!!!!
+        .style("fill", "#0e2002")
         .html(function (d) {
             return d.name;
         })
@@ -174,8 +174,8 @@ Tree.prototype.drawNodes = function (nodes, source) {
 
     // Grow boxes to their proper size    
     nodeUpdate.select('rect')
-        .style("stroke", "#485511") //!!!!!!!
-        .style("fill", "#8FAA22") //!!!!!!!!
+        .style("stroke", "#485511")
+        .style("fill", "#8FAA22")
         .style("fill-opacity", ".4")
         .attr({
             x: -(boxWidth / 2),
@@ -184,11 +184,12 @@ Tree.prototype.drawNodes = function (nodes, source) {
             height: boxHeight
         });
 
-    // Move text to it's proper position
+    // Move text to its proper position
     nodeUpdate.select('text')
         .attr("dx", -(boxWidth / 2) + 10)
         .style('fill-opacity', 1);
 
+    // NOT CURRENTLY USING THIS TO END OF FUNCTION
     // Remove nodes we aren't showing anymore
     var nodeExit = node.exit()
         .transition()
@@ -224,6 +225,7 @@ Tree.prototype.drawNodes = function (nodes, source) {
 
 /**
  * Update a person's state when they are clicked.
+ * NOT CURRENTLY USING THIS
  */
 Tree.prototype.togglePerson = function (person) {
 
@@ -247,6 +249,7 @@ Tree.prototype.togglePerson = function (person) {
 };
 
 /**
+ * NOT CURRENTLY USING THIS FEATURE
  * Collapse person (hide their ancestors). We recursively
  * collapse the ancestors so that when the person is
  * expanded it will only reveal one generation. If we don't
