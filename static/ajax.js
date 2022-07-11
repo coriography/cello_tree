@@ -3,12 +3,12 @@
 
 async function uploadMedia(files) {
     let endpoint = "/use_default_image";
-    let uploadData = new FormData();
+    let uploadData = new FormData(); // creates a key/value pair of the data we're going to pass
 
-    if (files.length === 1) {
+    if (files.length === 1) { // TODO: update this if handling multiple media files
         console.log(files);
         endpoint = "/upload_media";
-        let file = files[0]; // TODO: update this if handling multiple media files
+        let file = files[0];
         uploadData.append("file", file);
     }
 
@@ -28,7 +28,8 @@ $('#add_cellist').on('submit', async (evt) => {
 
     const media_files = $('#photo_upload').prop('files');
     await uploadMedia(media_files).then((res) => {
-        //get form input
+        // TODO: add handling of low quality or other unsuitable images
+        // TODO: add handling of multiple images and media types!
         const add_cellist_form_data = {
             'fname': $('#fname').val(),
             'lname': $('#lname').val(),
@@ -38,18 +39,14 @@ $('#add_cellist').on('submit', async (evt) => {
             'music_url': $('#music_url').val(),
         }
 
-        // send data to server.py
+        // send data to add_cellist endpoint and handle response
         $.post('/add_cellist', add_cellist_form_data, (res) => {
             if (res.status === 'ok') {
-                // hide add_cellist form, display response message,
-                // display add_another button, reset form fields
                 $('#add_cellist').addClass("d-none");
                 $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`);
                 $('#add_another_btn').removeClass("d-none");
                 $('#add_cellist').trigger('reset');
             } else if (res.status === 'error') {
-                // hide add_cellist form, display response message,
-                // display add_another button, reset form fields
                 $('#add_cellist').addClass("d-none");
                 $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`);
                 $('#add_another_btn').removeClass("d-none");

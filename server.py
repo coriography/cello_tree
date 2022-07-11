@@ -147,15 +147,14 @@ def upload_media_to_cloudinary():
     """Upload media to cloud service."""
 
     file = request.files['file']
-    return cloudinary.uploader.upload(file)
+    return cloudinary.uploader.upload(file)  # TODO: add quality check and display low-quality error
 
 
 @app.route('/use_default_image', methods=["POST"])
 def use_default_cloud_image():
     """Use default cloud image if user does not supply image."""
 
-    image_attr = cloudinary.api.resource("sample")
-    return image_attr
+    return cloudinary.api.resource("sample")  # TODO: use my own default image
 
 
 @app.route('/all_cellists')
