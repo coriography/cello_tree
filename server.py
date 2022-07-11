@@ -10,6 +10,19 @@ from jinja2 import StrictUndefined
 
 from datetime import datetime, timezone, timedelta
 
+# Set Cloudinary credentials
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import json
+
+# Return "https" URLs
+config = cloudinary.config(secure=True)
+
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
 app.jinja_env.undefined = StrictUndefined
@@ -85,6 +98,7 @@ def show_add_cellist_form():
 @app.route('/add_cellist', methods=["POST"])
 def add_cellist():
     """Add a new cellist to the database."""
+    print('in add_cellist')
 
     # request.form.get - getting from request, not from html
     fname = request.form.get('fname')
@@ -93,10 +107,11 @@ def add_cellist():
     bio = request.form.get('bio')
     img_url = request.form.get('img_url')
     music_url = request.form.get('music_url')
+    print('got form stuff from request')
 
     # check whether name combo already exists in db
     existing_cellist = crud.get_cellist_by_name(fname, lname)
-    if existing_cellist != None:
+    if existing_cellist is not None:
         return jsonify({'status': 'error', 'cellist_id': existing_cellist.cellist_id, 'fname': existing_cellist.fname,
                         'lname': existing_cellist.lname})
     else:
@@ -127,6 +142,13 @@ def update_cellist_from_form():
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'error'})
+
+
+@app.route('/upload_media', methods=["POST"])
+def upload_media_to_cloudinary(file):
+    """Upload media to cloud service."""
+    print('in upload_media')
+    return cloudinary.uploader.upload(file)
 
 
 @app.route('/all_cellists')

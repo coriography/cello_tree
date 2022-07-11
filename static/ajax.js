@@ -1,13 +1,13 @@
 "use strict";
 
 
-async function imageUpload(files) {
-    const url = "https://api.cloudinary.com/v1_1/cellotree/image/upload";
+async function uploadMedia(files) {
+    const url = "/upload_media";
     const uploadData = new FormData(); 
 
     let file = files[0];
     uploadData.append("file", file);
-    uploadData.append("upload_preset", "fb2hjysk");
+//    uploadData.append("upload_preset", "fb2hjysk");
 
     let response = await fetch(url, {
         method: "POST",
@@ -24,7 +24,7 @@ $('#add_cellist').on('submit', (evt) => {
     evt.preventDefault();
 
     const media_files = $('#photo_upload').prop('files');
-    const cloud_url = imageUpload(media_files);
+    const cloud_url = uploadMedia(media_files);
 
     cloud_url.then((res_url) => {
         //get form input
@@ -75,7 +75,7 @@ $('#update_cellist').on('submit', (evt) => {
 
     // if a new photo has been uploaded
     if (media_files.length !== 0) {
-        const cloud_url = imageUpload(media_files);
+        const cloud_url = uploadMedia(media_files);
 
         cloud_url.then((res_url) => {
             //get form input
