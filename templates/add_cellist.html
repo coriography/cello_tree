@@ -12,7 +12,8 @@
                     <h1>Add cellist</h1>
                     {% if 'user_id' in session %}
                     <form id="add_cellist">
-                        <p>Before you add a cellist, please check that they are not already in the <a href="/all_cellists">Cello Tree database.</a></p>
+                        <p>Before you add a cellist, please check that they are not already in the <a
+                                href="/all_cellists">Cello Tree database.</a></p>
                         <div class="form-group form-row">
                             <div class="col-6">
                                 <label for="fname">Cellist's first name</label>
@@ -24,7 +25,8 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label for="cello_details">Instrument details - include the year and maker, previous owners, nicknames... (limit 150 characters)</label>
+                            <label for="cello_details">Instrument details - include the year and maker, previous owners,
+                                nicknames... (limit 150 characters)</label>
                             <textarea id="cello_details" rows="3" class="form-control" maxlength="150"></textarea>
                         </div>
                         <div class="form-group form-row">
@@ -32,18 +34,21 @@
                             <textarea id="bio" rows="5" class="form-control" maxlength="800"></textarea>
                         </div>
                         <div class="form-group form-row">
-                            <label for="photo_upload">Upload a profile photo (for best results, photo should be portrait-oriented and minimum 300px wide)</label>
+                            <label for="photo_upload">Upload a profile photo (for best results, photo should be
+                                portrait-oriented and minimum 300px wide)</label>
                             <input type="file" id="photo_upload">
                         </div>
                         <div class="form-group form-row">
-                            <label for="music_url">Add a link to a Spotify playlist, YouTube channel, personal website, SoundCloud, or wherever their music can be found!</label>
+                            <label for="music_url">Add a link to a Spotify playlist, YouTube channel, personal website,
+                                SoundCloud, or wherever their music can be found!</label>
                             <input type="text" id="music_url" class="form-control">
                         </div>
                         <input type="submit" class="form-control btn btn-primary m-0">
                     </form>
                     <div id="add_response"></div>
                     <div id="add_another_container">
-                        <button id="add_another_btn" class="d-none btn btn-primary mt-3 mx-0">Add another cellist</button>
+                        <button id="add_another_btn" class="d-none btn btn-primary mt-3 mx-0">Add another cellist
+                        </button>
                     </div>
                     {% else %}
                     <p>Please <a href="/">log in</a> to add a cellist.</p>

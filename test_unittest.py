@@ -6,13 +6,14 @@ import testing.postgresql
 from sqlalchemy import create_engine
 import os
 
-class serverTests(unittest.TestCase):
+
+class ServerTests(unittest.TestCase):
     """Runs tests on routes/page render"""
 
     def setUp(self):
         """Code to run before every test."""
 
-        self.client = app.test_client() # test_client from Werkzeug library returns a "browser" to "run" app
+        self.client = app.test_client()  # test_client from Werkzeug library returns a "browser" to "run" app
         app.config['TESTING'] = True
 
     def test_homepage(self):
@@ -35,15 +36,14 @@ class TestDb(unittest.TestCase):
         os.system('dropdb testdb')
         os.system('createdb testdb')
         self.postgresql = testing.postgresql.Postgresql(name="testdb", port=7654)
-        
-        engine = create_engine(self.postgresql.url())
+
+        create_engine(self.postgresql.url())
 
         app.config['TESTING'] = True
         connect_to_db(app, db_uri="postgresql:///testdb")
 
         db.create_all()
         test_db.test_all()
-        ####### ** see db_tests.py for test_all function ** #######
 
     def test_homepage(self):
         """Can I add everything to my db?"""

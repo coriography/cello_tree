@@ -58,7 +58,6 @@ $('#add_cellist').on('submit', (evt) => {
     });
 });
 
-
 // event handler for add another cellist button
 $('#add_another_btn').on('click', function() {
     $('#add_cellist').removeClass("d-none");
@@ -115,7 +114,6 @@ $('#update_cellist').on('submit', (evt) => {
         });
     }
 });
-
 
 // event handler for login form on home.html
 $('#login_form').on('submit', (evt) => {
