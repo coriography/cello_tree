@@ -2,13 +2,17 @@
 
 
 async function uploadMedia(files) {
-    const url = "/upload_media";
-    const uploadData = new FormData(); 
+    let endpoint = "/use_default_image";
+    let uploadData = new FormData();
 
-    let file = files[0];
-    uploadData.append("file", file);
+    if (files.length === 1) {
+        console.log(files);
+        endpoint = "/upload_media";
+        let file = files[0]; // TODO: update this if handling multiple media files
+        uploadData.append("file", file);
+    }
 
-    let response = await fetch(url, {
+    let response = await fetch(endpoint, {
         method: "POST",
         body: uploadData
     });
@@ -23,7 +27,7 @@ $('#add_cellist').on('submit', async (evt) => {
     evt.preventDefault();
 
     const media_files = $('#photo_upload').prop('files');
-    const media_info = await uploadMedia(media_files).then((res) => {
+    await uploadMedia(media_files).then((res) => {
         //get form input
         const add_cellist_form_data = {
             'fname': $('#fname').val(),

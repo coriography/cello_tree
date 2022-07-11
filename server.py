@@ -150,6 +150,14 @@ def upload_media_to_cloudinary():
     return cloudinary.uploader.upload(file)
 
 
+@app.route('/use_default_image', methods=["POST"])
+def use_default_cloud_image():
+    """Use default cloud image if user does not supply image."""
+
+    image_attr = cloudinary.api.resource("sample")
+    return image_attr
+
+
 @app.route('/all_cellists')
 def show_all_cellists():
     """Show all cellists in alphabetical order."""
