@@ -98,7 +98,6 @@ def show_add_cellist_form():
 @app.route('/add_cellist', methods=["POST"])
 def add_cellist():
     """Add a new cellist to the database."""
-    print('in add_cellist')
 
     # request.form.get - getting from request, not from html
     fname = request.form.get('fname')
@@ -107,7 +106,6 @@ def add_cellist():
     bio = request.form.get('bio')
     img_url = request.form.get('img_url')
     music_url = request.form.get('music_url')
-    print('got form stuff from request')
 
     # check whether name combo already exists in db
     existing_cellist = crud.get_cellist_by_name(fname, lname)
@@ -145,9 +143,10 @@ def update_cellist_from_form():
 
 
 @app.route('/upload_media', methods=["POST"])
-def upload_media_to_cloudinary(file):
+def upload_media_to_cloudinary():
     """Upload media to cloud service."""
-    print('in upload_media')
+
+    file = request.files['file']
     return cloudinary.uploader.upload(file)
 
 

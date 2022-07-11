@@ -7,33 +7,30 @@ async function uploadMedia(files) {
 
     let file = files[0];
     uploadData.append("file", file);
-//    uploadData.append("upload_preset", "fb2hjysk");
 
     let response = await fetch(url, {
         method: "POST",
         body: uploadData
     });
 
-    let json = await response.json();
+    let image_attr = await response.json();
 
-    return json.url
+    return image_attr;
 }
 
 // event handler for add_cellist form in add_cellist.html
-$('#add_cellist').on('submit', (evt) => {
+$('#add_cellist').on('submit', async (evt) => {
     evt.preventDefault();
 
     const media_files = $('#photo_upload').prop('files');
-    const cloud_url = uploadMedia(media_files);
-
-    cloud_url.then((res_url) => {
+    const media_info = await uploadMedia(media_files).then((res) => {
         //get form input
         const add_cellist_form_data = {
             'fname': $('#fname').val(),
             'lname': $('#lname').val(),
             'cello_details': $('#cello_details').val(),
             'bio': $('#bio').val(),
-            'img_url': res_url,
+            'img_url': res.url,
             'music_url': $('#music_url').val(),
         }
 
