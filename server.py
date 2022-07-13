@@ -154,7 +154,7 @@ def upload_media_to_cloudinary():
 def use_default_cloud_image():
     """Use default cloud image if user does not supply image."""
 
-    return cloudinary.api.resource("sample")  # TODO: use my own default image
+    return cloudinary.api.resource("cello_tree_default")  # default image in my media library
 
 
 @app.route('/all_cellists')
