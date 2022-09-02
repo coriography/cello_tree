@@ -7,6 +7,19 @@ from jinja2 import StrictUndefined
 import crud
 from model import connect_to_db
 
+# Set Cloudinary credentials
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import json
+
+# Return "https" URLs
+config = cloudinary.config(secure=True)
+
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
 app.jinja_env.undefined = StrictUndefined
@@ -124,6 +137,21 @@ def update_cellist_from_form():
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'error'})
+
+
+@app.route('/upload_media', methods=["POST"])
+def upload_media_to_cloudinary():
+    """Upload media to cloud service."""
+
+    file = request.files['file']
+    return cloudinary.uploader.upload(file)  # TODO: add quality check and display low-quality error
+
+
+@app.route('/use_default_image', methods=["POST"])
+def use_default_cloud_image():
+    """Use default cloud image if user does not supply image."""
+
+    return cloudinary.api.resource("cello_tree_default")  # default image in my media library
 
 
 @app.route('/all_cellists')

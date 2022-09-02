@@ -1,54 +1,52 @@
 "use strict";
 
 
-async function imageUpload(files) {
-    const url = "https://api.cloudinary.com/v1_1/cellotree/image/upload";
-    const uploadData = new FormData(); 
+async function uploadMedia(files) {
+    let endpoint = "/use_default_image";
+    let uploadData = new FormData(); // creates a key/value pair of the data we're going to pass
 
-    let file = files[0];
-    uploadData.append("file", file);
-    uploadData.append("upload_preset", "fb2hjysk");
+    if (files.length === 1) { // TODO: update this if handling multiple media files
+        console.log(files);
+        endpoint = "/upload_media";
+        let file = files[0];
+        uploadData.append("file", file);
+    }
 
-    let response = await fetch(url, {
+    let response = await fetch(endpoint, {
         method: "POST",
         body: uploadData
     });
 
-    let json = await response.json();
+    let image_attr = await response.json();
 
-    return json.url
+    return image_attr;
 }
 
 // event handler for add_cellist form in add_cellist.html
-$('#add_cellist').on('submit', (evt) => {
+$('#add_cellist').on('submit', async (evt) => {
     evt.preventDefault();
 
     const media_files = $('#photo_upload').prop('files');
-    const cloud_url = imageUpload(media_files);
-
-    cloud_url.then((res_url) => {
-        //get form input
+    await uploadMedia(media_files).then((res) => {
+        // TODO: add handling of low quality or other unsuitable images
+        // TODO: add handling of multiple images and media types!
         const add_cellist_form_data = {
             'fname': $('#fname').val(),
             'lname': $('#lname').val(),
             'cello_details': $('#cello_details').val(),
             'bio': $('#bio').val(),
-            'img_url': res_url,
+            'img_url': res.url,
             'music_url': $('#music_url').val(),
         }
 
-        // send data to server.py
+        // send data to add_cellist endpoint and handle response
         $.post('/add_cellist', add_cellist_form_data, (res) => {
             if (res.status === 'ok') {
-                // hide add_cellist form, display response message,
-                // display add_another button, reset form fields
                 $('#add_cellist').addClass("d-none");
                 $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> has been added to the database.`);
                 $('#add_another_btn').removeClass("d-none");
                 $('#add_cellist').trigger('reset');
             } else if (res.status === 'error') {
-                // hide add_cellist form, display response message,
-                // display add_another button, reset form fields
                 $('#add_cellist').addClass("d-none");
                 $('#add_response').html(`<a href="/cellist_profile/${res.cellist_id}">${res.fname} ${res.lname}</a> already exists in the database.`);
                 $('#add_another_btn').removeClass("d-none");
@@ -74,7 +72,7 @@ $('#update_cellist').on('submit', (evt) => {
 
     // if a new photo has been uploaded
     if (media_files.length !== 0) {
-        const cloud_url = imageUpload(media_files);
+        const cloud_url = uploadMedia(media_files);
 
         cloud_url.then((res_url) => {
             //get form input

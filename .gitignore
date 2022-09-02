@@ -16,3 +16,4 @@ settings.json
 .coverage
 .idea
 notes.txt
+.env
